@@ -49,9 +49,9 @@ typedef enum {
  * @endcode
  */
 typedef struct{
-    uint8_t walls; /**< Wall and exploration state for the four directions. */
-    int priority; /**< Weight (heuristic value) associated with this cell. */
+    float priority; /**< Weight (heuristic value) associated with this cell. */
     int pos[2]; /**< The position (x, y) of the cell in the maze. */
+    uint8_t walls; /**< Wall and exploration state for the four directions. */
 } Cell;
 
 
