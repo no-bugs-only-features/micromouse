@@ -22,8 +22,8 @@
  * @brief An entry in the priority queue.
  */
 typedef struct {
-    CellID cell_id;
-    uint8_t priority;
+    CellID cell_id; /** ID of the cell. */
+    uint8_t priority; /** Priority of the cell. */
 } PQEntry;
 
 
@@ -31,9 +31,9 @@ typedef struct {
  * @brief A priority queue for maze cells.
  */
 typedef struct {
-    PQEntry entries[MAX];
-    uint16_t position[MAX];
-    int size;
+    PQEntry entries[MAX]; /** Array of priority queue entries. */
+    uint16_t position[MAX]; /** Maps cell IDs to their positions in the heap. */
+    int size; /** Current number of elements in the priority queue. */
 } PriorityQueue;
 
 
