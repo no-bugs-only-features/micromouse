@@ -12,10 +12,10 @@
 
 #include "cell.h"
 
-/*
- * The size of the maze (16x16).
+/**
+ * @brief The maximum number of elements in the priority queue.
  */
-#define MAX 256
+constexpr uint16_t MAX = SIZE*SIZE;
 
 
 /**
