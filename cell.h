@@ -10,7 +10,6 @@
 
 #include <stdint.h>
 
-
 /**
  * @brief The size of the maze (16x16).
  */
