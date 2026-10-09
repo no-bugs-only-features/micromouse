@@ -131,5 +131,4 @@ CellID dequeue(PriorityQueue* pq);
  */
 CellID peek(PriorityQueue* pq);
 
-
 #endif /* PRIORITY_QUEUE_H */
