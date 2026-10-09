@@ -2,7 +2,7 @@
  * @file priority_queue.h
  * @brief Defines data structures and functions for a priority queue of maze cells.
  * @author Dylan Wright (no-bugs-only-features)
- * @version 0.1
+ * @version 0.2
  * @date 2026-09-28
  */
 #ifndef PRIORITY_QUEUE_H
