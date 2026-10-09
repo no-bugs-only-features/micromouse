@@ -42,6 +42,24 @@ static inline Direction opposite(Direction dir) { return ((dir << 2) | (dir >> 2
 
 
 /**
+ * @brief Returns the change in the x-coordinate for a given direction.
+ * 
+ * @param dir The direction to get the x-coordinate change for.
+ * @return int The change in the x-coordinate.
+ */
+static inline int dx(Direction dir) { return dir == East ? 1 : dir == West ? -1 : 0; }
+
+
+/**
+ * @brief Returns the change in the y-coordinate for a given direction.
+ * 
+ * @param dir The direction to get the y-coordinate change for.
+ * @return int The change in the y-coordinate.
+ */
+static inline int dy(Direction dir) { return dir == North ? -1 : dir == South ? 1 : 0; }     
+
+
+/**
  * @brief Represents a single cell in the maze.
  *
  * Every cell is an 8-bit value containing both wall and exploration
