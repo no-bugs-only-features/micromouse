@@ -38,6 +38,27 @@ typedef struct {
 
 
 /**
+ * @brief Checks if the priority queue is empty.
+ * 
+ * @param pq Pointer to the priority queue.
+ * @return true The priority queue is empty.
+ * @return false The priority queue is not empty.
+ */
+static inline bool isEmpty(PriorityQueue* pq) { return pq->size == 0; }
+
+
+/**
+ * @brief Checks if a specific cell is in the priority queue.
+ * 
+ * @param pq Pointer to the priority queue.
+ * @param cell_id ID of the cell to check.
+ * @return true The cell is in the priority queue.
+ * @return false The cell is not in the priority queue.
+ */
+static inline bool contains(PriorityQueue* pq, CellID cell_id) { return pq->position[cell_id] != UINT16_MAX; }
+
+
+/**
  * @brief Swap the values of two priority queue entries.
  * 
  * @param pq Priority queue pointer.
@@ -109,5 +130,6 @@ CellID dequeue(PriorityQueue* pq);
  * @return CellID ID of the highest-priority cell in the queue.
  */
 CellID peek(PriorityQueue* pq);
+
 
 #endif /* PRIORITY_QUEUE_H */
