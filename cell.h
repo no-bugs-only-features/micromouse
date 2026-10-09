@@ -33,6 +33,15 @@ typedef enum {
 
 
 /**
+ * @brief Returns the opposite direction of the given direction.
+ *
+ * @param dir The direction whose opposite is to be found.
+ * @return Direction The opposite direction.
+ */
+static inline Direction opposite(Direction dir) { return ((dir << 2) | (dir >> 2)) & 0x0F; }
+
+
+/**
  * @brief Represents a single cell in the maze.
  *
  * Every cell is an 8-bit value containing both wall and exploration
