@@ -96,6 +96,8 @@ void heapifyDown(PriorityQueue* pq, int index);
 
 /**
  * @brief Decrease the priority of a specific cell in the priority queue.
+ *
+ * In order to use this function, you must initialize the position array with UINT16_MAX for all entries.
  * 
  * @param pq Priority queue pointer.
  * @param cell_id ID of the cell whose priority should be decreased.
