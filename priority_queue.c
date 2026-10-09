@@ -53,7 +53,7 @@ void heapifyDown(PriorityQueue* pq, int index) {
 
 void decreasePriority(PriorityQueue* pq, CellID cell_id, uint8_t new_priority) {
     int index = pq->position[cell_id];
-    if (index >= 0 && index < pq->size && pq->entries[index].priority > new_priority) {
+    if (index != UINT16_MAX && index < pq->size && pq->entries[index].priority > new_priority) {
         pq->entries[index].priority = new_priority;
         heapifyUp(pq, index);
     }
@@ -64,21 +64,23 @@ void enqueue(PriorityQueue* pq, CellID cell_id, uint8_t priority) {
     if (pq->size >= MAX) return;
     pq->entries[pq->size].cell_id = cell_id;
     pq->entries[pq->size].priority = priority;
+    pq->position[cell_id] = pq->size;
     pq->size++;
     heapifyUp(pq, pq->size - 1);
 }
 
 
 CellID dequeue(PriorityQueue* pq) {
-    if (pq->size <= 0) return 0;
+    if (pq->size <= 0) return UINT16_MAX;
     PQEntry top = pq->entries[0];
-    pq->entries[0] = pq->entries[--pq->size];
-    heapifyDown(pq, 0);
+    swap(pq, 0, --pq->size);
+    pq->position[top.cell_id] = UINT16_MAX;
+    if (pq->size > 0) heapifyDown(pq, 0);
     return top.cell_id;
 }
 
 
 CellID peek(PriorityQueue* pq) {
-    if (pq->size <= 0) return 0;
+    if (pq->size <= 0) return UINT16_MAX;
     return pq->entries[0].cell_id;
 }
