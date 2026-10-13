@@ -2,7 +2,7 @@
  * @file cell.h
  * @brief Defines data structures and utilities used to represent a maze cell.
  * @author Dylan Wright (no-bugs-only-features)
- * @version 0.2
+ * @version 0.3
  * @date 2026-09-28
  */
 #ifndef CELL_H
@@ -153,7 +153,7 @@ static inline bool isExplored(Cell cell, Direction dir) { return exploredMask(ce
  * @param cell Pointer to the cell whose wall state should be modified.
  * @param dir The direction in which to set the wall.
  */
-static inline void setWall(Cell *cell, Direction dir) { *cell = *cell | dir; }
+static inline void setWall(Cell *cell, Direction dir) { *cell |= dir; }
 
 /**
  * @brief Mark the specified direction as explored.
@@ -161,6 +161,6 @@ static inline void setWall(Cell *cell, Direction dir) { *cell = *cell | dir; }
  * @param cell Pointer to the cell whose exploration state should be modified.
  * @param dir The direction in which to mark as explored.
  */
-static inline void setExplored(Cell *cell, Direction dir) { *cell = *cell | (dir << 4); }
+static inline void setExplored(Cell *cell, Direction dir) { *cell |= (dir << 4); }
 
 #endif /* CELL_H */
