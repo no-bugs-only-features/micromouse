@@ -36,10 +36,10 @@ typedef struct {
 /**
  * @brief Creates a new priority queue.
  * 
- * @param max_size The maximum number of elements the queue can hold.
+ * @param size TThe size of the maze. The maximum number of cells in the queue will be size * size.
  * @return PriorityQueue* A pointer to the newly created priority queue.
  */
-PriorityQueue* createPriorityQueue(int max_size);
+PriorityQueue* createPriorityQueue(int size);
 
 
 /**
