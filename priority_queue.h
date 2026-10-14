@@ -2,7 +2,7 @@
  * @file priority_queue.h
  * @brief Defines data structures and functions for a priority queue of maze cells.
  * @author Dylan Wright (no-bugs-only-features)
- * @version 0.2
+ * @version 0.3
  * @date 2026-09-28
  */
 #ifndef PRIORITY_QUEUE_H
@@ -11,11 +11,6 @@
 #include <stdint.h>
 
 #include "cell.h"
-
-/**
- * @brief The maximum number of elements in the priority queue.
- */
-constexpr uint16_t MAX = SIZE*SIZE;
 
 
 /**
@@ -31,10 +26,28 @@ typedef struct {
  * @brief A priority queue for maze cells.
  */
 typedef struct {
-    PQEntry entries[MAX]; /** Array of priority queue entries. */
-    uint16_t position[MAX]; /** Maps cell IDs to their positions in the heap. */
+    PQEntry *entries; /** Array of priority queue entries. */
+    uint16_t *position; /** Maps cell IDs to their positions in the heap. */
     int size; /** Current number of elements in the priority queue. */
+    int max_size; /** Maximum capacity of the priority queue. */
 } PriorityQueue;
+
+
+/**
+ * @brief Creates a new priority queue.
+ * 
+ * @param max_size The maximum number of elements the queue can hold.
+ * @return PriorityQueue* A pointer to the newly created priority queue.
+ */
+PriorityQueue* createPriorityQueue(int max_size);
+
+
+/**
+ * @brief Destroys a priority queue and frees its memory.
+ * 
+ * @param pq The priority queue to destroy.
+ */
+void destroyPriorityQueue(PriorityQueue* pq);
 
 
 /**

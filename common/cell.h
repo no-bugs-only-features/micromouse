@@ -11,11 +11,6 @@
 #include <stdint.h>
 
 /**
- * @brief The size of the maze (16x16).
- */
-constexpr uint8_t SIZE = 16;
-
-/**
  * @brief Mask for cell's wall data.
  */
 constexpr uint8_t MASK = 0x0F;

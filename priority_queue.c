@@ -2,7 +2,7 @@
  * @file priority_queue.c
  * @brief Implementation of a priority queue of maze cells.
  * @author Dylan Wright (no-bugs-only-features)
- * @version 0.1
+ * @version 0.2
  * @date 2026-09-28
  */
 
@@ -10,6 +10,27 @@
 
 #include "cell.h"
 #include "priority_queue.h"
+
+
+PriorityQueue* createPriorityQueue(int size) {
+    pq->max_size = size * size;
+    PriorityQueue* pq = (PriorityQueue*) malloc(sizeof(PriorityQueue));
+    pq->entries = (PQEntry*) malloc(pq->max_size * sizeof(PQEntry));
+    pq->position = (uint16_t*) malloc(pq->max_size * sizeof(uint16_t));
+    /* Initialize all positions to UINT16_MAX to indicate that they are not in the queue. */
+    for (int i = 0; i < pq->max_size; i++) {
+        pq->position[i] = UINT16_MAX;
+    }
+    pq->size = 0;
+    return pq;
+}
+
+
+void destroyPriorityQueue(PriorityQueue* pq) {
+    free(pq->entries);
+    free(pq->position);
+    free(pq);
+}
 
 
 void swap(PriorityQueue* pq, int a, int b) {
