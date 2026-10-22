@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('priority__queue_8h.html',''); initResi
 <p>Defines data structures and functions for a priority queue of maze cells.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &quot;cell.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
 </div>
 <p><a href="priority__queue_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -129,16 +129,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a6656021f82dc5fc0e47981fad7fda2bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#a6656021f82dc5fc0e47981fad7fda2bd">heapifyDown</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq, int index)</td></tr>
 <tr class="memdesc:a6656021f82dc5fc0e47981fad7fda2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maintains heap property on removal.  <br /></td></tr>
 <tr class="separator:a6656021f82dc5fc0e47981fad7fda2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc052f349223d27aaae79cce2f9d5669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#afc052f349223d27aaae79cce2f9d5669">decreasePriority</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq, CellID cell_id, uint8_t new_priority)</td></tr>
+<tr class="memitem:afc052f349223d27aaae79cce2f9d5669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#afc052f349223d27aaae79cce2f9d5669">decreasePriority</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq, <a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> cell_id, uint8_t new_priority)</td></tr>
 <tr class="memdesc:afc052f349223d27aaae79cce2f9d5669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease the priority of a specific cell in the priority queue.  <br /></td></tr>
 <tr class="separator:afc052f349223d27aaae79cce2f9d5669"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b8ba643afe850d0fb59b26ee997293a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#a3b8ba643afe850d0fb59b26ee997293a">enqueue</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq, CellID cell_id, uint8_t priority)</td></tr>
+<tr class="memitem:a3b8ba643afe850d0fb59b26ee997293a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#a3b8ba643afe850d0fb59b26ee997293a">enqueue</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq, <a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> cell_id, uint8_t priority)</td></tr>
 <tr class="memdesc:a3b8ba643afe850d0fb59b26ee997293a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert a cell into the priority queue.  <br /></td></tr>
 <tr class="separator:a3b8ba643afe850d0fb59b26ee997293a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1dec535f7ce22f414f5c653368f5b57"><td class="memItemLeft" align="right" valign="top">CellID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#ad1dec535f7ce22f414f5c653368f5b57">dequeue</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq)</td></tr>
+<tr class="memitem:ad1dec535f7ce22f414f5c653368f5b57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#ad1dec535f7ce22f414f5c653368f5b57">dequeue</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq)</td></tr>
 <tr class="memdesc:ad1dec535f7ce22f414f5c653368f5b57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the highest-priority cell from the queue.  <br /></td></tr>
 <tr class="separator:ad1dec535f7ce22f414f5c653368f5b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af28d5a07a9bb165764af78ce7b2f6d74"><td class="memItemLeft" align="right" valign="top">CellID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#af28d5a07a9bb165764af78ce7b2f6d74">peek</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq)</td></tr>
+<tr class="memitem:af28d5a07a9bb165764af78ce7b2f6d74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="priority__queue_8h.html#af28d5a07a9bb165764af78ce7b2f6d74">peek</a> (<a class="el" href="structPriorityQueue.html">PriorityQueue</a> *pq)</td></tr>
 <tr class="memdesc:af28d5a07a9bb165764af78ce7b2f6d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">View the highest-priority cell in the queue.  <br /></td></tr>
 <tr class="separator:af28d5a07a9bb165764af78ce7b2f6d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -190,7 +190,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CellID&#160;</td>
+          <td class="paramtype"><a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td>
           <td class="paramname"><em>cell_id</em>, </td>
         </tr>
         <tr>
@@ -227,7 +227,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">CellID dequeue </td>
+          <td class="memname"><a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> dequeue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structPriorityQueue.html">PriorityQueue</a> *&#160;</td>
           <td class="paramname"><em>pq</em></td><td>)</td>
@@ -288,7 +288,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CellID&#160;</td>
+          <td class="paramtype"><a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td>
           <td class="paramname"><em>cell_id</em>, </td>
         </tr>
         <tr>
@@ -400,7 +400,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">CellID peek </td>
+          <td class="memname"><a class="el" href="cell_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> peek </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structPriorityQueue.html">PriorityQueue</a> *&#160;</td>
           <td class="paramname"><em>pq</em></td><td>)</td>

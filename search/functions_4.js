@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['peek_0',['peek',['../priority__queue_8c.html#af28d5a07a9bb165764af78ce7b2f6d74',1,'peek(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#af28d5a07a9bb165764af78ce7b2f6d74',1,'peek(PriorityQueue *pq):&#160;priority_queue.c']]]
+  ['ingoal_0',['inGoal',['../maze_8c.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;maze.c'],['../maze_8h.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;maze.c']]]
 ];
