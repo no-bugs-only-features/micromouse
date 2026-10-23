@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-#include "cell.h"
+#include "maze.h"
 #include "priority_queue.h"
 
 

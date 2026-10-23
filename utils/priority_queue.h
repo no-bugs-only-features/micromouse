@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-#include "cell.h"
+#include "maze.h"
 
 
 /**
