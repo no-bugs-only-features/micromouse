@@ -7,14 +7,15 @@
  */
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "maze.h"
 #include "priority_queue.h"
 
 
 PriorityQueue* createPriorityQueue(int size) {
-    pq->max_size = size * size;
     PriorityQueue* pq = (PriorityQueue*) malloc(sizeof(PriorityQueue));
+    pq->max_size = size * size;
     pq->entries = (PQEntry*) malloc(pq->max_size * sizeof(PQEntry));
     pq->position = (uint16_t*) malloc(pq->max_size * sizeof(uint16_t));
     /* Initialize all positions to UINT16_MAX to indicate that they are not in the queue. */
@@ -82,7 +83,7 @@ void decreasePriority(PriorityQueue* pq, CellID cell_id, uint8_t new_priority) {
 
 
 void enqueue(PriorityQueue* pq, CellID cell_id, uint8_t priority) {
-    if (pq->size >= MAX) return;
+    if (pq->size >= pq->max_size) return;
     pq->entries[pq->size].cell_id = cell_id;
     pq->entries[pq->size].priority = priority;
     pq->position[cell_id] = pq->size;
