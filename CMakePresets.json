@@ -1,0 +1,14 @@
+{
+  "version": 4,
+  "configurePresets": [
+    {
+      "name": "micromouse",
+      "displayName": "Micromouse Preset",
+      "description": "Preset to use with the micromouse project",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_C_STANDARD": "23"
+      }
+    }
+  ]
+}
