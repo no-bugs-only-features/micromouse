@@ -2,14 +2,17 @@
  * @file maze.c
  * @brief Implements functions for creating and manipulating a maze.
  * @author Dylan Wright (no-bugs-only-features)
- * @version 0.1
+ * @version 0.2
  * @date 2026-10-14
  */
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "cell.h"
 #include "maze.h"
 
-void writeMazeToJson(FILE *f, Maze maze, int size, int sx, int sy, int gx, int gy) {
-    fprintf(f, "{\"size\":%d,\"walls\":[", SIZE);
+void writeMazeToJson(FILE *f, Maze maze, int size, CellID* path, int pathLength) {
+    fprintf(f, "{\"size\":%d,\"walls\":[", size);
     for (int y = 0; y < size; y++) {
         fprintf(f, "%s[", y ? "," : "");
         for (int x = 0; x < size; x++) {
@@ -17,8 +20,16 @@ void writeMazeToJson(FILE *f, Maze maze, int size, int sx, int sy, int gx, int g
         }
         fprintf(f, "]");
     }
-    fprintf(f, "],\"start\":{\"x\":%d,\"y\":%d},\"goal\":{\"x\":%d,\"y\":%d}}",
-            sx, sy, gx, gy);
+    fprintf(f, "],\"start\":{\"x\":%d,\"y\":%d},\"goal\":{\"x\":%d,\"y\":%d}",
+            0, 0, size / 2, size / 2);
+    if (path && pathLength > 0) {
+        fprintf(f, ",\"path\":[");
+        for (int i = 0; i < pathLength; i++) {
+            fprintf(f, "%s{\"x\":%d,\"y\":%d}", i ? "," : "", 0, 0);
+        }
+        fprintf(f, "]");
+    }
+    fprintf(f, "}");
 }
 
 

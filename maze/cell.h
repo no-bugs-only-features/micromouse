@@ -79,26 +79,6 @@ typedef uint8_t Cell;
 
 
 /**
- * @brief Represents the unique identifier for a cell in the maze.
- *
- * This type is used to uniquely identify each cell within the maze.
- * It is the index of the cell within the maze grid.
- * @see cellID
- */
-typedef uint16_t CellID;
-
-
-/**
- * @brief Computes the unique identifier for a cell based on its row and column.
- *
- * @param row The row of the cell.
- * @param col The column of the cell.
- * @return CellID The unique identifier for the cell.
- */
-static inline CellID cellID(uint8_t row, uint8_t col) { return row * SIZE + col; }
-
-
-/**
  * @brief Returns the wall-state bits of a cell.
  *
  * Extracts the four least significant bits of the cell, which indicate
