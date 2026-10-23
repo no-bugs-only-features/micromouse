@@ -2,7 +2,7 @@
  * @file maze.h
  * @brief Defines data structures and functions for representing and manipulating a maze.
  * @author Dylan Wright (no-bugs-only-features)
- * @version 0.1
+ * @version 0.2
  * @date 2026-10-14
  */
 #ifndef MAZE_H
@@ -14,8 +14,40 @@
 
 
 /**
+ * @brief Represents the unique identifier for a cell in the maze.
+ *
+ * This type is used to uniquely identify each cell within the maze.
+ * It is the index of the cell within the maze grid.
+ *
+ * @see cellID
+ */
+typedef uint16_t CellID;
+
+
+/**
+ * @brief Computes the unique identifier for a cell based on its row and column.
+ *
+ * @param row The row of the cell.
+ * @param col The column of the cell.
+ * @return CellID The unique identifier for the cell.
+ */
+static inline CellID cellID(int size, int row, int col) { return row * size + col; }
+
+
+/**
  * @brief Represents a maze as a 2D array of cells.
- * 
+ *
+ * See @ref cell.h for details on the Cell data structure.
+ *
+ * A maze has the following properties:
+ * - It is always square, with a side length of `size`.
+ * - The goal is always located at the center of the maze, at coordinates `(size/2, size/2)`.
+ *   - If the maze has an even size, the goal occupies a 2x2 area in the center.
+ * - The maze will always start at (0, 0).
+ *
+ * Accessing a specfic cell at (y, x) can be done using `maze[y][x]`. In the north direction,
+ * the y coordinate decreases while in the south direction, the y coordinate increases. 
+ * In the east direction, the x coordinate increases while in the west direction, the x coordinate decreases.
  */
 typedef Cell** Maze;
 
@@ -95,20 +127,17 @@ void openGoal(Maze maze, int size);
  * @param gx The goal x-coordinate of the maze.
  * @param gy The goal y-coordinate of the maze.
  */
-void writeMazeToJson(FILE* f, Maze maze, int size, int sx, int sy, int gx, int gy);
+void writeMazeToJson(FILE* f, Maze maze, int size, CellID* path, int pathLength);
 
 
 /**
  * @brief Loads a maze from a JSON file.
  * 
  * @param f The file pointer to read the JSON data from.
+ * @param maze A pointer to store the loaded maze.
  * @param size A pointer to store the size of the loaded maze.
- * @param sx A pointer to store the start x-coordinate of the loaded maze.
- * @param sy A pointer to store the start y-coordinate of the loaded maze.
- * @param gx A pointer to store the goal x-coordinate of the loaded maze.
- * @param gy A pointer to store the goal y-coordinate of the loaded maze.
  * @return The loaded maze.
  */
-Maze loadMazeFromJson(FILE* f, int* size, int* sx, int* sy, int* gx, int* gy);
+Maze loadMazeFromJson(FILE* f, Maze* maze, int* size);
 
 #endif /* MAZE_H */

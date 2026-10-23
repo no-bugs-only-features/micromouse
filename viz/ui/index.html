@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mazeviz orchestrator</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d131a;
+      --panel: #121a23;
+      --line: #1f2b38;
+      --line2: #2c3d4c;
+      --ink: #cdd8e0;
+      --dim: #8a9bab;
+      --wall: #8fc7e0;
+      --amber: #e8a33d;
+      --ok: #5fc48a;
+      --bad: #e06b5a;
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font: 13px var(--sans);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden
+    }
+
+    header {
+      flex: none;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 600
+    }
+
+    .brand b {
+      color: var(--amber);
+      font-weight: 600
+    }
+
+    .brand small {
+      font: 400 12px var(--mono);
+      color: var(--dim)
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      font: 400 12px var(--mono)
+    }
+
+    .chip {
+      border: 1px solid var(--line2);
+      border-radius: 3px;
+      padding: 5px 10px
+    }
+
+    .chip i {
+      font-style: normal;
+      color: var(--dim)
+    }
+
+    .chip.on i {
+      color: var(--ok)
+    }
+
+    .cols {
+      flex: 1;
+      min-height: 0;
+      display: flex
+    }
+
+    aside {
+      flex: none;
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto
+    }
+
+    #left {
+      width: 300px;
+      border-right: 1px solid var(--line)
+    }
+
+    #right {
+      width: 280px;
+      border-left: 1px solid var(--line)
+    }
+
+    section {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    section:last-child {
+      border-bottom: 0
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 600
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px
+    }
+
+    label.f {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--dim)
+    }
+
+    input[type=number] {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--line2);
+      border-radius: 3px;
+      color: var(--ink);
+      font: 400 13px var(--mono);
+      padding: 7px 8px
+    }
+
+    button,
+    select {
+      font: 500 13px var(--sans);
+      color: var(--ink);
+      background: #1a2530;
+      border: 1px solid var(--line2);
+      border-radius: 3px
+    }
+
+    button {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 12px;
+      cursor: pointer
+    }
+
+    button+button {
+      margin-top: 8px
+    }
+
+    button:hover:not(:disabled) {
+      border-color: var(--amber)
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: default
+    }
+
+    button.pri {
+      background: var(--amber);
+      border: 0;
+      color: #1a1206;
+      font-weight: 600
+    }
+
+    button.big {
+      min-height: 48px;
+      font-size: 15px
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px
+    }
+
+    .mousename {
+      font: 500 13px var(--mono);
+      color: var(--amber);
+      margin-bottom: 12px;
+      word-break: break-all
+    }
+
+    .mousename.none {
+      color: var(--dim)
+    }
+
+    main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .bar {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .bar button {
+      width: 76px;
+      min-height: 36px
+    }
+
+    .bar .t {
+      font: 400 12px var(--mono);
+      color: var(--dim);
+      min-width: 48px
+    }
+
+    .bar input[type=range] {
+      flex: 1;
+      accent-color: var(--amber)
+    }
+
+    .bar select {
+      padding: 6px 8px;
+      min-height: 36px
+    }
+
+    #stage {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    canvas {
+      display: block
+    }
+
+    #status {
+      flex: none;
+      padding: 10px 20px;
+      border-top: 1px solid var(--line);
+      font: 400 12px var(--mono);
+      color: var(--dim)
+    }
+
+    #toast {
+      position: absolute;
+      top: 62px;
+      left: 20px;
+      right: 20px;
+      background: #2a1714;
+      border: 1px solid var(--bad);
+      color: #f2b8ae;
+      border-radius: 3px;
+      padding: 10px 14px;
+      z-index: 2
+    }
+
+    #toast[hidden] {
+      display: none
+    }
+
+    .kv {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 7px 0;
+      border-bottom: 1px solid #1a2530
+    }
+
+    .kv:last-child {
+      border-bottom: 0
+    }
+
+    .kv span {
+      color: var(--dim)
+    }
+
+    .kv b {
+      font: 500 13px var(--mono)
+    }
+
+    .empty {
+      color: var(--dim);
+      font-size: 12px
+    }
+
+    .chk {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0
+    }
+
+    .chk input {
+      accent-color: var(--amber);
+      width: 16px;
+      height: 16px
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">maze<b>viz</b><small>orchestrator</small></div>
+    <div class="chips">
+      <span class="chip" id="chipEngine"><i>●</i> engine: waiting</span>
+      <span class="chip" id="chipMouse"><i>●</i> mouse: none</span>
+    </div>
+  </header>
+
+  <div class="cols">
+    <aside id="left">
+      <section>
+        <h2>Maze</h2>
+        <div class="grid2">
+          <label class="f">Size<input type="number" id="size" value="10" min="2" max="16"></label>
+          <label class="f">Braid %<input type="number" id="braid" value="10" min="0" max="100"></label>
+          <label class="f">Seed (blank = random)<input type="number" id="seed" min="0"></label>
+        </div>
+        <button class="pri" id="btnGen">Generate maze</button>
+        <button id="btnLoadMaze">Load maze JSON…</button>
+      </section>
+      <section style="display: none">
+        <h2>Mouse</h2>
+        <div class="mousename none" id="mouseName">No library loaded</div>
+        <div class="grid2">
+          <label class="f">Max speed (m/s)<input type="number" id="vmax" value="3.0" min="0.1" step="0.1"></label>
+          <label class="f">Accel (m/s²)<input type="number" id="accel" value="12" min="0.1" step="0.5"></label>
+          <label class="f">Turn speed (m/s)<input type="number" id="vturn" value="0.9" min="0.1" step="0.1"></label>
+          <label class="f">Cell size (m)<input type="number" id="cell" value="0.18" min="0.01" step="0.01"></label>
+        </div>
+        <button id="btnLoadMouse">Load mouse library…</button>
+      </section>
+      <section style="display: none">
+        <button class="pri big" id="btnRun">Run mouse</button>
+      </section>
+    </aside>
+
+    <main>
+      <div class="bar">
+        <button id="btnPlay" aria-label="Play or pause replay">Play</button>
+        <span class="t" id="tNow">0.00s</span>
+        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Replay position">
+        <span class="t" id="tEnd">0.00s</span>
+        <select id="speed" aria-label="Replay speed">
+          <option value="0.5">0.5×</option>
+          <option value="1">1×</option>
+          <option value="2" selected>2×</option>
+          <option value="4">4×</option>
+          <option value="8">8×</option>
+        </select>
+      </div>
+      <div id="toast" role="alert" hidden></div>
+      <div id="stage"><canvas id="cv" role="img" aria-label="Maze with mouse path replay"></canvas></div>
+      <div id="status">Generate a maze or load one from a JSON file to begin.</div>
+    </main>
+
+    <aside id="right">
+      <section>
+        <h2>Last run</h2>
+        <div class="kv"><span>Time</span><b id="sTime">—</b></div>
+        <div class="kv"><span>Path length</span><b id="sCells">—</b></div>
+        <div class="kv"><span>Optimality gap</span><b id="sGap">—</b></div>
+        <div class="kv"><span>Diagonal cuts</span><b id="sDiag">—</b></div>
+        <div class="kv"><span>Blocked corners</span><b id="sBlock">—</b></div>
+      </section>
+      <section>
+        <h2>Run history</h2>
+        <div id="history">
+          <div class="empty">No runs yet.</div>
+        </div>
+      </section>
+      <section>
+        <h2>Layers</h2>
+        <label class="chk"><input type="checkbox" id="lyWalls" checked>Walls</label>
+        <label class="chk"><input type="checkbox" id="lyHeat">Flood-fill heatmap</label>
+        <label class="chk"><input type="checkbox" id="lyPath" checked>Path overlay</label>
+        <label class="chk"><input type="checkbox" id="lyMouse" checked>Mouse marker</label>
+      </section>
+    </aside>
+  </div>
+
+  <script>
+    // Wall bits match orchestrator.py and maze_json_format.md: N=8 E=4 S=2 W=1; (0,0) is top-left.
+    const N = 8, E = 4, S = 2, W = 1;
+    const $ = id => document.getElementById(id);
+    const css = getComputedStyle(document.documentElement);
+    const color = name => css.getPropertyValue(name).trim();
+
+    const state = { maze: null, path: [], log: [], t: 0, playing: false };
+    const cv = $('cv'), cx = cv.getContext('2d');
+
+    // ---------- rendering ----------
+    function fit() {
+      const stage = $('stage');
+      const side = Math.max(160, Math.min(stage.clientWidth, stage.clientHeight) - 32);
+      const dpr = window.devicePixelRatio || 1;
+      cv.style.width = cv.style.height = side + 'px';
+      cv.width = cv.height = Math.round(side * dpr);
+      cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+    new ResizeObserver(fit).observe($('stage'));
+
+    function heat(t) { // 0 = near goal (blue), 1 = far (amber)
+      const a = [0x27, 0x4a, 0x63], b = [0xe8, 0xa3, 0x3d];
+      return `rgba(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',')},0.6)`;
+    }
+
+    function positionAt(t) {
+      const log = state.log;
+      if (!log.length) return null;
+      if (t <= log[0].t) return log[0];
+      for (let i = 1; i < log.length; i++) {
+        if (t <= log[i].t) {
+          const a = log[i - 1], b = log[i], f = b.t > a.t ? (t - a.t) / (b.t - a.t) : 1;
+          return { x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f };
+        }
+      }
+      return log[log.length - 1];
+    }
+
+    function draw() {
+      const side = cv.clientWidth;
+      cx.clearRect(0, 0, side, side);
+      const m = state.maze;
+      if (!m) return;
+      const pad = 10, n = m.size, c = (side - 2 * pad) / n;
+      const px = x => pad + (x + 0.5) * c, py = y => pad + (y + 0.5) * c;
+
+      if ($('lyHeat').checked) {
+        const max = Math.max(1, ...m.distances.flat());
+        for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+          const d = m.distances[y][x];
+          if (d < 0) continue;
+          cx.fillStyle = heat(d / max);
+          cx.fillRect(pad + x * c, pad + y * c, c, c);
+        }
+      }
+
+      cx.fillStyle = 'rgba(232,163,61,0.18)'; // goal cell
+      cx.fillRect(pad + m.goal.x * c, pad + m.goal.y * c, c, c);
+      cx.strokeStyle = color('--line'); cx.lineWidth = 1;
+      cx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        cx.moveTo(pad + i * c, pad); cx.lineTo(pad + i * c, pad + n * c);
+        cx.moveTo(pad, pad + i * c); cx.lineTo(pad + n * c, pad + i * c);
+      }
+      cx.stroke();
+
+      if ($('lyWalls').checked) {
+        cx.strokeStyle = color('--wall'); cx.lineWidth = 3; cx.lineCap = 'round';
+        cx.beginPath();
+        for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+          const w = m.walls[y][x], l = pad + x * c, t = pad + y * c;
+          if (w & N) { cx.moveTo(l, t); cx.lineTo(l + c, t); }
+          if (w & S) { cx.moveTo(l, t + c); cx.lineTo(l + c, t + c); }
+          if (w & W) { cx.moveTo(l, t); cx.lineTo(l, t + c); }
+          if (w & E) { cx.moveTo(l + c, t); cx.lineTo(l + c, t + c); }
+        }
+        cx.stroke();
+      }
+
+      cx.font = `500 ${Math.max(10, c * 0.3)}px ${color('--mono')}`;
+      cx.textAlign = 'center'; cx.textBaseline = 'middle';
+      cx.fillStyle = color('--dim'); cx.fillText('S', px(m.start.x), py(m.start.y));
+      cx.fillStyle = color('--amber'); cx.fillText('G', px(m.goal.x), py(m.goal.y));
+
+      const pos = positionAt(state.t);
+      if ($('lyPath').checked && state.path.length > 1) {
+        cx.lineJoin = cx.lineCap = 'round'; cx.lineWidth = Math.max(2, c * 0.12);
+        cx.strokeStyle = 'rgba(232,163,61,0.35)'; cx.setLineDash([3, 6]);
+        cx.beginPath();
+        state.path.forEach((p, i) => i ? cx.lineTo(px(p.x), py(p.y)) : cx.moveTo(px(p.x), py(p.y)));
+        cx.stroke(); cx.setLineDash([]);
+        if (pos) { // traveled portion, solid
+          cx.strokeStyle = color('--amber');
+          cx.beginPath();
+          state.log.filter(e => e.t <= state.t).forEach((e, i) => i ? cx.lineTo(px(e.x), py(e.y)) : cx.moveTo(px(e.x), py(e.y)));
+          cx.lineTo(px(pos.x), py(pos.y));
+          cx.stroke();
+        }
+      }
+      if ($('lyMouse').checked && pos) {
+        cx.fillStyle = color('--amber'); cx.strokeStyle = '#1a1206'; cx.lineWidth = 2;
+        cx.beginPath(); cx.arc(px(pos.x), py(pos.y), c * 0.26, 0, Math.PI * 2); cx.fill(); cx.stroke();
+      }
+    }
+
+    // ---------- playback ----------
+    const duration = () => state.log.length ? state.log[state.log.length - 1].t : 0;
+    function sync() {
+      $('tNow').textContent = state.t.toFixed(2) + 's';
+      $('tEnd').textContent = duration().toFixed(2) + 's';
+      $('scrub').value = duration() ? Math.round(state.t / duration() * 1000) : 0;
+    }
+    function setPlaying(on) {
+      state.playing = on && duration() > 0;
+      $('btnPlay').textContent = state.playing ? 'Pause' : 'Play';
+    }
+    let last = 0;
+    function tick(ts) {
+      const dt = Math.min(0.1, (ts - last) / 1000); last = ts;
+      if (state.playing) {
+        state.t = Math.min(duration(), state.t + dt * parseFloat($('speed').value));
+        if (state.t >= duration()) setPlaying(false);
+        sync(); draw();
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    $('btnPlay').onclick = () => {
+      if (!state.playing && state.t >= duration()) state.t = 0;
+      setPlaying(!state.playing);
+    };
+    $('scrub').oninput = e => { state.t = e.target.value / 1000 * duration(); setPlaying(false); sync(); draw(); };
+    ['lyWalls', 'lyHeat', 'lyPath', 'lyMouse'].forEach(id => $(id).onchange = draw);
+
+    // ---------- panels ----------
+    function showError(msg) {
+      const t = $('toast');
+      t.textContent = msg; t.hidden = false;
+      clearTimeout(showError.timer);
+      showError.timer = setTimeout(() => t.hidden = true, 8000);
+    }
+    function setStats(s) {
+      $('sTime').textContent = s ? s.time_s.toFixed(2) + ' s' : '—';
+      $('sCells').textContent = s ? s.path_cells + ' cells' : '—';
+      $('sGap').textContent = s ? (s.gap_pct > 0 ? '+' : '') + s.gap_pct + '%' : '—';
+      $('sDiag').textContent = s ? s.diagonal_cuts : '—';
+      $('sBlock').textContent = s ? s.blocked_corners : '—';
+    }
+    function setHistory(list) {
+      const box = $('history');
+      box.replaceChildren();
+      if (!list.length) { box.innerHTML = '<div class="empty">No runs yet.</div>'; return; }
+      for (const r of list) {
+        const row = document.createElement('div'); row.className = 'kv';
+        const name = document.createElement('span'); name.textContent = `#${r.id} ${r.mouse}`;
+        const time = document.createElement('b'); time.textContent = r.time_s.toFixed(2) + ' s';
+        row.append(name, time); box.append(row);
+      }
+    }
+    function loadMaze(m, resetRun) {
+      state.maze = m;
+      state.path = m.path || [];
+      state.log = m.run_log || [];
+      state.t = 0;
+      if (resetRun) { setStats(null); }
+      setPlaying(false); sync(); draw();
+    }
+
+    // ---------- events pushed from orchestrator.py (Api._push -> evaluate_js) ----------
+    window.onOrchestratorEvent = ({ kind, data }) => {
+      if (kind === 'maze') {
+        loadMaze(data.maze, true);
+        const m = data.maze, meta = data.meta, parts = [`${m.size}×${m.size} maze`, meta.source];
+        if (meta.seed !== null) parts.push(`seed ${meta.seed}`);
+        if (meta.braid_pct !== null) parts.push(`braid ${meta.braid_pct}%`);
+        parts.push(`start (${m.start.x},${m.start.y}), goal (${m.goal.x},${m.goal.y})`);
+        if (meta.solvable) parts.push('solvable');
+        $('status').textContent = parts.join(', ');
+      } else if (kind === 'run') {
+        loadMaze(data.maze, false);
+        setStats(data.summary); setHistory(data.history);
+        setPlaying(true);
+      } else if (kind === 'mouse') {
+        $('mouseName').textContent = data.name; $('mouseName').classList.remove('none');
+        $('chipMouse').classList.add('on'); $('chipMouse').lastChild.textContent = ' mouse: ' + data.name;
+      } else if (kind === 'error') {
+        showError(data.message);
+      }
+    };
+
+    // ---------- calls into orchestrator.py (pywebview js_api) ----------
+    const actions = ['btnGen', 'btnLoadMaze', 'btnLoadMouse', 'btnRun'];
+    async function call(method, ...args) {
+      if (!(window.pywebview && window.pywebview.api)) {
+        showError('Not connected to the orchestrator. Start the app with: python orchestrator.py');
+        return;
+      }
+      actions.forEach(id => $(id).disabled = true);
+      try { await window.pywebview.api[method](...args); }
+      catch (err) { showError(String(err)); }
+      finally { actions.forEach(id => $(id).disabled = false); }
+    }
+    const num = id => $(id).value === '' ? '' : Number($(id).value);
+
+    $('btnGen').onclick = () => call('generate_maze', num('size'), num('braid'), num('seed'));
+    $('btnLoadMaze').onclick = () => call('load_maze_file');
+    $('btnLoadMouse').onclick = () => call('load_mouse');
+    $('btnRun').onclick = () => call('run_mouse', {
+      max_speed: num('vmax'), accel: num('accel'), turn_speed: num('vturn'), cell_size: num('cell')
+    });
+
+    window.addEventListener('pywebviewready', () => {
+      $('chipEngine').classList.add('on');
+      $('chipEngine').lastChild.textContent = ' engine: ready';
+    });
+  </script>
+</body>
+
+</html>
