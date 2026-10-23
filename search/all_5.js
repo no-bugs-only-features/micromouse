@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loadmazefromjson_0',['loadMazeFromJson',['../maze_8h.html#aa9ae4239c1fc56de4d249120b68188cb',1,'maze.h']]]
+  ['opengoal_0',['openGoal',['../maze_8c.html#aa2fa163bb728b260f894742c28fa434d',1,'openGoal(Maze maze, int size):&#160;maze.c'],['../maze_8h.html#aa2fa163bb728b260f894742c28fa434d',1,'openGoal(Maze maze, int size):&#160;maze.c']]]
 ];

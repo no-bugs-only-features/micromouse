@@ -5,5 +5,5 @@ var maze_8c =
     [ "inGoal", "maze_8c.html#ab1d0c6c001704e130f2de3b7b57439e0", null ],
     [ "openGoal", "maze_8c.html#aa2fa163bb728b260f894742c28fa434d", null ],
     [ "setWallBoth", "maze_8c.html#a39184589996ad6618c6f90840dafc9ee", null ],
-    [ "writeMazeToJson", "maze_8c.html#ad879ee3aa9bdb5a24c7e0cb5e2015ea7", null ]
+    [ "writeMazeToJson", "maze_8c.html#a3b11704e70ff5c6fe744711a153b29e2", null ]
 ];

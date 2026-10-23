@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loadmazefromjson_0',['loadMazeFromJson',['../maze_8h.html#aa9ae4239c1fc56de4d249120b68188cb',1,'maze.h']]]
+  ['writemazetojson_0',['writeMazeToJson',['../maze_8c.html#a3b11704e70ff5c6fe744711a153b29e2',1,'writeMazeToJson(FILE *f, Maze maze, int size, CellID *path, int pathLength):&#160;maze.c'],['../maze_8h.html#a3b11704e70ff5c6fe744711a153b29e2',1,'writeMazeToJson(FILE *f, Maze maze, int size, CellID *path, int pathLength):&#160;maze.c']]]
 ];

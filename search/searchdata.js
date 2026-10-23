@@ -1,36 +1,33 @@
 var indexSectionsWithContent =
 {
-  0: "cdehilmoprsw",
-  1: "p",
-  2: "cdmp",
-  3: "cdehilopsw",
-  4: "mps",
-  5: "cm",
-  6: "d",
-  7: "r"
+  0: "cdilmorsw",
+  1: "cm",
+  2: "cilosw",
+  3: "m",
+  4: "cm",
+  5: "d",
+  6: "r"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "classes",
-  2: "files",
-  3: "functions",
-  4: "variables",
-  5: "typedefs",
-  6: "enums",
-  7: "pages"
+  1: "files",
+  2: "functions",
+  3: "variables",
+  4: "typedefs",
+  5: "enums",
+  6: "pages"
 };
 
 var indexSectionLabels =
 {
   0: "All",
-  1: "Data Structures",
-  2: "Files",
-  3: "Functions",
-  4: "Variables",
-  5: "Typedefs",
-  6: "Enumerations",
-  7: "Pages"
+  1: "Files",
+  2: "Functions",
+  3: "Variables",
+  4: "Typedefs",
+  5: "Enumerations",
+  6: "Pages"
 };
 

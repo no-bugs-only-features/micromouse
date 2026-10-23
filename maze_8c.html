@@ -97,14 +97,16 @@ $(document).ready(function(){initNavTree('maze_8c.html',''); initResizable(); })
 
 <p>Implements functions for creating and manipulating a maze.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="maze_8h_source.html">maze.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad879ee3aa9bdb5a24c7e0cb5e2015ea7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ad879ee3aa9bdb5a24c7e0cb5e2015ea7">writeMazeToJson</a> (FILE *f, <a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, int sx, int sy, int gx, int gy)</td></tr>
-<tr class="memdesc:ad879ee3aa9bdb5a24c7e0cb5e2015ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the maze data to a JSON file.  <br /></td></tr>
-<tr class="separator:ad879ee3aa9bdb5a24c7e0cb5e2015ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b11704e70ff5c6fe744711a153b29e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#a3b11704e70ff5c6fe744711a153b29e2">writeMazeToJson</a> (FILE *f, <a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *path, int pathLength)</td></tr>
+<tr class="memdesc:a3b11704e70ff5c6fe744711a153b29e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the maze data to a JSON file.  <br /></td></tr>
+<tr class="separator:a3b11704e70ff5c6fe744711a153b29e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39bbe5144c68f7125cd6bd07564108c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#a39bbe5144c68f7125cd6bd07564108c5">createGoal</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size)</td></tr>
 <tr class="memdesc:a39bbe5144c68f7125cd6bd07564108c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the goal area in the maze.  <br /></td></tr>
 <tr class="separator:a39bbe5144c68f7125cd6bd07564108c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,7 +126,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implements functions for creating and manipulating a maze. </p>
 <dl class="section author"><dt>Author</dt><dd>Dylan Wright (no-bugs-only-features) </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>0.2 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-10-14 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ae30ba9e374fcd2d1533fe37383c2df76" name="ae30ba9e374fcd2d1533fe37383c2df76"></a>
@@ -362,8 +364,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad879ee3aa9bdb5a24c7e0cb5e2015ea7" name="ad879ee3aa9bdb5a24c7e0cb5e2015ea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad879ee3aa9bdb5a24c7e0cb5e2015ea7">&#9670;&#160;</a></span>writeMazeToJson()</h2>
+<a id="a3b11704e70ff5c6fe744711a153b29e2" name="a3b11704e70ff5c6fe744711a153b29e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b11704e70ff5c6fe744711a153b29e2">&#9670;&#160;</a></span>writeMazeToJson()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -389,26 +391,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>sx</em>, </td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>sy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>gx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>gy</em>&#160;</td>
+          <td class="paramname"><em>pathLength</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

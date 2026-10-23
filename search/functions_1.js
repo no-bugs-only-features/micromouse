@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['decreasepriority_0',['decreasePriority',['../priority__queue_8c.html#afc052f349223d27aaae79cce2f9d5669',1,'decreasePriority(PriorityQueue *pq, CellID cell_id, uint8_t new_priority):&#160;priority_queue.c'],['../priority__queue_8h.html#afc052f349223d27aaae79cce2f9d5669',1,'decreasePriority(PriorityQueue *pq, CellID cell_id, uint8_t new_priority):&#160;priority_queue.c']]],
-  ['dequeue_1',['dequeue',['../priority__queue_8c.html#ad1dec535f7ce22f414f5c653368f5b57',1,'dequeue(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#ad1dec535f7ce22f414f5c653368f5b57',1,'dequeue(PriorityQueue *pq):&#160;priority_queue.c']]],
-  ['destroypriorityqueue_2',['destroyPriorityQueue',['../priority__queue_8c.html#af5ac0beb8435710793dfd1639e87d1ed',1,'destroyPriorityQueue(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#af5ac0beb8435710793dfd1639e87d1ed',1,'destroyPriorityQueue(PriorityQueue *pq):&#160;priority_queue.c']]]
+  ['ingoal_0',['inGoal',['../maze_8c.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;maze.c'],['../maze_8h.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;maze.c']]]
 ];

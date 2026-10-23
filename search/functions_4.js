@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ingoal_0',['inGoal',['../maze_8c.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;maze.c'],['../maze_8h.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;maze.c']]]
+  ['setwallboth_0',['setWallBoth',['../maze_8c.html#a39184589996ad6618c6f90840dafc9ee',1,'setWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c'],['../maze_8h.html#a39184589996ad6618c6f90840dafc9ee',1,'setWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c']]]
 ];

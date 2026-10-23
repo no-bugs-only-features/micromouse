@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['djikstra_2ec_0',['djikstra.c',['../djikstra_8c.html',1,'']]]
+  ['maze_2ec_0',['maze.c',['../maze_8c.html',1,'']]],
+  ['maze_2eh_1',['maze.h',['../maze_8h.html',1,'']]]
 ];
