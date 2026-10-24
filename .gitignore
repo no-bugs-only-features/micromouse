@@ -1,1 +1,3 @@
 .vscode/
+mousetrace/build/
+compile_commands.json
