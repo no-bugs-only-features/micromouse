@@ -21,7 +21,7 @@
  * @param neighbors Array of neighbor cells.
  * @return The number of neighbor cells.
  */
-int getNeighbors(Maze maze, int size, CellID u, CellID neighbors[]) {
+int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
   int count = 0;
 
   // convert the CellID back into 2D cords
