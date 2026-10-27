@@ -24,20 +24,20 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
 
   // check north (y - 1)
   if (y > 0 && !hasWall(current_cell, North)) {
-    neighbors[count++] = cellID(y - 1, x);
+    neighbors[count++] = cellID(size, y - 1, x);
   }
   // check south (y + 1)
   if (y < size - 1 && !hasWall(current_cell, South)) {
-    neighbors[count++] = cellID(y + 1, x);
+    neighbors[count++] = cellID(size, y + 1, x);
   }
 
   // check east (x + 1)
   if (x < size - 1 && !hasWall(current_cell, East)) {
-    neighbors[count++] = cellID(y, x + 1);
+    neighbors[count++] = cellID(size, y, x + 1);
   }
   // check west (x - 1)
   if (x > 0 && !hasWall(current_cell, West)) {
-    neighbors[count++] = cellID(y, x - 1);
+    neighbors[count++] = cellID(size, y, x - 1);
   }
 
   return count;
@@ -63,10 +63,6 @@ void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
     // pull off the cell with the lowest distance
     CellID u = dequeue(pq);
 
-    if (u == target) {
-      break;
-    }
-
     CellID neighbors[4];
     int num_neighbors = getNeighbors(maze, size, u, neighbors);
 
@@ -79,7 +75,7 @@ void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
         prev[v] = u;
 
         //update queue
-        if ( pq->position[v] != UINT16_MAX;
+        if ( pq->position[v] != UINT16_MAX
           && pq->position[v] < pq->size
           && pq->entries[pq->position[v]].cell_id == v
         ) {
@@ -91,7 +87,7 @@ void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
     }
   }
 
-  free(pq);
+  destroyPriorityQueue(pq);
 
 }
 

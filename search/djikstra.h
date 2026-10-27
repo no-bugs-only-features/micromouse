@@ -8,6 +8,7 @@
 #ifndef DJIKSTRA_H
 #define DJIKSTRA_H
 
+#include "maze.h"
 
 /**
  * @brief Finds the available neighbor cells of a given CellID.
@@ -17,7 +18,7 @@
  * @param neighbors Array of neighbor cells.
  * @return The number of neighbor cells.
  */
-int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors)
+int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors);
 
 
 /**
