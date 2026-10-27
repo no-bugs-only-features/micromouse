@@ -13,14 +13,6 @@
 #include "priority_queue.h"
 
 
-/**
- * @brief Finds the available neighbor cells of a given CellID.
- *
- * @param maze The maze.
- * @param u Cell of the maze to check for neighbors.
- * @param neighbors Array of neighbor cells.
- * @return The number of neighbor cells.
- */
 int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
   int count = 0;
 
@@ -52,25 +44,12 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
 }
 
 
-/**
- * @brief Runs djikstras on a array of Cells, reconstructs shortest path to standard out
- *
- * @param maze The maze.
- * @param start The starting CellID.
- * @param target The target CellID we want to reach.
- */
-void djikstra(Maze maze, int size, CellID start, CellID target) {
-  
-  // dist[] tracks the distance it takes to get to any cell from the start
-  uint8_t dist[size * size];
-  // prev constructs the path as we move through the maze
-  CellID prev[size * size];
-
+void djikstra(Maze maze, int size, CellID start, CellID target, uint8_t* dist, CellID* prev) {
   PriorityQueue *pq = createPriorityQueue(size);
 
   // set each CellID distance and previous to max values
   for (int v = 0; v < size * size; v++) {
-    dist[v] = UINT8_MAX; // MAX here will cause problems with overflow
+    dist[v] = UINT8_MAX;
     prev[v] = UINT16_MAX;
   }
 
