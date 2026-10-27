@@ -58,12 +58,10 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    for (; optind < argc; optind++) {
-        f = fopen(argv[optind], "w");
-        if (f == NULL) {
-            perror("fopen");
-            return EXIT_FAILURE;
-        }
+    f = fopen(argv[optind], "w");
+    if (f == NULL) {
+        perror("fopen");
+        return EXIT_FAILURE;
     }
 
     Maze maze = generateBacktrackingMaze(size, seed, braid_pct);
