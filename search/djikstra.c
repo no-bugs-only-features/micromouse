@@ -44,7 +44,7 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
 }
 
 
-void djikstra(Maze maze, int size, CellID start, CellID target, uint8_t* dist, CellID* prev) {
+void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
   PriorityQueue *pq = createPriorityQueue(size);
 
   // set each CellID distance and previous to max values
@@ -53,9 +53,9 @@ void djikstra(Maze maze, int size, CellID start, CellID target, uint8_t* dist, C
     prev[v] = UINT16_MAX;
   }
 
-  dist[start] = 0;
+  dist[0] = 0;
 
-  enqueue(pq, start, 0);
+  enqueue(pq, 0, 0);
 
 
   // search the maze while there is reachable cells to explore

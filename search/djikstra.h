@@ -23,18 +23,21 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors)
 /**
  * @brief Runs djikstras on a array of Cells. Populates the dist and prev arrays.
  *
+ * This algorithm will always start at the top-left cell (CellID 0).
+ *
  * @param maze The maze.
- * @param start The starting CellID.
- * @param target The target CellID we want to reach.
  * @param dist Pointer to an array to store the shortest distances from the start to each cell.
  *             Array should be size * size and indexed by CellID.
  * @param prev Pointer to an array to store the previous cell in the shortest path to each cell.
  *             Array should be size * size and indexed by CellID.
  */
-void djikstra(Maze maze, int size, CellID start, CellID target, uint8_t* dist, CellID* prev);
+void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev);
 
 
 /** @brief Reconstructs the shortest path from the start to the target.
+ *
+ * The start of the maze is always the top-left cell (CellID 0). If the path length is 0, either
+ * the target is unreachable or the target is the start.
  *
  * @param prev The array of previous cells.
  * @param target The target CellID.
