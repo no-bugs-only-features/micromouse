@@ -25,11 +25,35 @@ void writeMazeToJson(FILE *f, Maze maze, int size, CellID* path, int pathLength)
     if (path && pathLength > 0) {
         fprintf(f, ",\"path\":[");
         for (int i = 0; i < pathLength; i++) {
-            fprintf(f, "%s{\"x\":%d,\"y\":%d}", i ? "," : "", 0, 0);
+            fprintf(f, "%s{\"x\":%d,\"y\":%d}", i ? "," : "", path[i]%size, path[i]/size);
         }
         fprintf(f, "]");
     }
     fprintf(f, "}");
+}
+
+
+Maze loadMazeFromJson(FILE *f, int *size) {
+    *size = 0;
+    fscanf(f, "{\"size\":%d,\"walls\":[", size);
+    Maze maze = malloc(*size * sizeof(Cell*));
+    for (int i = 0; i < *size; i++) {
+        maze[i] = malloc(*size * sizeof(Cell));
+    }
+    for (int y = 0; y < *size; y++) {
+        if (y > 0)
+            fscanf(f, ",");
+        fscanf(f, "[");
+        for (int x = 0; x < *size; x++) {
+            if (x > 0)
+                fscanf(f, ",");
+            int v;
+            fscanf(f, "%d", &v);
+            maze[y][x] = v;
+        }
+        fscanf(f, "]");
+    }
+    return maze;
 }
 
 
