@@ -10,3 +10,16 @@ target_link_libraries(mouse_test
         maze
         djikstra
 )
+
+add_executable(maze_gen)
+
+target_sources(maze_gen
+    PRIVATE
+        maze_gen.c
+)
+
+target_link_libraries(maze_gen
+    PRIVATE
+        maze
+        maze_gens
+)
