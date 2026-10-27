@@ -21,7 +21,7 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors)
 
 
 /**
- * @brief Runs djikstras on a array of Cells. Creates dist and prev arrays for 
+ * @brief Runs djikstras on a array of Cells. Populates the dist and prev arrays.
  *
  * @param maze The maze.
  * @param start The starting CellID.
@@ -29,19 +29,18 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors)
  * @param dist Pointer to an array to store the shortest distances from the start to each cell.
  *             Array should be size * size and indexed by CellID.
  * @param prev Pointer to an array to store the previous cell in the shortest path to each cell.
- *             Array should be size * size.
+ *             Array should be size * size and indexed by CellID.
  */
 void djikstra(Maze maze, int size, CellID start, CellID target, uint8_t* dist, CellID* prev);
 
 
-/**
- * @brief Reconstructs the shortest path from the start to the target.
- * 
- * @param target The target CellID.
+/** @brief Reconstructs the shortest path from the start to the target.
+ *
  * @param prev The array of previous cells.
- * @param size The size of the maze.
- * @return A pointer to an array containing the shortest path.
+ * @param target The target CellID.
+ * @param path An array to store the shortest path.
+ * @return The number of cells in the shortest path.
  */
-CellID* reconstructPath(CellID target, CellID* prev, int size);
+int reconstructPath(CellID* prev, CellID target, CellID* path);
 
 #endif /* DJIKSTRA_H */

@@ -93,37 +93,21 @@ void djikstra(Maze maze, int size, CellID start, CellID target, uint8_t* dist, C
 
   free(pq);
 
-  if (dist[target] == UINT8_MAX) {
-      printf("No path exists to the target!\n");
-      return;
-  }
-
-  printf("Shortest path takes %d steps.\n", dist[target]);
-
-  // reconstruction of djikstras
-
-  // Create an array to hold the route
-  CellID route[size * size];
-  int step_count = 0;
-  
-  // Start at the target and walk backwards using the 'prev' array
-  CellID current = target;
-  while (current != UINT16_MAX) {
-      route[step_count] = current;
-      step_count++;
-      current = prev[current]; // Look at the breadcrumb
-  }
-
-  // The route array now holds the path, but in reverse (Target -> Start).
-  // Print it looping backwards so it reads forwards (Start -> Target).
-  printf("Path to take: ");
-  for (int i = step_count - 1; i >= 0; i--) {
-      printf("%d", route[i]);
-      if (i > 0) {
-          printf(" -> ");
-      }
-  }
-  printf("\n");
 }
 
 
+int reconstructPath(CellID* prev, CellID target, CellID* path) {
+    int path_length = 0;
+    for (CellID current = target; current != UINT16_MAX; current = prev[current]) {
+        path[path_length++] = current;
+    }
+
+    /* Reverse the path to get it in the correct order. */
+    for (int i = 0; i < path_length / 2; i++) {
+        CellID temp = path[i];
+        path[i] = path[path_length - 1 - i];
+        path[path_length - 1 - i] = temp;
+    }
+
+    return path_length;
+}
