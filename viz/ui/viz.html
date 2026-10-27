@@ -1,633 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>mazeviz orchestrator</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #0d131a;
-      --panel: #121a23;
-      --line: #1f2b38;
-      --line2: #2c3d4c;
-      --ink: #cdd8e0;
-      --dim: #8a9bab;
-      --wall: #8fc7e0;
-      --amber: #e8a33d;
-      --ok: #5fc48a;
-      --bad: #e06b5a;
-      --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    html,
-    body {
-      height: 100%;
-      margin: 0
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font: 13px var(--sans);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden
-    }
-
-    header {
-      flex: none;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 18px;
-      background: var(--panel);
-      border-bottom: 1px solid var(--line)
-    }
-
-    .brand {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      font-size: 16px;
-      font-weight: 600
-    }
-
-    .brand b {
-      color: var(--amber);
-      font-weight: 600
-    }
-
-    .brand small {
-      font: 400 12px var(--mono);
-      color: var(--dim)
-    }
-
-    .chips {
-      display: flex;
-      gap: 10px;
-      font: 400 12px var(--mono)
-    }
-
-    .chip {
-      border: 1px solid var(--line2);
-      border-radius: 3px;
-      padding: 5px 10px
-    }
-
-    .chip i {
-      font-style: normal;
-      color: var(--dim)
-    }
-
-    .chip.on i {
-      color: var(--ok)
-    }
-
-    .cols {
-      flex: 1;
-      min-height: 0;
-      display: flex
-    }
-
-    aside {
-      flex: none;
-      background: var(--panel);
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto
-    }
-
-    #left {
-      width: 300px;
-      border-right: 1px solid var(--line)
-    }
-
-    #right {
-      width: 280px;
-      border-left: 1px solid var(--line)
-    }
-
-    section {
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line)
-    }
-
-    section:last-child {
-      border-bottom: 0
-    }
-
-    h2 {
-      margin: 0 0 12px;
-      font-size: 13px;
-      font-weight: 600
-    }
-
-    .grid2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 12px
-    }
-
-    label.f {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 12px;
-      color: var(--dim)
-    }
-
-    input[type=number] {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--line2);
-      border-radius: 3px;
-      color: var(--ink);
-      font: 400 13px var(--mono);
-      padding: 7px 8px
-    }
-
-    button,
-    select {
-      font: 500 13px var(--sans);
-      color: var(--ink);
-      background: #1a2530;
-      border: 1px solid var(--line2);
-      border-radius: 3px
-    }
-
-    button {
-      width: 100%;
-      min-height: 40px;
-      padding: 8px 12px;
-      cursor: pointer
-    }
-
-    button+button {
-      margin-top: 8px
-    }
-
-    button:hover:not(:disabled) {
-      border-color: var(--amber)
-    }
-
-    button:disabled {
-      opacity: .5;
-      cursor: default
-    }
-
-    button.pri {
-      background: var(--amber);
-      border: 0;
-      color: #1a1206;
-      font-weight: 600
-    }
-
-    button.big {
-      min-height: 48px;
-      font-size: 15px
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--amber);
-      outline-offset: 2px
-    }
-
-    .mousename {
-      font: 500 13px var(--mono);
-      color: var(--amber);
-      margin-bottom: 12px;
-      word-break: break-all
-    }
-
-    .mousename.none {
-      color: var(--dim)
-    }
-
-    main {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      position: relative
-    }
-
-    .bar {
-      flex: none;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 20px;
-      background: var(--panel);
-      border-bottom: 1px solid var(--line)
-    }
-
-    .bar button {
-      width: 76px;
-      min-height: 36px
-    }
-
-    .bar .t {
-      font: 400 12px var(--mono);
-      color: var(--dim);
-      min-width: 48px
-    }
-
-    .bar input[type=range] {
-      flex: 1;
-      accent-color: var(--amber)
-    }
-
-    .bar select {
-      padding: 6px 8px;
-      min-height: 36px
-    }
-
-    #stage {
-      flex: 1;
-      min-height: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center
-    }
-
-    canvas {
-      display: block
-    }
-
-    #status {
-      flex: none;
-      padding: 10px 20px;
-      border-top: 1px solid var(--line);
-      font: 400 12px var(--mono);
-      color: var(--dim)
-    }
-
-    #toast {
-      position: absolute;
-      top: 62px;
-      left: 20px;
-      right: 20px;
-      background: #2a1714;
-      border: 1px solid var(--bad);
-      color: #f2b8ae;
-      border-radius: 3px;
-      padding: 10px 14px;
-      z-index: 2
-    }
-
-    #toast[hidden] {
-      display: none
-    }
-
-    .kv {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 7px 0;
-      border-bottom: 1px solid #1a2530
-    }
-
-    .kv:last-child {
-      border-bottom: 0
-    }
-
-    .kv span {
-      color: var(--dim)
-    }
-
-    .kv b {
-      font: 500 13px var(--mono)
-    }
-
-    .empty {
-      color: var(--dim);
-      font-size: 12px
-    }
-
-    .chk {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 0
-    }
-
-    .chk input {
-      accent-color: var(--amber);
-      width: 16px;
-      height: 16px
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Micromouse Visualizer</title>
+<style>
+  :root{
+    --bg:#0d131a;
+    --panel:#121a23;
+    --grid:#1f2b38;
+    --wall:#8fc7e0;
+    --wall-dim:#2c3d4c;
+    --ink:#cdd8e0;
+    --ink-dim:#6f818f;
+    --amber:#e8a33d;
+    --amber-dim:#5a4526;
+    --near:#274a63;
+    --far:#e8a33d;
+    --mono: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+  }
+  #sidebar{
+    width:280px;
+    background:var(--panel);
+    border-right:1px solid var(--grid);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    overflow-y:auto;
+  }
+  h1{
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    margin:0;
+    color:var(--ink);
+  }
+  h1 span{color:var(--amber);}
+  .sub{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-dim);
+    margin-top:2px;
+  }
+  .block{
+    border-top:1px solid var(--grid);
+    padding-top:14px;
+  }
+  .block-label{
+    font-size:11px;
+    color:var(--ink-dim);
+    margin-bottom:10px;
+    font-family:var(--mono);
+  }
+  .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:8px;
+    font-size:13px;
+  }
+  .toggle{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .toggle input{accent-color:var(--amber);}
+  button{
+    background:var(--grid);
+    color:var(--ink);
+    border:1px solid var(--wall-dim);
+    border-radius:3px;
+    padding:7px 10px;
+    font-size:12px;
+    font-family:var(--sans);
+    cursor:pointer;
+  }
+  button:hover{border-color:var(--amber);}
+  button.primary{
+    background:var(--amber);
+    color:#1a1206;
+    border:none;
+    font-weight:600;
+  }
+  .btn-row{display:flex;gap:6px;}
+  .btn-row button{flex:1;}
+  input[type=range]{
+    width:100%;
+    accent-color:var(--amber);
+  }
+  input[type=file]{display:none;}
+  .filebtn{
+    display:block;
+    text-align:center;
+  }
+  #stats{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-dim);
+    line-height:1.9;
+  }
+  #stats b{color:var(--ink);font-weight:600;}
+  #main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+  #scrub{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 24px;
+    border-bottom:1px solid var(--grid);
+    background:var(--panel);
+  }
+  #scrub span{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-dim);
+    width:48px;
+    flex:0 0 auto;
+  }
+  #scrubBar{
+    flex:1;
+  }
+  #canvasWrap{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:0;
+  }
+  canvas{
+    background:var(--bg);
+  }
+  button:disabled,input:disabled{opacity:.4;cursor:default;}
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="brand">maze<b>viz</b><small>orchestrator</small></div>
-    <div class="chips">
-      <span class="chip" id="chipEngine"><i>●</i> engine: waiting</span>
-      <span class="chip" id="chipMouse"><i>●</i> mouse: none</span>
-    </div>
-  </header>
 
-  <div class="cols">
-    <aside id="left">
-      <section>
-        <h2>Maze</h2>
-        <div class="grid2">
-          <label class="f">Size<input type="number" id="size" value="10" min="2" max="16"></label>
-          <label class="f">Braid %<input type="number" id="braid" value="10" min="0" max="100"></label>
-          <label class="f">Seed (blank = random)<input type="number" id="seed" min="0"></label>
-        </div>
-        <button class="pri" id="btnGen">Generate maze</button>
-        <button id="btnLoadMaze">Load maze JSON…</button>
-      </section>
-      <section style="display: none">
-        <h2>Mouse</h2>
-        <div class="mousename none" id="mouseName">No library loaded</div>
-        <div class="grid2">
-          <label class="f">Max speed (m/s)<input type="number" id="vmax" value="3.0" min="0.1" step="0.1"></label>
-          <label class="f">Accel (m/s²)<input type="number" id="accel" value="12" min="0.1" step="0.5"></label>
-          <label class="f">Turn speed (m/s)<input type="number" id="vturn" value="0.9" min="0.1" step="0.1"></label>
-          <label class="f">Cell size (m)<input type="number" id="cell" value="0.18" min="0.01" step="0.01"></label>
-        </div>
-        <button id="btnLoadMouse">Load mouse library…</button>
-      </section>
-      <section style="display: none">
-        <button class="pri big" id="btnRun">Run mouse</button>
-      </section>
-    </aside>
-
-    <main>
-      <div class="bar">
-        <button id="btnPlay" aria-label="Play or pause replay">Play</button>
-        <span class="t" id="tNow">0.00s</span>
-        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Replay position">
-        <span class="t" id="tEnd">0.00s</span>
-        <select id="speed" aria-label="Replay speed">
-          <option value="0.5">0.5×</option>
-          <option value="1">1×</option>
-          <option value="2" selected>2×</option>
-          <option value="4">4×</option>
-          <option value="8">8×</option>
-        </select>
-      </div>
-      <div id="toast" role="alert" hidden></div>
-      <div id="stage"><canvas id="cv" role="img" aria-label="Maze with mouse path replay"></canvas></div>
-      <div id="status">Generate a maze or load one from a JSON file to begin.</div>
-    </main>
-
-    <aside id="right">
-      <section>
-        <h2>Last run</h2>
-        <div class="kv"><span>Time</span><b id="sTime">—</b></div>
-        <div class="kv"><span>Path length</span><b id="sCells">—</b></div>
-        <div class="kv"><span>Optimality gap</span><b id="sGap">—</b></div>
-        <div class="kv"><span>Diagonal cuts</span><b id="sDiag">—</b></div>
-        <div class="kv"><span>Blocked corners</span><b id="sBlock">—</b></div>
-      </section>
-      <section>
-        <h2>Run history</h2>
-        <div id="history">
-          <div class="empty">No runs yet.</div>
-        </div>
-      </section>
-      <section>
-        <h2>Layers</h2>
-        <label class="chk"><input type="checkbox" id="lyWalls" checked>Walls</label>
-        <label class="chk"><input type="checkbox" id="lyHeat">Flood-fill heatmap</label>
-        <label class="chk"><input type="checkbox" id="lyPath" checked>Path overlay</label>
-        <label class="chk"><input type="checkbox" id="lyMouse" checked>Mouse marker</label>
-      </section>
-    </aside>
+<div id="sidebar">
+  <div>
+    <h1>maze<span>viz</span></h1>
+    <div class="sub">micromouse replay tool</div>
   </div>
 
-  <script>
-    // Wall bits match orchestrator.py and maze_json_format.md: N=8 E=4 S=2 W=1; (0,0) is top-left.
-    const N = 8, E = 4, S = 2, W = 1;
-    const $ = id => document.getElementById(id);
-    const css = getComputedStyle(document.documentElement);
-    const color = name => css.getPropertyValue(name).trim();
+  <div class="block">
+    <div class="block-label">SOURCE</div>
+    <div class="btn-row">
+      <button class="primary" id="loadBtn">Open maze JSON</button>
+    </div>
+    <div class="sub" style="margin-top:8px;">or drop a .json file anywhere</div>
+    <div id="msg" role="alert" style="color:#e06b5a;font-size:12px;margin-top:8px;"></div>
+    <div class="btn-row" style="margin-top:10px;">
+      <button id="genBtn">Sample maze</button>
+    </div>
+    <input type="file" id="fileInput" accept=".json,application/json">
+  </div>
 
-    const state = { maze: null, path: [], log: [], t: 0, playing: false };
-    const cv = $('cv'), cx = cv.getContext('2d');
+  <div class="block">
+    <div class="block-label">LAYERS</div>
+    <div class="row"><label class="toggle"><input type="checkbox" id="lyWalls" checked>Walls</label></div>
+    <div class="row"><label class="toggle"><input type="checkbox" id="lyHeat" checked>Flood-fill heatmap</label></div>
+    <div class="row"><label class="toggle"><input type="checkbox" id="lyPath" checked>Path overlay</label></div>
+    <div class="row"><label class="toggle"><input type="checkbox" id="lyMouse" checked>Mouse marker</label></div>
+  </div>
 
-    // ---------- rendering ----------
-    function fit() {
-      const stage = $('stage');
-      const side = Math.max(160, Math.min(stage.clientWidth, stage.clientHeight) - 32);
-      const dpr = window.devicePixelRatio || 1;
-      cv.style.width = cv.style.height = side + 'px';
-      cv.width = cv.height = Math.round(side * dpr);
-      cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw();
-    }
-    new ResizeObserver(fit).observe($('stage'));
+  <div class="block">
+    <div class="block-label">PLAYBACK</div>
+    <div class="btn-row">
+      <button id="playBtn" class="primary">Play</button>
+      <button id="stepBtn">Step</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <span style="font-size:11px;color:var(--ink-dim);">Speed</span>
+    </div>
+    <input type="range" id="speed" min="0.25" max="8" step="0.25" value="2">
+  </div>
 
-    function heat(t) { // 0 = near goal (blue), 1 = far (amber)
-      const a = [0x27, 0x4a, 0x63], b = [0xe8, 0xa3, 0x3d];
-      return `rgba(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',')},0.6)`;
-    }
+  <div class="block">
+    <div class="block-label">TELEMETRY</div>
+    <div id="stats"></div>
+  </div>
+</div>
 
-    function positionAt(t) {
-      const log = state.log;
-      if (!log.length) return null;
-      if (t <= log[0].t) return log[0];
-      for (let i = 1; i < log.length; i++) {
-        if (t <= log[i].t) {
-          const a = log[i - 1], b = log[i], f = b.t > a.t ? (t - a.t) / (b.t - a.t) : 1;
-          return { x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f };
-        }
-      }
-      return log[log.length - 1];
-    }
+<div id="main">
+  <div id="scrub">
+    <span id="scrubT">0.00s</span>
+    <input type="range" id="scrubBar" min="0" max="100" value="0">
+  </div>
+  <div id="canvasWrap">
+    <canvas id="cv"></canvas>
+  </div>
+</div>
 
-    function draw() {
-      const side = cv.clientWidth;
-      cx.clearRect(0, 0, side, side);
-      const m = state.maze;
-      if (!m) return;
-      const pad = 10, n = m.size, c = (side - 2 * pad) / n;
-      const px = x => pad + (x + 0.5) * c, py = y => pad + (y + 0.5) * c;
+<script>
+// ---------- data model ----------
+// walls bitmask per cell: bit3=N(8) bit2=E(4) bit1=S(2) bit0=W(1)  (matches C engine convention)
+const N=8,E=4,S=2,W=1;
+const OPP={ [N]:S, [S]:N, [E]:W, [W]:E };
 
-      if ($('lyHeat').checked) {
-        const max = Math.max(1, ...m.distances.flat());
-        for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
-          const d = m.distances[y][x];
-          if (d < 0) continue;
-          cx.fillStyle = heat(d / max);
-          cx.fillRect(pad + x * c, pad + y * c, c, c);
-        }
-      }
+let maze = null; // {size, walls, start, goal, distances, path, run_log}
+let playing = false;
+let simTime = 0;
+let lastFrame = null;
 
-      cx.fillStyle = 'rgba(232,163,61,0.18)'; // goal cell
-      cx.fillRect(pad + m.goal.x * c, pad + m.goal.y * c, c, c);
-      cx.strokeStyle = color('--line'); cx.lineWidth = 1;
-      cx.beginPath();
-      for (let i = 0; i <= n; i++) {
-        cx.moveTo(pad + i * c, pad); cx.lineTo(pad + i * c, pad + n * c);
-        cx.moveTo(pad, pad + i * c); cx.lineTo(pad + n * c, pad + i * c);
-      }
-      cx.stroke();
+const canvas = document.getElementById('cv');
+const ctx = canvas.getContext('2d');
 
-      if ($('lyWalls').checked) {
-        cx.strokeStyle = color('--wall'); cx.lineWidth = 3; cx.lineCap = 'round';
-        cx.beginPath();
-        for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
-          const w = m.walls[y][x], l = pad + x * c, t = pad + y * c;
-          if (w & N) { cx.moveTo(l, t); cx.lineTo(l + c, t); }
-          if (w & S) { cx.moveTo(l, t + c); cx.lineTo(l + c, t + c); }
-          if (w & W) { cx.moveTo(l, t); cx.lineTo(l, t + c); }
-          if (w & E) { cx.moveTo(l + c, t); cx.lineTo(l + c, t + c); }
-        }
-        cx.stroke();
-      }
+function fitCanvas(){
+  const wrap = document.getElementById('canvasWrap');
+  const pad = 40;
+  const avail = Math.min(wrap.clientWidth, wrap.clientHeight) - pad;
+  canvas.width = avail; canvas.height = avail;
+}
+window.addEventListener('resize', ()=>{ fitCanvas(); render(); });
 
-      cx.font = `500 ${Math.max(10, c * 0.3)}px ${color('--mono')}`;
-      cx.textAlign = 'center'; cx.textBaseline = 'middle';
-      cx.fillStyle = color('--dim'); cx.fillText('S', px(m.start.x), py(m.start.y));
-      cx.fillStyle = color('--amber'); cx.fillText('G', px(m.goal.x), py(m.goal.y));
+// ---------- maze generation (randomized DFS, for demo/testing) ----------
+function generateMaze(size){
+  const walls = Array.from({length:size}, ()=>Array(size).fill(N|E|S|W));
+  const visited = Array.from({length:size}, ()=>Array(size).fill(false));
+  const dirs = [[0,-1,N],[0,1,S],[1,0,E],[-1,0,W]];
 
-      const pos = positionAt(state.t);
-      if ($('lyPath').checked && state.path.length > 1) {
-        cx.lineJoin = cx.lineCap = 'round'; cx.lineWidth = Math.max(2, c * 0.12);
-        cx.strokeStyle = 'rgba(232,163,61,0.35)'; cx.setLineDash([3, 6]);
-        cx.beginPath();
-        state.path.forEach((p, i) => i ? cx.lineTo(px(p.x), py(p.y)) : cx.moveTo(px(p.x), py(p.y)));
-        cx.stroke(); cx.setLineDash([]);
-        if (pos) { // traveled portion, solid
-          cx.strokeStyle = color('--amber');
-          cx.beginPath();
-          state.log.filter(e => e.t <= state.t).forEach((e, i) => i ? cx.lineTo(px(e.x), py(e.y)) : cx.moveTo(px(e.x), py(e.y)));
-          cx.lineTo(px(pos.x), py(pos.y));
-          cx.stroke();
-        }
-      }
-      if ($('lyMouse').checked && pos) {
-        cx.fillStyle = color('--amber'); cx.strokeStyle = '#1a1206'; cx.lineWidth = 2;
-        cx.beginPath(); cx.arc(px(pos.x), py(pos.y), c * 0.26, 0, Math.PI * 2); cx.fill(); cx.stroke();
-      }
-    }
+  function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
-    // ---------- playback ----------
-    const duration = () => state.log.length ? state.log[state.log.length - 1].t : 0;
-    function sync() {
-      $('tNow').textContent = state.t.toFixed(2) + 's';
-      $('tEnd').textContent = duration().toFixed(2) + 's';
-      $('scrub').value = duration() ? Math.round(state.t / duration() * 1000) : 0;
-    }
-    function setPlaying(on) {
-      state.playing = on && duration() > 0;
-      $('btnPlay').textContent = state.playing ? 'Pause' : 'Play';
-    }
-    let last = 0;
-    function tick(ts) {
-      const dt = Math.min(0.1, (ts - last) / 1000); last = ts;
-      if (state.playing) {
-        state.t = Math.min(duration(), state.t + dt * parseFloat($('speed').value));
-        if (state.t >= duration()) setPlaying(false);
-        sync(); draw();
-      }
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-
-    $('btnPlay').onclick = () => {
-      if (!state.playing && state.t >= duration()) state.t = 0;
-      setPlaying(!state.playing);
-    };
-    $('scrub').oninput = e => { state.t = e.target.value / 1000 * duration(); setPlaying(false); sync(); draw(); };
-    ['lyWalls', 'lyHeat', 'lyPath', 'lyMouse'].forEach(id => $(id).onchange = draw);
-
-    // ---------- panels ----------
-    function showError(msg) {
-      const t = $('toast');
-      t.textContent = msg; t.hidden = false;
-      clearTimeout(showError.timer);
-      showError.timer = setTimeout(() => t.hidden = true, 8000);
-    }
-    function setStats(s) {
-      $('sTime').textContent = s ? s.time_s.toFixed(2) + ' s' : '—';
-      $('sCells').textContent = s ? s.path_cells + ' cells' : '—';
-      $('sGap').textContent = s ? (s.gap_pct > 0 ? '+' : '') + s.gap_pct + '%' : '—';
-      $('sDiag').textContent = s ? s.diagonal_cuts : '—';
-      $('sBlock').textContent = s ? s.blocked_corners : '—';
-    }
-    function setHistory(list) {
-      const box = $('history');
-      box.replaceChildren();
-      if (!list.length) { box.innerHTML = '<div class="empty">No runs yet.</div>'; return; }
-      for (const r of list) {
-        const row = document.createElement('div'); row.className = 'kv';
-        const name = document.createElement('span'); name.textContent = `#${r.id} ${r.mouse}`;
-        const time = document.createElement('b'); time.textContent = r.time_s.toFixed(2) + ' s';
-        row.append(name, time); box.append(row);
-      }
-    }
-    function loadMaze(m, resetRun) {
-      state.maze = m;
-      state.path = m.path || [];
-      state.log = m.run_log || [];
-      state.t = 0;
-      if (resetRun) { setStats(null); }
-      setPlaying(false); sync(); draw();
-    }
-
-    // ---------- events pushed from orchestrator.py (Api._push -> evaluate_js) ----------
-    window.onOrchestratorEvent = ({ kind, data }) => {
-      if (kind === 'maze') {
-        loadMaze(data.maze, true);
-        const m = data.maze, meta = data.meta, parts = [`${m.size}×${m.size} maze`, meta.source];
-        if (meta.seed !== null) parts.push(`seed ${meta.seed}`);
-        if (meta.braid_pct !== null) parts.push(`braid ${meta.braid_pct}%`);
-        parts.push(`start (${m.start.x},${m.start.y}), goal (${m.goal.x},${m.goal.y})`);
-        if (meta.solvable) parts.push('solvable');
-        $('status').textContent = parts.join(', ');
-      } else if (kind === 'run') {
-        loadMaze(data.maze, false);
-        setStats(data.summary); setHistory(data.history);
-        setPlaying(true);
-      } else if (kind === 'mouse') {
-        $('mouseName').textContent = data.name; $('mouseName').classList.remove('none');
-        $('chipMouse').classList.add('on'); $('chipMouse').lastChild.textContent = ' mouse: ' + data.name;
-      } else if (kind === 'error') {
-        showError(data.message);
-      }
-    };
-
-    // ---------- calls into orchestrator.py (pywebview js_api) ----------
-    const actions = ['btnGen', 'btnLoadMaze', 'btnLoadMouse', 'btnRun'];
-    async function call(method, ...args) {
-      if (!(window.pywebview && window.pywebview.api)) {
-        showError('Not connected to the orchestrator. Start the app with: python orchestrator.py');
-        return;
-      }
-      actions.forEach(id => $(id).disabled = true);
-      try { await window.pywebview.api[method](...args); }
-      catch (err) { showError(String(err)); }
-      finally { actions.forEach(id => $(id).disabled = false); }
-    }
-    const num = id => $(id).value === '' ? '' : Number($(id).value);
-
-    $('btnGen').onclick = () => call('generate_maze', num('size'), num('braid'), num('seed'));
-    $('btnLoadMaze').onclick = () => call('load_maze_file');
-    $('btnLoadMouse').onclick = () => call('load_mouse');
-    $('btnRun').onclick = () => call('run_mouse', {
-      max_speed: num('vmax'), accel: num('accel'), turn_speed: num('vturn'), cell_size: num('cell')
+  const stack = [[0,0]];
+  visited[0][0]=true;
+  while(stack.length){
+    const [x,y] = stack[stack.length-1];
+    const options = shuffle(dirs.slice()).filter(([dx,dy])=>{
+      const nx=x+dx, ny=y+dy;
+      return nx>=0 && ny>=0 && nx<size && ny<size && !visited[ny][nx];
     });
+    if(options.length===0){ stack.pop(); continue; }
+    const [dx,dy,dir] = options[0];
+    const nx=x+dx, ny=y+dy;
+    walls[y][x] &= ~dir;
+    walls[ny][nx] &= ~OPP[dir];
+    visited[ny][nx]=true;
+    stack.push([nx,ny]);
+  }
+  // braid: knock a few extra walls down so it isn't a perfect single-path maze
+  for(let i=0;i<size*2;i++){
+    const x=Math.floor(Math.random()*size), y=Math.floor(Math.random()*size);
+    const opts = shuffle(dirs.slice());
+    for(const [dx,dy,dir] of opts){
+      const nx=x+dx, ny=y+dy;
+      if(nx<0||ny<0||nx>=size||ny>=size) continue;
+      if(walls[y][x] & dir){
+        walls[y][x] &= ~dir;
+        walls[ny][nx] &= ~OPP[dir];
+        break;
+      }
+    }
+  }
+  return walls;
+}
 
-    window.addEventListener('pywebviewready', () => {
-      $('chipEngine').classList.add('on');
-      $('chipEngine').lastChild.textContent = ' engine: ready';
-    });
-  </script>
+function bfsDistances(walls, size, goal){
+  const dist = Array.from({length:size}, ()=>Array(size).fill(-1));
+  dist[goal.y][goal.x]=0;
+  const q=[[goal.x,goal.y]];
+  const dirs=[[0,-1,N,S],[0,1,S,N],[1,0,E,W],[-1,0,W,E]];
+  let head=0;
+  while(head<q.length){
+    const [x,y]=q[head++];
+    for(const [dx,dy,dir,rev] of dirs){
+      const nx=x+dx, ny=y+dy;
+      if(nx<0||ny<0||nx>=size||ny>=size) continue;
+      if(walls[y][x] & dir) continue; // wall blocks this direction from (x,y)
+      if(dist[ny][nx]!==-1) continue;
+      dist[ny][nx]=dist[y][x]+1;
+      q.push([nx,ny]);
+    }
+  }
+  return dist;
+}
+
+function reconstructPath(walls, size, start, goal, dist){
+  const path=[{x:start.x,y:start.y}];
+  let cx=start.x, cy=start.y;
+  const dirs=[[0,-1,N],[0,1,S],[1,0,E],[-1,0,W]];
+  let guard=0;
+  while((cx!==goal.x||cy!==goal.y) && guard++<size*size*2){
+    let best=null, bestD=Infinity;
+    for(const [dx,dy,dir] of dirs){
+      if(walls[cy][cx] & dir) continue;
+      const nx=cx+dx, ny=cy+dy;
+      if(nx<0||ny<0||nx>=size||ny>=size) continue;
+      if(dist[ny][nx]>=0 && dist[ny][nx]<bestD){ bestD=dist[ny][nx]; best=[nx,ny]; }
+    }
+    if(!best) break;
+    cx=best[0]; cy=best[1];
+    path.push({x:cx,y:cy});
+  }
+  return path;
+}
+
+function cornerOpen(walls, size, x, y, dx, dy){
+  // diagonal cut from (x,y) to (x+dx,y+dy) is only legal if both orthogonal
+  // walls forming the corner are open (matches maze_json_format.md's rule)
+  const nx=x+dx, ny=y+dy;
+  if(nx<0||ny<0||nx>=size||ny>=size) return false;
+  const horiz = dx>0 ? E : W;      // wall from (x,y) toward (x+dx,y)
+  const vert  = dy>0 ? S : N;      // wall from (x,y) toward (x,y+dy)
+  const horizOpen = !(walls[y][x] & horiz);
+  const vertOpen  = !(walls[y][x] & vert);
+  return horizOpen && vertOpen;
+}
+
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function decodeText(buf){
+  // files written by PowerShell redirection are UTF-16 with a BOM; handle that and plain UTF-8
+  const b = new Uint8Array(buf);
+  if(b[0]===0xFF && b[1]===0xFE) return new TextDecoder('utf-16le').decode(b.subarray(2));
+  if(b[0]===0xFE && b[1]===0xFF) return new TextDecoder('utf-16be').decode(b.subarray(2));
+  return new TextDecoder('utf-8').decode(b);
+}
+
+function structureError(d){
+  if(!d || typeof d!=='object' || Array.isArray(d)) return 'top level must be a JSON object';
+  for(const k of ['size','walls','start','goal']) if(!(k in d)) return `missing required key "${k}"`;
+  const n = d.size;
+  if(!Number.isInteger(n) || n<1) return '"size" must be a positive integer';
+  const grid = (g, ok) => Array.isArray(g) && g.length===n && g.every(r => Array.isArray(r) && r.length===n && r.every(ok));
+  if(!grid(d.walls, v => Number.isInteger(v) && v>=0 && v<=15)) return `"walls" must be a ${n}×${n} grid of integers 0–15`;
+  for(const k of ['start','goal']){
+    const p = d[k];
+    if(!p || !Number.isInteger(p.x) || !Number.isInteger(p.y) || p.x<0 || p.y<0 || p.x>=n || p.y>=n) return `"${k}" must be {"x","y"} inside the maze`;
+  }
+  if('distances' in d && !grid(d.distances, v => Number.isInteger(v))) return `"distances" must be a ${n}×${n} grid of integers`;
+  if('path' in d && !(Array.isArray(d.path) && d.path.every(p => p && typeof p.x==='number' && typeof p.y==='number'))) return '"path" must be a list of {"x","y"}';
+  if('run_log' in d && !(Array.isArray(d.run_log) && d.run_log.every(r => r && ['t','x','y'].every(k => typeof r[k]==='number')))) return '"run_log" must be a list of {"t","x","y"}';
+  return null;
+}
+
+function wallIssues(walls, size){
+  const out = [];
+  for(let y=0;y<size;y++) for(let x=0;x<size;x++){
+    const w = walls[y][x];
+    if(x+1<size && !!(w&E) !== !!(walls[y][x+1]&W)) out.push(`one-sided wall between (${x},${y}) and (${x+1},${y})`);
+    if(y+1<size && !!(w&S) !== !!(walls[y+1][x]&N)) out.push(`one-sided wall between (${x},${y}) and (${x},${y+1})`);
+  }
+  return out;
+}
+
+function validatePath(m){
+  const {walls, size, path, start, goal} = m, issues = [], bad = new Set();
+  if(!path.length) return {issues, bad};
+  const out = path.findIndex(p => !(Number.isInteger(p.x) && Number.isInteger(p.y) && p.x>=0 && p.y>=0 && p.x<size && p.y<size));
+  if(out>=0){ issues.push(`path step ${out} is outside the maze or off the cell grid`); bad.add(out); return {issues, bad}; }
+  if(path[0].x!==start.x || path[0].y!==start.y) issues.push(`path starts at (${path[0].x},${path[0].y}), not the start cell`);
+  const last = path[path.length-1];
+  if(last.x!==goal.x || last.y!==goal.y) issues.push(`path ends at (${last.x},${last.y}), not the goal`);
+  for(let i=1;i<path.length;i++){
+    const a=path[i-1], b=path[i], dx=b.x-a.x, dy=b.y-a.y, ax=Math.abs(dx), ay=Math.abs(dy);
+    if(ax+ay===0) continue;                                   // standing still is fine
+    if(ax+ay===1){
+      const dir = dx>0 ? E : dx<0 ? W : dy>0 ? S : N;
+      if((walls[a.y][a.x] & dir) || (walls[b.y][b.x] & OPP[dir])){ issues.push(`step ${i}: (${a.x},${a.y}) to (${b.x},${b.y}) crosses a wall`); bad.add(i); }
+    } else if(ax===1 && ay===1){
+      if(b.move!=='diagonal'){ issues.push(`step ${i}: diagonal step is not marked "move":"diagonal"`); bad.add(i); }
+      else if(!cornerOpen(walls,size,a.x,a.y,dx,dy)){ issues.push(`step ${i}: diagonal cut through a blocked corner`); bad.add(i); }
+    } else { issues.push(`step ${i}: (${a.x},${a.y}) to (${b.x},${b.y}) is not adjacent`); bad.add(i); }
+  }
+  return {issues, bad};
+}
+
+function setMaze(m, source){
+  const pv = validatePath(m);
+  m.issues = pv.issues.concat(wallIssues(m.walls, m.size));
+  if(m.distances[m.start.y][m.start.x] < 0) m.issues.unshift('goal is unreachable from the start cell');
+  m.badSegs = pv.bad;
+  m.source = source;
+  maze = m; simTime = 0; playing = false;
+  const has = m.run_log.length > 0;
+  document.getElementById('playBtn').textContent = 'Play';
+  ['playBtn','stepBtn','resetBtn','scrubBar'].forEach(id => document.getElementById(id).disabled = !has);
+  const bar = document.getElementById('scrubBar');
+  bar.max = has ? m.run_log[m.run_log.length-1].t*1000 : 0;
+  bar.value = 0;
+  document.getElementById('msg').textContent = '';
+  render(); updateStats();
+}
+
+async function loadFile(f){
+  try{
+    const data = JSON.parse(decodeText(await f.arrayBuffer()));
+    const err = structureError(data);
+    if(err) throw new Error(err);
+    const path = data.path || [];
+    setMaze({
+      size: data.size, walls: data.walls, start: data.start, goal: data.goal,
+      distances: data.distances || bfsDistances(data.walls, data.size, data.goal),
+      path,
+      run_log: data.run_log || (path.length ? buildRunLog(path, 0.18) : [])   // path-only files replay at a constant 0.18 s per cell
+    }, f.name);
+  }catch(e){
+    document.getElementById('msg').textContent = `Could not load ${f.name}: ${e.message}`;
+  }
+}
+
+function buildRunLog(path, cellTime){
+  // demo timing: constant time per cell — replace with real kinematics output when available
+  return path.map((p,i)=>({t: +(i*cellTime).toFixed(3), x:p.x, y:p.y}));
+}
+
+function newRandomMaze(size=16){
+  const walls = generateMaze(size);
+  const start={x:0,y:0}, goal={x:Math.floor(size/2),y:Math.floor(size/2)};
+  const distances = bfsDistances(walls, size, goal);
+  const path = reconstructPath(walls, size, start, goal, distances);
+  const run_log = buildRunLog(path, 0.18);
+  setMaze({size, walls, start, goal, distances, path, run_log}, 'sample maze');
+}
+
+// ---------- rendering ----------
+function render(){
+  if(!maze){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = getVar('--ink-dim');
+    ctx.font = '14px ' + getVar('--mono').trim();
+    ctx.textAlign = 'center';
+    ctx.fillText('Open a maze JSON, or drop a file here', canvas.width/2, canvas.height/2);
+    ctx.textAlign = 'start';
+    return;
+  }
+  const {size, walls, start, goal, distances, path} = maze;
+  const W_ = canvas.width, H_ = canvas.height;
+  const cell = Math.floor(Math.min(W_,H_)/size);
+  const originX = (W_-cell*size)/2, originY=(H_-cell*size)/2;
+  ctx.clearRect(0,0,W_,H_);
+
+  // heatmap layer
+  if(document.getElementById('lyHeat').checked){
+    let maxD=1;
+    for(let y=0;y<size;y++) for(let x=0;x<size;x++) maxD=Math.max(maxD, distances[y][x]);
+    for(let y=0;y<size;y++) for(let x=0;x<size;x++){
+      const d=distances[y][x];
+      if(d<0) continue;
+      const t=d/maxD;
+      ctx.fillStyle = lerpColor([0x27,0x4a,0x63], [0xe8,0xa3,0x3d], t);
+      ctx.globalAlpha = 0.55;
+      ctx.fillRect(originX+x*cell, originY+y*cell, cell, cell);
+    }
+    ctx.globalAlpha=1;
+  }
+
+  // grid
+  ctx.strokeStyle = getVar('--grid');
+  ctx.lineWidth=1;
+  for(let i=0;i<=size;i++){
+    ctx.beginPath();
+    ctx.moveTo(originX+i*cell, originY);
+    ctx.lineTo(originX+i*cell, originY+size*cell);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(originX, originY+i*cell);
+    ctx.lineTo(originX+size*cell, originY+i*cell);
+    ctx.stroke();
+  }
+
+  // walls
+  if(document.getElementById('lyWalls').checked){
+    ctx.strokeStyle = getVar('--wall');
+    ctx.lineWidth=3;
+    ctx.lineCap='round';
+    for(let y=0;y<size;y++) for(let x=0;x<size;x++){
+      const wx=originX+x*cell, wy=originY+y*cell;
+      const w=walls[y][x];
+      ctx.beginPath();
+      if(w & N){ ctx.moveTo(wx,wy); ctx.lineTo(wx+cell,wy); }
+      if(w & S){ ctx.moveTo(wx,wy+cell); ctx.lineTo(wx+cell,wy+cell); }
+      if(w & W){ ctx.moveTo(wx,wy); ctx.lineTo(wx,wy+cell); }
+      if(w & E){ ctx.moveTo(wx+cell,wy); ctx.lineTo(wx+cell,wy+cell); }
+      ctx.stroke();
+    }
+  }
+
+  // start/goal markers
+  ctx.fillStyle = getVar('--ink-dim');
+  ctx.font = '10px ' + getVar('--mono').trim();
+  ctx.fillText('S', originX+start.x*cell+cell/2-3, originY+start.y*cell+cell/2+3);
+  ctx.fillStyle = getVar('--amber');
+  ctx.fillText('G', originX+goal.x*cell+cell/2-3, originY+goal.y*cell+cell/2+3);
+
+  // path overlay — drawn as individual segments so blocked diagonal cuts can be flagged in red
+  if(document.getElementById('lyPath').checked && path && path.length>1){
+    ctx.lineWidth = Math.max(2, cell*0.12);
+    ctx.lineCap = 'round';
+    for(let i=1;i<path.length;i++){
+      const a=path[i-1], b=path[i];
+      const ax=originX+a.x*cell+cell/2, ay=originY+a.y*cell+cell/2;
+      const bx=originX+b.x*cell+cell/2, by=originY+b.y*cell+cell/2;
+      const blocked = maze.badSegs && maze.badSegs.has(i);
+      ctx.strokeStyle = blocked ? '#e06b5a' : getVar('--amber');
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ctx.moveTo(ax,ay); ctx.lineTo(bx,by);
+      ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+  }
+
+  // mouse marker (interpolated along run_log by simTime)
+  if(document.getElementById('lyMouse').checked && maze.run_log && maze.run_log.length){
+    const pos = interpolatePosition(maze.run_log, simTime);
+    const px=originX+pos.x*cell+cell/2, py=originY+pos.y*cell+cell/2;
+    ctx.fillStyle = getVar('--amber');
+    ctx.beginPath();
+    ctx.arc(px,py, cell*0.28, 0, Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle = '#1a1206';
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+  }
+}
+
+function interpolatePosition(log, t){
+  if(t<=log[0].t) return log[0];
+  if(t>=log[log.length-1].t) return log[log.length-1];
+  for(let i=0;i<log.length-1;i++){
+    const a=log[i], b=log[i+1];
+    if(t>=a.t && t<=b.t){
+      const f = (b.t-a.t)>0 ? (t-a.t)/(b.t-a.t) : 0;
+      return {x: a.x+(b.x-a.x)*f, y: a.y+(b.y-a.y)*f};
+    }
+  }
+  return log[log.length-1];
+}
+
+function lerpColor(a,b,t){
+  const r=Math.round(a[0]+(b[0]-a[0])*t);
+  const g=Math.round(a[1]+(b[1]-a[1])*t);
+  const bl=Math.round(a[2]+(b[2]-a[2])*t);
+  return `rgb(${r},${g},${bl})`;
+}
+function getVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name); }
+
+// ---------- playback ----------
+function tick(ts){
+  if(!lastFrame) lastFrame=ts;
+  const dt=(ts-lastFrame)/1000;
+  lastFrame=ts;
+  if(playing && maze && maze.run_log.length){
+    const speed = parseFloat(document.getElementById('speed').value);
+    const maxT = maze.run_log[maze.run_log.length-1].t;
+    simTime = Math.min(maxT, simTime + dt*speed);
+    document.getElementById('scrubBar').value = simTime*1000;
+    if(simTime>=maxT) playing=false, document.getElementById('playBtn').textContent='Play';
+    render();
+    updateStats();
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+function updateStats(){
+  if(!maze) return;
+  const el = document.getElementById('stats');
+  const hasPath = maze.path.length > 0;
+  const maxT = maze.run_log.length ? maze.run_log[maze.run_log.length-1].t : 0;
+  const diagCount = maze.path.filter(p=>p.move==='diagonal').length;
+  const shown = maze.issues.slice(0,6).map(i => `<br>• ${esc(i)}`).join('');
+  const more = maze.issues.length>6 ? `<br>…and ${maze.issues.length-6} more` : '';
+  el.innerHTML =
+    `file: <b>${esc(maze.source)}</b><br>` +
+    `size: <b>${maze.size}×${maze.size}</b><br>` +
+    (hasPath
+      ? `path length: <b>${maze.path.length}</b> cells<br>diagonal cuts: <b>${diagCount}</b><br>` +
+        `run time: <b>${simTime.toFixed(2)}s</b> / ${maxT.toFixed(2)}s<br>`
+      : `path: <b>none in this file</b><br>`) +
+    `start: <b>(${maze.start.x},${maze.start.y})</b><br>` +
+    `goal: <b>(${maze.goal.x},${maze.goal.y})</b>` +
+    (maze.issues.length
+      ? `<br><br><span style="color:#e06b5a;">⚠ ${maze.issues.length} problem${maze.issues.length>1?'s':''}${shown}${more}</span>`
+      : (hasPath ? `<br><br><span style="color:#5fc48a;">✓ path is valid</span>` : ''));
+  document.getElementById('scrubT').textContent = simTime.toFixed(2)+'s';
+}
+
+// ---------- controls ----------
+document.getElementById('genBtn').onclick = ()=> newRandomMaze(16);
+document.getElementById('playBtn').onclick = (e)=>{
+  playing = !playing;
+  e.target.textContent = playing ? 'Pause' : 'Play';
+};
+document.getElementById('stepBtn').onclick = ()=>{
+  if(!maze) return;
+  const idx = maze.run_log.findIndex(r=>r.t>simTime);
+  if(idx>=0){ simTime = maze.run_log[idx].t; document.getElementById('scrubBar').value=simTime*1000; render(); updateStats(); }
+};
+document.getElementById('resetBtn').onclick = ()=>{
+  simTime=0; playing=false;
+  document.getElementById('playBtn').textContent='Play';
+  document.getElementById('scrubBar').value=0;
+  render(); updateStats();
+};
+document.getElementById('scrubBar').oninput = (e)=>{
+  if(!maze) return;
+  simTime = e.target.value/1000;
+  playing=false;
+  document.getElementById('playBtn').textContent='Play';
+  render(); updateStats();
+};
+['lyWalls','lyHeat','lyPath','lyMouse'].forEach(id=>{
+  document.getElementById(id).onchange = render;
+});
+document.getElementById('loadBtn').onclick = ()=> document.getElementById('fileInput').click();
+document.getElementById('fileInput').onchange = (e)=>{
+  const f = e.target.files[0];
+  e.target.value = '';                                  // allow re-opening the same file
+  if(f) loadFile(f);
+};
+window.addEventListener('dragover', e => e.preventDefault());
+window.addEventListener('drop', e => {
+  e.preventDefault();
+  const f = e.dataTransfer.files[0];
+  if(f) loadFile(f);
+});
+
+// ---------- init ----------
+fitCanvas();
+['playBtn','stepBtn','resetBtn','scrubBar'].forEach(id => document.getElementById(id).disabled = true);
+render();
+</script>
 </body>
-
 </html>
