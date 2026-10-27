@@ -9,42 +9,43 @@
  */
 #include <stdio.h>
 
-#include "cell.h"
+#include "maze.h"
 #include "priority_queue.h"
 
 
 /**
- * @brief Finds the available neighbor cells of a given CellID
- * @param maze the array of Cells for a given maze.
- * @param u Cell of the maze we are checking if it has neighbors.
- * @param neighbors array of given neighbor cells.
- * @return the count of the number of neighbors a cell has.
+ * @brief Finds the available neighbor cells of a given CellID.
+ *
+ * @param maze The maze.
+ * @param u Cell of the maze to check for neighbors.
+ * @param neighbors Array of neighbor cells.
+ * @return The number of neighbor cells.
  */
-int getNeighbors(Cell maze[], CellID u, CellID neighbors[]) {
+int getNeighbors(Maze maze, int size, CellID u, CellID neighbors[]) {
   int count = 0;
 
   // convert the CellID back into 2D cords
-  uint8_t row = u / SIZE;
-  uint8_t col = u % SIZE;
+  uint8_t y = u / size;
+  uint8_t x = u % size;
   
-  Cell current_cell = maze[u];
+  Cell current_cell = maze[y][x];
 
-  // check north (row - 1)
-  if (row > 0 && !hasWall(current_cell, North)) {
-    neighbors[count++] = cellID(row - 1, col);
+  // check north (y - 1)
+  if (y > 0 && !hasWall(current_cell, North)) {
+    neighbors[count++] = cellID(y - 1, x);
   }
-  // check south (row + 1)
-  if (row < SIZE - 1 && !hasWall(current_cell, South)) {
-    neighbors[count++] = cellID(row + 1, col);
+  // check south (y + 1)
+  if (y < size - 1 && !hasWall(current_cell, South)) {
+    neighbors[count++] = cellID(y + 1, x);
   }
 
-  // check east (col + 1)
-  if (col < SIZE - 1 && !hasWall(current_cell, East)) {
-    neighbors[count++] = cellID(row, col + 1);
+  // check east (x + 1)
+  if (x < size - 1 && !hasWall(current_cell, East)) {
+    neighbors[count++] = cellID(y, x + 1);
   }
-  // check west (col - 1)
-  if (col > 0 && !hasWall(current_cell, West)) {
-    neighbors[count++] = cellID(row, col - 1);
+  // check west (x - 1)
+  if (x > 0 && !hasWall(current_cell, West)) {
+    neighbors[count++] = cellID(y, x - 1);
   }
 
   return count;
@@ -52,45 +53,43 @@ int getNeighbors(Cell maze[], CellID u, CellID neighbors[]) {
 
 
 /**
- * @brief runs djikstras on a array of Cells, reconstructs shortest path to standard out
+ * @brief Runs djikstras on a array of Cells, reconstructs shortest path to standard out
  *
- * @param maze the array of Cells for a given maze.
- * @param start the starting cellid
- * @param target the target cellid we want to reach
+ * @param maze The maze.
+ * @param start The starting CellID.
+ * @param target The target CellID we want to reach.
  */
-void djikstra(Cell maze[], CellID start, CellID target) {
+void djikstra(Maze maze, int size, CellID start, CellID target) {
   
   // dist[] tracks the distance it takes to get to any cell from the start
-  uint8_t dist[MAX];
+  uint8_t dist[size * size];
   // prev constructs the path as we move through the maze
-  CellID prev[MAX];
+  CellID prev[size * size];
 
-  PriorityQueue pq;
-  pq.size = 0;
+  PriorityQueue *pq = createPriorityQueue(size);
 
   // set each CellID distance and previous to max values
-  for (int v = 0; v < MAX; v++) {
-    dist[v] = 255; // MAX here will cause problems with overflow
-    prev[v] = MAX;
-    pq.position[v] = MAX;
+  for (int v = 0; v < size * size; v++) {
+    dist[v] = UINT8_MAX; // MAX here will cause problems with overflow
+    prev[v] = UINT16_MAX;
   }
 
   dist[start] = 0;
 
-  enqueue(&pq, start, 0);
+  enqueue(pq, start, 0);
 
 
   // search the maze while there is reachable cells to explore
-  while (pq.size > 0) {
+  while (pq->size > 0) {
     // pull off the cell with the lowest distance
-    CellID u = dequeue(&pq);
+    CellID u = dequeue(pq);
 
     if (u == target) {
       break;
     }
 
     CellID neighbors[4];
-    int num_neighbors = getNeighbors(maze, u, neighbors);
+    int num_neighbors = getNeighbors(maze, size, u, neighbors);
 
     for (int i = 0; i < num_neighbors; i++) {
       CellID v = neighbors[i];
@@ -101,20 +100,21 @@ void djikstra(Cell maze[], CellID start, CellID target) {
         prev[v] = u;
 
         //update queue
-        if ( pq.position[v] != MAX
-          && pq.position[v] < pq.size
-          && pq.entries[pq.position[v]].cell_id == v
+        if ( pq->position[v] != UINT16_MAX;
+          && pq->position[v] < pq->size
+          && pq->entries[pq->position[v]].cell_id == v
         ) {
-          decreasePriority(&pq, v, alt);
+          decreasePriority(pq, v, alt);
         } else {
-          enqueue(&pq, v, alt);
+          enqueue(pq, v, alt);
         }
       }
     }
   }
 
+  free(pq);
 
-  if (dist[target] == 255) {
+  if (dist[target] == UINT8_MAX) {
       printf("No path exists to the target!\n");
       return;
   }
@@ -124,12 +124,12 @@ void djikstra(Cell maze[], CellID start, CellID target) {
   // reconstruction of djikstras
 
   // Create an array to hold the route
-  CellID route[MAX];
+  CellID route[size * size];
   int step_count = 0;
   
   // Start at the target and walk backwards using the 'prev' array
   CellID current = target;
-  while (current != MAX) {
+  while (current != UINT16_MAX) {
       route[step_count] = current;
       step_count++;
       current = prev[current]; // Look at the breadcrumb
@@ -145,37 +145,6 @@ void djikstra(Cell maze[], CellID start, CellID target) {
       }
   }
   printf("\n");
-}
-
-
-int main() {
-  // empty maze (all 0s = no walls)
-  Cell maze[MAX] = {0}; 
-
-  // Build a vertical wall down column 2
-  // We will block rows 0, 1, and 2. 
-  // To do this, we put East walls on Col 1, and West walls on Col 2.
-
-  // Block Row 0
-  setWall(&maze[cellID(0, 1)], East);
-  setWall(&maze[cellID(0, 2)], West);
-
-  // Block Row 1
-  setWall(&maze[cellID(1, 1)], East);
-  setWall(&maze[cellID(1, 2)], West);
-
-  // Block Row 2
-  setWall(&maze[cellID(2, 1)], East);
-  setWall(&maze[cellID(2, 2)], West);
-
-  // 3. Define our start (top left) and target (top right side of the wall)
-  CellID start = cellID(0, 0); 
-  CellID target = cellID(0, 4);
-
-  printf("Running Dijkstra's Algorithm...\n\n");
-  djikstra(maze, start, target);
-
-  return 0;
 }
 
 
