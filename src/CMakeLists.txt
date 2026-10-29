@@ -23,4 +23,5 @@ target_link_libraries(maze_gen
     PRIVATE
         maze
         maze_gens
+        maze_io
 )
