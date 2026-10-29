@@ -7,9 +7,9 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "maze_io.h"
-
 
 
 void writeMazeToJson(FILE *f, Maze maze, int size, CellID* path, int pathLength) {
