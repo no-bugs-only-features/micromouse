@@ -8,5 +8,4 @@ target_sources(maze
         FILE_SET HEADERS
         FILES
             maze.h
-            cell.h
 )
