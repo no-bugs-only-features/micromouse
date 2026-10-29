@@ -6,5 +6,6 @@ var searchData=
   ['maze_2eh_3',['maze.h',['../maze_8h.html',1,'']]],
   ['maze_5fgen_2ec_4',['maze_gen.c',['../maze__gen_8c.html',1,'']]],
   ['maze_5fio_2ec_5',['maze_io.c',['../maze__io_8c.html',1,'']]],
-  ['maze_5fio_2eh_6',['maze_io.h',['../maze__io_8h.html',1,'']]]
+  ['maze_5fio_2eh_6',['maze_io.h',['../maze__io_8h.html',1,'']]],
+  ['mouse_5ftest_2ec_7',['mouse_test.c',['../mouse__test_8c.html',1,'']]]
 ];

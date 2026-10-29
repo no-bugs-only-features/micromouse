@@ -107,9 +107,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a3b11704e70ff5c6fe744711a153b29e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze__io_8h.html#a3b11704e70ff5c6fe744711a153b29e2">writeMazeToJson</a> (FILE *f, <a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *path, int pathLength)</td></tr>
 <tr class="memdesc:a3b11704e70ff5c6fe744711a153b29e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the maze data to a JSON file.  <br /></td></tr>
 <tr class="separator:a3b11704e70ff5c6fe744711a153b29e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30aa7d4b794345ffff320cb9889a9b92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze__io_8h.html#a30aa7d4b794345ffff320cb9889a9b92">loadMazeFromJson</a> (FILE *f, <a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> *maze, int *size)</td></tr>
-<tr class="memdesc:a30aa7d4b794345ffff320cb9889a9b92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a maze from a JSON file.  <br /></td></tr>
-<tr class="separator:a30aa7d4b794345ffff320cb9889a9b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f33d2f5f393104dd7404c721334d685"><td class="memItemLeft" align="right" valign="top"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze__io_8h.html#a5f33d2f5f393104dd7404c721334d685">loadMazeFromJson</a> (FILE *f, int *size)</td></tr>
+<tr class="memdesc:a5f33d2f5f393104dd7404c721334d685"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a maze from a JSON file.  <br /></td></tr>
+<tr class="separator:a5f33d2f5f393104dd7404c721334d685"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header file for maze input/output operations. </p>
@@ -117,8 +117,8 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-10-29 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a30aa7d4b794345ffff320cb9889a9b92" name="a30aa7d4b794345ffff320cb9889a9b92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30aa7d4b794345ffff320cb9889a9b92">&#9670;&#160;</a></span>loadMazeFromJson()</h2>
+<a id="a5f33d2f5f393104dd7404c721334d685" name="a5f33d2f5f393104dd7404c721334d685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f33d2f5f393104dd7404c721334d685">&#9670;&#160;</a></span>loadMazeFromJson()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,12 +128,6 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">FILE *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> *&#160;</td>
-          <td class="paramname"><em>maze</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -153,7 +147,6 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>The file pointer to read the JSON data from. </td></tr>
-    <tr><td class="paramname">maze</td><td>A pointer to store the loaded maze. </td></tr>
     <tr><td class="paramname">size</td><td>A pointer to store the size of the loaded maze. </td></tr>
   </table>
   </dd>

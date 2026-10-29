@@ -28,12 +28,14 @@ var NAVTREEINDEX0 =
 "maze_8h_source.html":[1,0,0,1],
 "maze__gen_8c.html":[1,0,1,0],
 "maze__io_8c.html":[1,0,0,2],
-"maze__io_8c.html#a3b11704e70ff5c6fe744711a153b29e2":[1,0,0,2,0],
+"maze__io_8c.html#a3b11704e70ff5c6fe744711a153b29e2":[1,0,0,2,1],
+"maze__io_8c.html#a5f33d2f5f393104dd7404c721334d685":[1,0,0,2,0],
 "maze__io_8h.html":[1,0,0,3],
-"maze__io_8h.html#a30aa7d4b794345ffff320cb9889a9b92":[1,0,0,3,0],
 "maze__io_8h.html#a3b11704e70ff5c6fe744711a153b29e2":[1,0,0,3,1],
+"maze__io_8h.html#a5f33d2f5f393104dd7404c721334d685":[1,0,0,3,0],
 "maze__io_8h_source.html":[1,0,0,3],
 "md_README.html":[0],
 "md_README.html#autotoc_md0":[0,0],
+"mouse__test_8c.html":[1,0,1,1],
 "pages.html":[]
 };
