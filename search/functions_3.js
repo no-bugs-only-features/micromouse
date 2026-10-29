@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['setwallboth_0',['setWallBoth',['../maze_8c.html#a39184589996ad6618c6f90840dafc9ee',1,'setWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c'],['../maze_8h.html#a39184589996ad6618c6f90840dafc9ee',1,'setWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c']]]
+  ['decreasepriority_0',['decreasePriority',['../priority__queue_8c.html#afc052f349223d27aaae79cce2f9d5669',1,'decreasePriority(PriorityQueue *pq, CellID cell_id, uint8_t new_priority):&#160;priority_queue.c'],['../priority__queue_8h.html#afc052f349223d27aaae79cce2f9d5669',1,'decreasePriority(PriorityQueue *pq, CellID cell_id, uint8_t new_priority):&#160;priority_queue.c']]],
+  ['dequeue_1',['dequeue',['../priority__queue_8c.html#ad1dec535f7ce22f414f5c653368f5b57',1,'dequeue(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#ad1dec535f7ce22f414f5c653368f5b57',1,'dequeue(PriorityQueue *pq):&#160;priority_queue.c']]],
+  ['destroypriorityqueue_2',['destroyPriorityQueue',['../priority__queue_8c.html#af5ac0beb8435710793dfd1639e87d1ed',1,'destroyPriorityQueue(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#af5ac0beb8435710793dfd1639e87d1ed',1,'destroyPriorityQueue(PriorityQueue *pq):&#160;priority_queue.c']]],
+  ['djikstra_3',['djikstra',['../djikstra_8c.html#a40a8c5f6fcd276e50b3774a90166c269',1,'djikstra(Maze maze, int size, uint8_t *dist, CellID *prev):&#160;djikstra.c'],['../djikstra_8h.html#a40a8c5f6fcd276e50b3774a90166c269',1,'djikstra(Maze maze, int size, uint8_t *dist, CellID *prev):&#160;djikstra.c']]]
 ];

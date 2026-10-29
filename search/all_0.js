@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['cell_0',['Cell',['../maze_8h.html#af2846eae42eb56daadc424ab51f77e20',1,'maze.h']]],
-  ['cellid_1',['CellID',['../maze_8h.html#afa369492e1133ed75e3b102b62e387df',1,'maze.h']]],
-  ['clearwallboth_2',['clearWallBoth',['../maze_8c.html#ae30ba9e374fcd2d1533fe37383c2df76',1,'clearWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c'],['../maze_8h.html#ae30ba9e374fcd2d1533fe37383c2df76',1,'clearWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c']]]
+  ['_5fguard_0',['_guard',['../namespacemazeviz.html#a5f5d968d1856dbfb82fde18c52beb957',1,'mazeviz']]],
+  ['_5ft_5facc_1',['_t_acc',['../namespacemazeviz.html#aa3fd4a593d7ed60bc060b4a118a38575',1,'mazeviz']]]
 ];

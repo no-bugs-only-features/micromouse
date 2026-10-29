@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['mask_0',['MASK',['../maze_8h.html#a34e230d32e3d5372adb458cd5f7fd8cf',1,'maze.h']]],
-  ['maze_1',['Maze',['../maze_8h.html#a604e92d978d76b789611cc901c616d1a',1,'maze.h']]],
-  ['maze_2ec_2',['maze.c',['../maze_8c.html',1,'']]],
-  ['maze_2eh_3',['maze.h',['../maze_8h.html',1,'']]],
-  ['maze_5fgen_2ec_4',['maze_gen.c',['../maze__gen_8c.html',1,'']]],
-  ['maze_5fio_2ec_5',['maze_io.c',['../maze__io_8c.html',1,'']]],
-  ['maze_5fio_2eh_6',['maze_io.h',['../maze__io_8h.html',1,'']]],
-  ['mouse_5ftest_2ec_7',['mouse_test.c',['../mouse__test_8c.html',1,'']]]
+  ['decreasepriority_0',['decreasePriority',['../priority__queue_8c.html#afc052f349223d27aaae79cce2f9d5669',1,'decreasePriority(PriorityQueue *pq, CellID cell_id, uint8_t new_priority):&#160;priority_queue.c'],['../priority__queue_8h.html#afc052f349223d27aaae79cce2f9d5669',1,'decreasePriority(PriorityQueue *pq, CellID cell_id, uint8_t new_priority):&#160;priority_queue.c']]],
+  ['dequeue_1',['dequeue',['../priority__queue_8c.html#ad1dec535f7ce22f414f5c653368f5b57',1,'dequeue(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#ad1dec535f7ce22f414f5c653368f5b57',1,'dequeue(PriorityQueue *pq):&#160;priority_queue.c']]],
+  ['destroypriorityqueue_2',['destroyPriorityQueue',['../priority__queue_8c.html#af5ac0beb8435710793dfd1639e87d1ed',1,'destroyPriorityQueue(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#af5ac0beb8435710793dfd1639e87d1ed',1,'destroyPriorityQueue(PriorityQueue *pq):&#160;priority_queue.c']]],
+  ['direction_3',['Direction',['../maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa',1,'maze.h']]],
+  ['djikstra_4',['djikstra',['../djikstra_8c.html#a40a8c5f6fcd276e50b3774a90166c269',1,'djikstra(Maze maze, int size, uint8_t *dist, CellID *prev):&#160;djikstra.c'],['../djikstra_8h.html#a40a8c5f6fcd276e50b3774a90166c269',1,'djikstra(Maze maze, int size, uint8_t *dist, CellID *prev):&#160;djikstra.c']]],
+  ['djikstra_2ec_5',['djikstra.c',['../djikstra_8c.html',1,'']]],
+  ['djikstra_2eh_6',['djikstra.h',['../djikstra_8h.html',1,'']]]
 ];

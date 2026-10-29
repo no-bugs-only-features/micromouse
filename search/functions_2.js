@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['loadmazefromjson_0',['loadMazeFromJson',['../maze__io_8c.html#a5f33d2f5f393104dd7404c721334d685',1,'loadMazeFromJson(FILE *f, int *size):&#160;maze_io.c'],['../maze__io_8h.html#a5f33d2f5f393104dd7404c721334d685',1,'loadMazeFromJson(FILE *f, int *size):&#160;maze_io.c']]]
+  ['clearwallboth_0',['clearWallBoth',['../maze_8c.html#ae30ba9e374fcd2d1533fe37383c2df76',1,'clearWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c'],['../maze_8h.html#ae30ba9e374fcd2d1533fe37383c2df76',1,'clearWallBoth(Maze maze, int size, int y, int x, Direction dir):&#160;maze.c']]],
+  ['creategoal_1',['createGoal',['../backtracking__gen_8c.html#a39bbe5144c68f7125cd6bd07564108c5',1,'createGoal(Maze maze, int size):&#160;backtracking_gen.c'],['../backtracking__gen_8h.html#a39bbe5144c68f7125cd6bd07564108c5',1,'createGoal(Maze maze, int size):&#160;backtracking_gen.c']]],
+  ['createpriorityqueue_2',['createPriorityQueue',['../priority__queue_8c.html#a4ff2787292d17a40706738e6b38e7f31',1,'createPriorityQueue(int size):&#160;priority_queue.c'],['../priority__queue_8h.html#a4ff2787292d17a40706738e6b38e7f31',1,'createPriorityQueue(int size):&#160;priority_queue.c']]]
 ];

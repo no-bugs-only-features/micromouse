@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['writemazetojson_0',['writeMazeToJson',['../maze__io_8c.html#a3b11704e70ff5c6fe744711a153b29e2',1,'writeMazeToJson(FILE *f, Maze maze, int size, CellID *path, int pathLength):&#160;maze_io.c'],['../maze__io_8h.html#a3b11704e70ff5c6fe744711a153b29e2',1,'writeMazeToJson(FILE *f, Maze maze, int size, CellID *path, int pathLength):&#160;maze_io.c']]]
+  ['heapifydown_0',['heapifyDown',['../priority__queue_8c.html#a6656021f82dc5fc0e47981fad7fda2bd',1,'heapifyDown(PriorityQueue *pq, int index):&#160;priority_queue.c'],['../priority__queue_8h.html#a6656021f82dc5fc0e47981fad7fda2bd',1,'heapifyDown(PriorityQueue *pq, int index):&#160;priority_queue.c']]],
+  ['heapifyup_1',['heapifyUp',['../priority__queue_8c.html#ab7631090c485201b8c6f7773b0575e3f',1,'heapifyUp(PriorityQueue *pq, int index):&#160;priority_queue.c'],['../priority__queue_8h.html#ab7631090c485201b8c6f7773b0575e3f',1,'heapifyUp(PriorityQueue *pq, int index):&#160;priority_queue.c']]]
 ];
