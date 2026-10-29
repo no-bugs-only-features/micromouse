@@ -14,6 +14,7 @@
 
 #include "maze.h"
 #include "maze_gens.h"
+#include "maze_io.h"
 
 
 int main(int argc, char* argv[]) {
