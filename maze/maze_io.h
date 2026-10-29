@@ -31,11 +31,10 @@ void writeMazeToJson(FILE* f, Maze maze, int size, CellID* path, int pathLength)
  * @brief Loads a maze from a JSON file.
  * 
  * @param f The file pointer to read the JSON data from.
- * @param maze A pointer to store the loaded maze.
  * @param size A pointer to store the size of the loaded maze.
  * @return The loaded maze.
  */
-Maze loadMazeFromJson(FILE* f, Maze* maze, int* size);
+Maze loadMazeFromJson(FILE* f, int* size);
 
 
 #endif /* MAZE_IO_H */
