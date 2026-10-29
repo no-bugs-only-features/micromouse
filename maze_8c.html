@@ -95,35 +95,21 @@ $(document).ready(function(){initNavTree('maze_8c.html',''); initResizable(); })
 </div><!--header-->
 <div class="contents">
 
-<p>Implements functions for creating and manipulating a maze.  
+<p>Implements functions for manipulating a maze.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="maze_8h_source.html">maze.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="maze_8h_source.html">maze.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3b11704e70ff5c6fe744711a153b29e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#a3b11704e70ff5c6fe744711a153b29e2">writeMazeToJson</a> (FILE *f, <a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *path, int pathLength)</td></tr>
-<tr class="memdesc:a3b11704e70ff5c6fe744711a153b29e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the maze data to a JSON file.  <br /></td></tr>
-<tr class="separator:a3b11704e70ff5c6fe744711a153b29e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39bbe5144c68f7125cd6bd07564108c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#a39bbe5144c68f7125cd6bd07564108c5">createGoal</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size)</td></tr>
-<tr class="memdesc:a39bbe5144c68f7125cd6bd07564108c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the goal area in the maze.  <br /></td></tr>
-<tr class="separator:a39bbe5144c68f7125cd6bd07564108c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2fa163bb728b260f894742c28fa434d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#aa2fa163bb728b260f894742c28fa434d">openGoal</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size)</td></tr>
-<tr class="memdesc:aa2fa163bb728b260f894742c28fa434d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a path to the goal area in the maze.  <br /></td></tr>
-<tr class="separator:aa2fa163bb728b260f894742c28fa434d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39184589996ad6618c6f90840dafc9ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#a39184589996ad6618c6f90840dafc9ee">setWallBoth</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, int y, int x, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
 <tr class="memdesc:a39184589996ad6618c6f90840dafc9ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the wall in both directions for a given cell.  <br /></td></tr>
 <tr class="separator:a39184589996ad6618c6f90840dafc9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae30ba9e374fcd2d1533fe37383c2df76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ae30ba9e374fcd2d1533fe37383c2df76">clearWallBoth</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, int y, int x, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
 <tr class="memdesc:ae30ba9e374fcd2d1533fe37383c2df76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the wall in both directions for a given cell.  <br /></td></tr>
 <tr class="separator:ae30ba9e374fcd2d1533fe37383c2df76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1d0c6c001704e130f2de3b7b57439e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ab1d0c6c001704e130f2de3b7b57439e0">inGoal</a> (int size, int y, int x)</td></tr>
-<tr class="memdesc:ab1d0c6c001704e130f2de3b7b57439e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given coordinates are within the goal area of the maze.  <br /></td></tr>
-<tr class="separator:ab1d0c6c001704e130f2de3b7b57439e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implements functions for creating and manipulating a maze. </p>
+<div class="textblock"><p>Implements functions for manipulating a maze. </p>
 <dl class="section author"><dt>Author</dt><dd>Dylan Wright (no-bugs-only-features) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.2 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-10-14 </dd></dl>
@@ -186,125 +172,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a39bbe5144c68f7125cd6bd07564108c5" name="a39bbe5144c68f7125cd6bd07564108c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39bbe5144c68f7125cd6bd07564108c5">&#9670;&#160;</a></span>createGoal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void createGoal </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a>&#160;</td>
-          <td class="paramname"><em>maze</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates the goal area in the maze. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">maze</td><td>The maze in which to create the goal. </td></tr>
-    <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ab1d0c6c001704e130f2de3b7b57439e0" name="ab1d0c6c001704e130f2de3b7b57439e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1d0c6c001704e130f2de3b7b57439e0">&#9670;&#160;</a></span>inGoal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool inGoal </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks if the given coordinates are within the goal area of the maze. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
-    <tr><td class="paramname">y</td><td>The y-coordinate to check. </td></tr>
-    <tr><td class="paramname">x</td><td>The x-coordinate to check. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the coordinates are within the goal area, false otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="aa2fa163bb728b260f894742c28fa434d" name="aa2fa163bb728b260f894742c28fa434d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2fa163bb728b260f894742c28fa434d">&#9670;&#160;</a></span>openGoal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void openGoal </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a>&#160;</td>
-          <td class="paramname"><em>maze</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Opens a path to the goal area in the maze. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">maze</td><td>The maze in which to open the goal. </td></tr>
-    <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a39184589996ad6618c6f90840dafc9ee" name="a39184589996ad6618c6f90840dafc9ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a39184589996ad6618c6f90840dafc9ee">&#9670;&#160;</a></span>setWallBoth()</h2>
 
@@ -357,66 +224,6 @@ Functions</h2></td></tr>
     <tr><td class="paramname">y</td><td>The y-coordinate of the cell. </td></tr>
     <tr><td class="paramname">x</td><td>The x-coordinate of the cell. </td></tr>
     <tr><td class="paramname">dir</td><td>The direction of the wall to set. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a3b11704e70ff5c6fe744711a153b29e2" name="a3b11704e70ff5c6fe744711a153b29e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b11704e70ff5c6fe744711a153b29e2">&#9670;&#160;</a></span>writeMazeToJson()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void writeMazeToJson </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>f</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a>&#160;</td>
-          <td class="paramname"><em>maze</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pathLength</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Writes the maze data to a JSON file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">f</td><td>The file pointer to write the JSON data to. </td></tr>
-    <tr><td class="paramname">maze</td><td>The maze to be written. </td></tr>
-    <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
-    <tr><td class="paramname">sx</td><td>The start x-coordinate of the maze. </td></tr>
-    <tr><td class="paramname">sy</td><td>The start y-coordinate of the maze. </td></tr>
-    <tr><td class="paramname">gx</td><td>The goal x-coordinate of the maze. </td></tr>
-    <tr><td class="paramname">gy</td><td>The goal y-coordinate of the maze. </td></tr>
   </table>
   </dd>
 </dl>
