@@ -8,7 +8,6 @@
 #ifndef BACKTRACKING_GEN_H
 #define BACKTRACKING_GEN_H
 
-#include "cell.h"
 #include "maze.h"
 
 
