@@ -7,8 +7,9 @@ target_sources(mouse_test
 
 target_link_libraries(mouse_test
     PRIVATE
-        maze
         djikstra
+        maze
+        maze_io
 )
 
 add_executable(maze_gen)
