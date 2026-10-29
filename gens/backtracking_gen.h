@@ -21,6 +21,7 @@
  */
 Maze generateBacktrackingMaze(int size, int seed, int braid_pct);
 
+
 /**
  * @brief Checks if a cell has not been visited in the maze generation process.
  *
@@ -40,5 +41,23 @@ static inline bool isUnvisited(Cell cell) { return wallMask(cell) == 0x0F; }
  * @return int The number of walls present in the cell.
  */
 static inline int countWalls(Cell cell) { return __builtin_popcount(wallMask(cell)); }
+
+
+/**
+ * @brief Creates the goal area in the maze.
+ * 
+ * @param maze The maze in which to create the goal.
+ * @param size The size of the maze.
+ */
+void createGoal(Maze maze, int size);
+
+
+/**
+ * @brief Opens a path to the goal area in the maze.
+ * 
+ * @param maze The maze in which to open the goal.
+ * @param size The size of the maze.
+ */
+void openGoal(Maze maze, int size);
 
 #endif /* BACKTRACKING_GEN_H */

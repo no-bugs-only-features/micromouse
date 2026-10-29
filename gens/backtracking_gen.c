@@ -150,3 +150,63 @@ static void braid(Maze maze, int size, int braid_pct) {
         }
     }
 }
+
+
+void createGoal(Maze maze, int size) {
+    /* We only need to clear the goal if the maze is an even size. */
+    if (size % 2 == 0) {
+        int center2 = size / 2;
+        int center1 = center2 - 1;
+
+        Direction dirs[4] = { North, East, South, West };
+
+        for (int y = center1; y <= center2; y++) {
+            for (int x = center1; x <= center2; x++) {
+                for (int i = 0; i < 4; i++) {
+                    Direction dir = dirs[i];
+                    int nx = x + dx(dir);
+                    int ny = y + dy(dir);
+
+                    if (inGoal(size, ny, nx))
+                        clearWallBoth(maze, size, y, x, dir); /* Inner wall. */
+
+                    else
+                        setWallBoth(maze, size, y, x, dir); /* Outer wall. */
+                }
+            }
+        }
+    }
+}
+
+
+void openGoal(Maze maze, int size) {
+    if (size % 2 == 0) {
+        int center2 = size / 2;
+        int center1 = center2 - 1;
+
+        /* Randomly choose a corner. */
+        int x = rand() % 2 ? center1 : center2;
+        int y = rand() % 2 ? center1 : center2;
+
+        /* Randomly clear an axis. */
+        Direction vertical = (y == center1) ? North : South;
+        Direction horizontal = (x == center1) ? West : East;
+        clearWallBoth(maze, size, y, x, rand() % 2 ? vertical : horizontal);
+    } else {
+        /* Clear a random direction for odd-sized mazes. */
+        int center = size / 2;
+        clearWallBoth(maze, size, center, center, 1 << (rand() % 4));
+    }
+}
+
+
+bool inGoal(int size, int y, int x) {
+    if (size % 2 == 1) {
+        int center = size / 2;
+        return x == center && y == center;
+    } else {
+        int center2 = size / 2;
+        int center1 = center2 - 1;
+        return (x == center1 || x == center2) && (y == center1 || y == center2);
+    }
+}
