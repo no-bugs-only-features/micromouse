@@ -11,37 +11,7 @@
 
 #include "maze.h"
 #include "priority_queue.h"
-
-
-int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
-  int count = 0;
-
-  // convert the CellID back into 2D cords
-  uint8_t y = u / size;
-  uint8_t x = u % size;
-  
-  Cell current_cell = maze[y][x];
-
-  // check north (y - 1)
-  if (y > 0 && !hasWall(current_cell, North)) {
-    neighbors[count++] = cellID(size, y - 1, x);
-  }
-  // check south (y + 1)
-  if (y < size - 1 && !hasWall(current_cell, South)) {
-    neighbors[count++] = cellID(size, y + 1, x);
-  }
-
-  // check east (x + 1)
-  if (x < size - 1 && !hasWall(current_cell, East)) {
-    neighbors[count++] = cellID(size, y, x + 1);
-  }
-  // check west (x - 1)
-  if (x > 0 && !hasWall(current_cell, West)) {
-    neighbors[count++] = cellID(size, y, x - 1);
-  }
-
-  return count;
-}
+#include "search_utils.h"
 
 
 void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
@@ -89,21 +59,4 @@ void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
 
   destroyPriorityQueue(pq);
 
-}
-
-
-int reconstructPath(CellID* prev, CellID target, CellID* path) {
-    int path_length = 0;
-    for (CellID current = target; current != UINT16_MAX; current = prev[current]) {
-        path[path_length++] = current;
-    }
-
-    /* Reverse the path to get it in the correct order. */
-    for (int i = 0; i < path_length / 2; i++) {
-        CellID temp = path[i];
-        path[i] = path[path_length - 1 - i];
-        path[path_length - 1 - i] = temp;
-    }
-
-    return path_length;
 }
