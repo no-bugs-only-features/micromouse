@@ -13,6 +13,7 @@
 #include "djikstra.h"
 #include "maze.h"
 #include "maze_io.h"
+#include "search_utils.h"
 
 int main(int argc, char* argv[]) {
     FILE* f = NULL;

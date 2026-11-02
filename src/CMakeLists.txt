@@ -10,6 +10,7 @@ target_link_libraries(mouse_test
         djikstra
         maze
         maze_io
+        utils
 )
 
 add_executable(maze_gen)
