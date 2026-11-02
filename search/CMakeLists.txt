@@ -15,3 +15,21 @@ target_link_libraries(djikstra
         utils
         maze
 )
+
+add_library(a_star)
+
+target_sources(a_star
+    PRIVATE
+        a_star.c
+    
+    PUBLIC
+        FILE_SET HEADERS
+        FILES
+            a_star.h
+)
+
+target_link_libraries(a_star
+    PRIVATE
+        maze
+        utils
+)

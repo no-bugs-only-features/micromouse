@@ -26,7 +26,8 @@ void writeMazeToJson(FILE *f, Maze maze, int size, CellID* path, int pathLength)
     if (path && pathLength > 0) {
         fprintf(f, ",\"path\":[");
         for (int i = 0; i < pathLength; i++) {
-            fprintf(f, "%s{\"x\":%d,\"y\":%d}", i ? "," : "", 0, 0);
+            CellID v = path[i];
+            fprintf(f, "%s{\"x\":%d,\"y\":%d}", i ? "," : "", col(size, v), row(size, v));
         }
         fprintf(f, "]");
     }

@@ -162,6 +162,26 @@ static inline CellID cellID(int size, int row, int col) { return row * size + co
 
 
 /**
+ * @brief Get the row of a given CellID.
+ * 
+ * @param size The size of the maze.
+ * @param c The CellID.
+ * @return int The row the cell resides in.
+ */
+static inline int row(int size, CellID c) { return c / size; }
+
+
+/**
+ * @brief Get the column of a given CellID.
+ * 
+ * @param size The size of the maze.
+ * @param c The CellID.
+ * @return int The column the cell resides in.
+ */
+static inline int col(int size, CellID c) { return c % size; }
+
+
+/**
  * @brief Represents a maze as a 2D array of cells.
  *
  * See @ref Cell for details on the Cell data structure.
