@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ingoal_0',['inGoal',['../backtracking__gen_8c.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;backtracking_gen.c'],['../maze_8h.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;backtracking_gen.c']]]
+  ['heapifydown_0',['heapifyDown',['../priority__queue_8c.html#a6656021f82dc5fc0e47981fad7fda2bd',1,'heapifyDown(PriorityQueue *pq, int index):&#160;priority_queue.c'],['../priority__queue_8h.html#a6656021f82dc5fc0e47981fad7fda2bd',1,'heapifyDown(PriorityQueue *pq, int index):&#160;priority_queue.c']]],
+  ['heapifyup_1',['heapifyUp',['../priority__queue_8c.html#ab7631090c485201b8c6f7773b0575e3f',1,'heapifyUp(PriorityQueue *pq, int index):&#160;priority_queue.c'],['../priority__queue_8h.html#ab7631090c485201b8c6f7773b0575e3f',1,'heapifyUp(PriorityQueue *pq, int index):&#160;priority_queue.c']]]
 ];

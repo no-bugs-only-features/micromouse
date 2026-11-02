@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bfs_5fdistances_0',['bfs_distances',['../namespacemazeviz.html#aad5bf01314cc4ef6d41f628162d86003',1,'mazeviz']]],
-  ['build_5frun_5flog_1',['build_run_log',['../namespacemazeviz.html#a7f1cb02ce9a6dca33f41edd41717e856',1,'mazeviz']]]
+  ['astar_0',['aStar',['../a__star_8c.html#a9f3e75da8dbcfb9bfbb35b2eb8c52d78',1,'aStar(Maze maze, int size, CellID *prev):&#160;a_star.c'],['../a__star_8h.html#a9f3e75da8dbcfb9bfbb35b2eb8c52d78',1,'aStar(Maze maze, int size, CellID *prev):&#160;a_star.c']]]
 ];

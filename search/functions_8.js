@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loadmazefromjson_0',['loadMazeFromJson',['../maze__io_8c.html#a5f33d2f5f393104dd7404c721334d685',1,'loadMazeFromJson(FILE *f, int *size):&#160;maze_io.c'],['../maze__io_8h.html#a5f33d2f5f393104dd7404c721334d685',1,'loadMazeFromJson(FILE *f, int *size):&#160;maze_io.c']]]
+  ['ingoal_0',['inGoal',['../backtracking__gen_8c.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;backtracking_gen.c'],['../maze_8h.html#ab1d0c6c001704e130f2de3b7b57439e0',1,'inGoal(int size, int y, int x):&#160;backtracking_gen.c']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['peek_0',['peek',['../priority__queue_8c.html#af28d5a07a9bb165764af78ce7b2f6d74',1,'peek(PriorityQueue *pq):&#160;priority_queue.c'],['../priority__queue_8h.html#af28d5a07a9bb165764af78ce7b2f6d74',1,'peek(PriorityQueue *pq):&#160;priority_queue.c']]]
+  ['opengoal_0',['openGoal',['../backtracking__gen_8c.html#aa2fa163bb728b260f894742c28fa434d',1,'openGoal(Maze maze, int size):&#160;backtracking_gen.c'],['../backtracking__gen_8h.html#aa2fa163bb728b260f894742c28fa434d',1,'openGoal(Maze maze, int size):&#160;backtracking_gen.c']]]
 ];
