@@ -19,10 +19,8 @@
  * @param f The file pointer to write the JSON data to.
  * @param maze The maze to be written.
  * @param size The size of the maze.
- * @param sx The start x-coordinate of the maze.
- * @param sy The start y-coordinate of the maze.
- * @param gx The goal x-coordinate of the maze.
- * @param gy The goal y-coordinate of the maze.
+ * @param path The path to be highlighted in the maze.
+ * @param pathLength The length of the path.
  */
 void writeMazeToJson(FILE* f, Maze maze, int size, CellID* path, int pathLength);
 
