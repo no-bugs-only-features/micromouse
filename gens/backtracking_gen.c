@@ -111,11 +111,11 @@ static void braid(Maze maze, int size, int braid_pct) {
             Direction options[4];
             int options_count = 0;
 
-            for (int d = 1; d <= 8; d <<= 1) {
-                int nx = x + dx(d);
-                int ny = y + dy(d);
-                if (hasWall(maze[y][x], d) && inBounds(size, ny, nx) && !inGoal(size, ny, nx)) {
-                    options[options_count++] = d;
+            for (Direction dir = North; dir > 0; dir >>= 1) {
+                int nx = x + dx(dir);
+                int ny = y + dy(dir);
+                if (hasWall(maze[y][x], dir) && inBounds(size, ny, nx) && !inGoal(size, ny, nx)) {
+                    options[options_count++] = dir;
                 }
             }
 
@@ -158,12 +158,9 @@ void createGoal(Maze maze, int size) {
         int center2 = size / 2;
         int center1 = center2 - 1;
 
-        Direction dirs[4] = { North, East, South, West };
-
         for (int y = center1; y <= center2; y++) {
             for (int x = center1; x <= center2; x++) {
-                for (int i = 0; i < 4; i++) {
-                    Direction dir = dirs[i];
+                for (Direction dir = North; dir > 0; dir >>= 1) {
                     int nx = x + dx(dir);
                     int ny = y + dy(dir);
 
