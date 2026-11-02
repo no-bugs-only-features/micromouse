@@ -8,6 +8,8 @@
 #ifndef A_STAR_H
 #define A_STAR_H
 
+#include <stdlib.h>
+
 #include "maze.h"
 
 

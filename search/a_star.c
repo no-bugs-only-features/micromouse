@@ -25,11 +25,11 @@ void aStar(Maze maze, int size, CellID* prev) {
         prev[i] = UINT16_MAX;
     }
 
-    uint8_t *gScore = malloc(size * size * sizeof(uint8_t));
-    uint8_t *fScore = malloc(size * size * sizeof(uint8_t));
+    int *gScore = malloc(size * size * sizeof(int));
+    int *fScore = malloc(size * size * sizeof(int));
     for (int i = 0; i < size * size; i++) {
-        gScore[i] = UINT8_MAX;
-        fScore[i] = UINT8_MAX;
+        gScore[i] = INT_MAX;
+        fScore[i] = INT_MAX;
     }
 
     gScore[start] = 0;
