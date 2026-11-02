@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "a_star.h"
 #include "djikstra.h"
 #include "maze.h"
 #include "maze_io.h"
@@ -35,7 +36,7 @@ int main(int argc, char* argv[]) {
 
     fclose(f);
 
-    /* Run the algorithm. */
+    /* Run Djikstra. */
     uint8_t* dist = malloc(size * size * sizeof(uint8_t));
     CellID* prev = malloc(size * size * sizeof(CellID));
     djikstra(maze, size, dist, prev);
@@ -51,6 +52,22 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
+    writeMazeToJson(f, maze, size, path, path_length);
+    fclose(f);
+
+    /* Run A*. */
+    aStar(maze, size, prev);
+
+    /* Generate backtracking path. */
+    path_length = reconstructPath(prev, cellID(size, size/2, size/2), path);
+
+    /* Write the solution. */
+    f = fopen("a-star_soln.json", "w");
+    if (f == NULL) {
+        perror("fopen");
+        return EXIT_FAILURE;
+    }
+        
     writeMazeToJson(f, maze, size, path, path_length);
     fclose(f);
 
