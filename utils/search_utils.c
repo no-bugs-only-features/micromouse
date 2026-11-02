@@ -14,7 +14,7 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
     int count = 0;
 
     /* Convert the CellID back into 2D coords. */
-    int y = col(size, u);
+    int y = row(size, u);
     int x = col(size, u);
 
     Cell cur = maze[y][x];
