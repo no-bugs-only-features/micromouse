@@ -21,3 +21,8 @@ target_sources(maze_io
         FILES
             maze_io.h
 )
+
+target_link_libraries(maze_io
+    PRIVATE
+        maze
+)
