@@ -10,11 +10,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "a_star.h"
-#include "djikstra.h"
 #include "maze.h"
 #include "maze_io.h"
-#include "search_utils.h"
+#include "search.h"
+
 
 int main(int argc, char* argv[]) {
     FILE* f = NULL;

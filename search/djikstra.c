@@ -11,7 +11,6 @@
 
 #include "maze.h"
 #include "priority_queue.h"
-#include "search_utils.h"
 
 
 void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {

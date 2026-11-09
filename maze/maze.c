@@ -22,3 +22,24 @@ void clearWallBoth(Maze maze, int size, int y, int x, Direction dir) {
     int ny = y + dy(dir);
     maze[ny][nx] &= ~opposite(dir);
 }
+
+
+int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
+    int count = 0;
+
+    /* Convert the CellID back into 2D coords. */
+    int y = row(size, u);
+    int x = col(size, u);
+
+    Cell cur = maze[y][x];
+
+    /* Check each direction for valid neighbors. */
+    for (Direction dir = North; dir > 0; dir >>= 1) {
+        int ny = y + dy(dir);
+        int nx = x + dx(dir);
+        if (inBounds(size, ny, nx) && !hasWall(cur, dir)) {
+            neighbors[count++] = cellID(size, ny, nx);
+        }
+    }
+    return count;
+}
