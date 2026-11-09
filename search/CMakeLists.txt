@@ -1,18 +1,19 @@
-add_library(djikstra)
+add_library(search)
 
-target_sources(djikstra
+target_sources(search
     PRIVATE
-        djikstra.c
-    
+        search.c
+        
     PUBLIC
         FILE_SET HEADERS
         FILES
-            djikstra.h
+            search.h
 )
 
-target_link_libraries(djikstra
+target_link_libraries(search
     PRIVATE
-        utils
+        a_star
+        djikstra
         maze
 )
 
@@ -29,6 +30,24 @@ target_sources(a_star
 )
 
 target_link_libraries(a_star
+    PRIVATE
+        maze
+        utils
+)
+
+add_library(djikstra)
+
+target_sources(djikstra
+    PRIVATE
+        djikstra.c
+    
+    PUBLIC
+        FILE_SET HEADERS
+        FILES
+            djikstra.h
+)
+
+target_link_libraries(djikstra
     PRIVATE
         maze
         utils

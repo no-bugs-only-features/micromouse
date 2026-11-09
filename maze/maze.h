@@ -244,4 +244,15 @@ void setWallBoth(Maze maze, int size, int y, int x, Direction dir);
  */
 void clearWallBoth(Maze maze, int size, int y, int x, Direction dir);
 
+
+/**
+ * @brief Finds the available neighbor cells of a given CellID.
+ *
+ * @param maze The maze.
+ * @param u Cell of the maze to check for neighbors.
+ * @param neighbors Array of neighbor cells.
+ * @return The number of neighbor cells.
+ */
+int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors);
+
 #endif /* MAZE_H */

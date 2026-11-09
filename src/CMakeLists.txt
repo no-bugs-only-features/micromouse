@@ -7,11 +7,9 @@ target_sources(mouse_test
 
 target_link_libraries(mouse_test
     PRIVATE
-        a_star
-        djikstra
+        search
         maze
         maze_io
-        utils
 )
 
 add_executable(maze_gen)

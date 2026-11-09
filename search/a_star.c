@@ -11,7 +11,7 @@
 #include "a_star.h"
 #include "maze.h"
 #include "priority_queue.h"
-#include "search_utils.h"
+
 
 void aStar(Maze maze, int size, CellID* prev) {
     CellID start = cellID(size, 0, 0);

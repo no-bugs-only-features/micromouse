@@ -1,26 +1,21 @@
 /**
- * @file search_utils.h
- * @brief 
+ * @file search.h
+ * @brief Umbrella header for algorithms and functions related to searching through a maze.
+ *
+ * Available search algorithms included by this module:
+ * - @see a_star.h
+ * - @see djikstra.h
+ *
  * @author Dylan Wright (no-bugs-only-features)
  * @version 0.1
- * @date 2026-11-02
+ * @date 2026-11-09
  */
+#ifndef SEARCH_H
+#define SEARCH_H
 
-#ifndef SEARCH_UTILS_H
-#define SEARCH_UTILS_H
-
+#include "a_star.h"
+#include "djikstra.h"
 #include "maze.h"
-
-
-/**
- * @brief Finds the available neighbor cells of a given CellID.
- *
- * @param maze The maze.
- * @param u Cell of the maze to check for neighbors.
- * @param neighbors Array of neighbor cells.
- * @return The number of neighbor cells.
- */
-int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors);
 
 
 /** @brief Reconstructs the shortest path from the start to the target.
@@ -35,4 +30,4 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors);
  */
 int reconstructPath(CellID* prev, CellID target, CellID* path);
 
-#endif /* SEARCH_UTILS_H */
+#endif /* SEARCH_H */
