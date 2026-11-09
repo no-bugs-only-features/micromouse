@@ -5,7 +5,6 @@
  * @version 0.1
  * @date 2026-10-30
  */
-
 #include <stdint.h>
 #include <stdlib.h>
 
