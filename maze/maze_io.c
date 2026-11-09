@@ -5,10 +5,10 @@
  * @version 0.1
  * @date 2026-10-29
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "maze.h"
 #include "maze_io.h"
 
 
