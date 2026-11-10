@@ -14,15 +14,14 @@
 /**
  * @brief Runs djikstras on the maze. Populates the dist and prev arrays.
  *
- * This algorithm will always start at the top-left cell (CellID 0).
- *
  * @param maze The maze.
  * @param size The size of the maze.
+ * @param start The starting node.
  * @param dist Pointer to an array to store the shortest distances from the start to each cell.
  *             Array should be size * size and indexed by CellID.
- * @param prev Pointer to an array to store the previous cell in the shortest path to each cell.
- *             Array should be size * size and indexed by CellID.
+ * @param prev Pointer to an array to store the previous cell in the shortest path from the start 
+ *             to each cell. Array should be size * size and indexed by CellID.
  */
-void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev);
+void djikstra(Maze maze, int size, CellID start, uint8_t* dist, CellID* prev);
 
 #endif /* DJIKSTRA_H */

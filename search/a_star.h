@@ -30,13 +30,13 @@ static inline int heuristic(int size, CellID a, CellID b) { return abs(row(size,
 /**
  * @brief Run A* on the maze. Populates the prev array.
  * 
- * This algorithm will always start at the top-left cell (CellID 0) and end at the center of the maze (CellID size/2, size/2).
- * 
  * @param maze The maze.
  * @param size The size of the maze.
- * @param prev Pointer to an array to store the previous cell in the shortest path to each cell.
- *             Array should be size * size and indexed by CellID.
+ * @param start The starting node to path from.
+ * @param target The target node to path to.
+ * @param prev Pointer to an array to store the previous cell in the shortest path from
+ *             the start to the target. Array should be size * size and indexed by CellID.
  */
-void aStar(Maze maze, int size, CellID* prev);
+void aStar(Maze maze, int size, CellID start, CellID target, CellID* prev);
 
 #endif /* A_STAR_H */

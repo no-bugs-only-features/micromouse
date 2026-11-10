@@ -13,7 +13,7 @@
 #include "priority_queue.h"
 
 
-void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
+void djikstra(Maze maze, int size, CellID start, uint8_t* dist, CellID* prev) {
     PriorityQueue *pq = createPriorityQueue(size);
 
     // set each CellID distance and previous to max values
@@ -22,9 +22,9 @@ void djikstra(Maze maze, int size, uint8_t* dist, CellID* prev) {
         prev[v] = UINT16_MAX;
     }
 
-    dist[0] = 0;
+    dist[start] = 0;
 
-    enqueue(pq, 0, 0);
+    enqueue(pq, start, 0);
 
 
     // search the maze while there is reachable cells to explore

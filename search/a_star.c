@@ -13,10 +13,7 @@
 #include "priority_queue.h"
 
 
-void aStar(Maze maze, int size, CellID* prev) {
-    CellID start = cellID(size, 0, 0);
-    CellID goal = cellID(size, size / 2, size / 2);
-
+void aStar(Maze maze, int size, CellID start, CellID target, CellID* prev) {
     PriorityQueue *open = createPriorityQueue(size);
     enqueue(open, start, 0);
 
@@ -32,7 +29,7 @@ void aStar(Maze maze, int size, CellID* prev) {
     }
 
     gScore[start] = 0;
-    fScore[start] = heuristic(size, start, goal);
+    fScore[start] = heuristic(size, start, target);
 
     bool *closed = malloc(size * size * sizeof(bool));
     for (int i = 0; i < size * size; i++) {
@@ -42,7 +39,7 @@ void aStar(Maze maze, int size, CellID* prev) {
     while (!isEmpty(open)) {
         CellID cur = dequeue(open);
 
-        if (cur == goal)
+        if (cur == target)
             /* Done. */
             break;
 
@@ -62,7 +59,7 @@ void aStar(Maze maze, int size, CellID* prev) {
                 /* We found a better path to this neighbor. */
                 prev[n] = cur;
                 gScore[n] = tentative_g;
-                fScore[n] = tentative_g + heuristic(size, n, goal);
+                fScore[n] = tentative_g + heuristic(size, n, target);
                 if (contains(open, n))
                     decreasePriority(open, n, fScore[n]);
                 else
