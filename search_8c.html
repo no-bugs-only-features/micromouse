@@ -145,7 +145,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reconstructs the shortest path from the start to the target. </p>
-<p>The start of the maze is always the top-left cell (CellID 0). If the path length is 0, either the target is unreachable or the target is the start.</p>
+<p>The start cell is determined by the function that populated the prev array. If the path length is 0, either the target is unreachable or the target is the start.</p>
+<p>Available search algorithms that generate a prev array:</p><ul>
+<li><a class="el" href="a__star_8c.html#aae891b6ed03b9dbabd902bd90a42d99c">aStar</a></li>
+<li><a class="el" href="djikstra_8c.html#ad3d211dc7e62f8deab114c1454b16d07">djikstra</a></li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">prev</td><td>The array of previous cells. </td></tr>

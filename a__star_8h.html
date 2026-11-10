@@ -104,9 +104,9 @@ $(document).ready(function(){initNavTree('a__star_8h.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9f3e75da8dbcfb9bfbb35b2eb8c52d78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a__star_8h.html#a9f3e75da8dbcfb9bfbb35b2eb8c52d78">aStar</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *prev)</td></tr>
-<tr class="memdesc:a9f3e75da8dbcfb9bfbb35b2eb8c52d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run A* on the maze. Populates the prev array.  <br /></td></tr>
-<tr class="separator:a9f3e75da8dbcfb9bfbb35b2eb8c52d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae891b6ed03b9dbabd902bd90a42d99c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a__star_8h.html#aae891b6ed03b9dbabd902bd90a42d99c">aStar</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> start, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> target, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *prev)</td></tr>
+<tr class="memdesc:aae891b6ed03b9dbabd902bd90a42d99c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run A* on the maze. Populates the prev array.  <br /></td></tr>
+<tr class="separator:aae891b6ed03b9dbabd902bd90a42d99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A* pathfinding algorithm definitions. </p>
@@ -114,8 +114,8 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-10-30 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a9f3e75da8dbcfb9bfbb35b2eb8c52d78" name="a9f3e75da8dbcfb9bfbb35b2eb8c52d78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f3e75da8dbcfb9bfbb35b2eb8c52d78">&#9670;&#160;</a></span>aStar()</h2>
+<a id="aae891b6ed03b9dbabd902bd90a42d99c" name="aae891b6ed03b9dbabd902bd90a42d99c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae891b6ed03b9dbabd902bd90a42d99c">&#9670;&#160;</a></span>aStar()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -135,6 +135,18 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *&#160;</td>
           <td class="paramname"><em>prev</em>&#160;</td>
         </tr>
@@ -147,12 +159,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run A* on the maze. Populates the prev array. </p>
-<p>This algorithm will always start at the top-left cell (CellID 0) and end at the center of the maze (CellID size/2, size/2).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">maze</td><td>The maze. </td></tr>
     <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
-    <tr><td class="paramname">prev</td><td>Pointer to an array to store the previous cell in the shortest path to each cell. Array should be size * size and indexed by CellID. </td></tr>
+    <tr><td class="paramname">start</td><td>The starting node to path from. </td></tr>
+    <tr><td class="paramname">target</td><td>The target node to path to. </td></tr>
+    <tr><td class="paramname">prev</td><td>Pointer to an array to store the previous cell in the shortest path from the start to the target. Array should be size * size and indexed by CellID. </td></tr>
   </table>
   </dd>
 </dl>

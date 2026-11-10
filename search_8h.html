@@ -111,15 +111,16 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Umbrella header for algorithms and functions related to searching through a maze. </p>
-<p>Available search algorithms included by this module:</p><ul>
-<li><dl class="section see"><dt>See also</dt><dd><a class="el" href="a__star_8h.html" title="A* pathfinding algorithm definitions.">a_star.h</a></dd></dl>
-</li>
-<li><dl class="section see"><dt>See also</dt><dd><a class="el" href="djikstra_8h.html" title="Djikstra&#39;s algorithm implementation for pathfinding in a maze.">djikstra.h</a></dd></dl>
+<p>Available search sub-modules included by this module:</p><ul>
+<li><a class="el" href="a__star_8h.html">a_star.h</a></li>
+<li><a class="el" href="djikstra_8h.html">djikstra.h</a></li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a__star_8h.html" title="A* pathfinding algorithm definitions.">a_star.h</a> </dd>
+<dd>
+<a class="el" href="djikstra_8h.html" title="Djikstra&#39;s algorithm implementation for pathfinding in a maze.">djikstra.h</a> </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Dylan Wright (no-bugs-only-features) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-11-09 </dd></dl>
-</li>
-</ul>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a97e428931f309af8afb173a5bf23e5a5" name="a97e428931f309af8afb173a5bf23e5a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97e428931f309af8afb173a5bf23e5a5">&#9670;&#160;</a></span>reconstructPath()</h2>
@@ -154,7 +155,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reconstructs the shortest path from the start to the target. </p>
-<p>The start of the maze is always the top-left cell (CellID 0). If the path length is 0, either the target is unreachable or the target is the start.</p>
+<p>The start cell is determined by the function that populated the prev array. If the path length is 0, either the target is unreachable or the target is the start.</p>
+<p>Available search algorithms that generate a prev array:</p><ul>
+<li><a class="el" href="a__star_8c.html#aae891b6ed03b9dbabd902bd90a42d99c">aStar</a></li>
+<li><a class="el" href="djikstra_8c.html#ad3d211dc7e62f8deab114c1454b16d07">djikstra</a></li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">prev</td><td>The array of previous cells. </td></tr>

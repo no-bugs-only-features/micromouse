@@ -103,9 +103,9 @@ $(document).ready(function(){initNavTree('djikstra_8h.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a40a8c5f6fcd276e50b3774a90166c269"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="djikstra_8h.html#a40a8c5f6fcd276e50b3774a90166c269">djikstra</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, uint8_t *dist, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *prev)</td></tr>
-<tr class="memdesc:a40a8c5f6fcd276e50b3774a90166c269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs djikstras on the maze. Populates the dist and prev arrays.  <br /></td></tr>
-<tr class="separator:a40a8c5f6fcd276e50b3774a90166c269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3d211dc7e62f8deab114c1454b16d07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="djikstra_8h.html#ad3d211dc7e62f8deab114c1454b16d07">djikstra</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> start, uint8_t *dist, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *prev)</td></tr>
+<tr class="memdesc:ad3d211dc7e62f8deab114c1454b16d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs djikstras on the maze. Populates the dist and prev arrays.  <br /></td></tr>
+<tr class="separator:ad3d211dc7e62f8deab114c1454b16d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Djikstra's algorithm implementation for pathfinding in a maze. </p>
@@ -113,8 +113,8 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-10-22 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a40a8c5f6fcd276e50b3774a90166c269" name="a40a8c5f6fcd276e50b3774a90166c269"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40a8c5f6fcd276e50b3774a90166c269">&#9670;&#160;</a></span>djikstra()</h2>
+<a id="ad3d211dc7e62f8deab114c1454b16d07" name="ad3d211dc7e62f8deab114c1454b16d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3d211dc7e62f8deab114c1454b16d07">&#9670;&#160;</a></span>djikstra()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,6 +130,12 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -152,13 +158,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Runs djikstras on the maze. Populates the dist and prev arrays. </p>
-<p>This algorithm will always start at the top-left cell (CellID 0).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">maze</td><td>The maze. </td></tr>
     <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
+    <tr><td class="paramname">start</td><td>The starting node. </td></tr>
     <tr><td class="paramname">dist</td><td>Pointer to an array to store the shortest distances from the start to each cell. Array should be size * size and indexed by CellID. </td></tr>
-    <tr><td class="paramname">prev</td><td>Pointer to an array to store the previous cell in the shortest path to each cell. Array should be size * size and indexed by CellID. </td></tr>
+    <tr><td class="paramname">prev</td><td>Pointer to an array to store the previous cell in the shortest path from the start to each cell. Array should be size * size and indexed by CellID. </td></tr>
   </table>
   </dd>
 </dl>
