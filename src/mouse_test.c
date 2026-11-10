@@ -38,7 +38,8 @@ int main(int argc, char* argv[]) {
     /* Run Djikstra. */
     uint8_t* dist = malloc(size * size * sizeof(uint8_t));
     CellID* prev = malloc(size * size * sizeof(CellID));
-    djikstra(maze, size, dist, prev);
+    CellID start = 0;
+    djikstra(maze, size, start, dist, prev);
 
     /* Generate backtracking path. */
     CellID* path = malloc(size * size * sizeof(CellID));
@@ -55,7 +56,8 @@ int main(int argc, char* argv[]) {
     fclose(f);
 
     /* Run A*. */
-    aStar(maze, size, prev);
+    CellID target = cellID(size, size / 2, size / 2);
+    aStar(maze, size, start, target, prev);
 
     /* Generate backtracking path. */
     path_length = reconstructPath(prev, cellID(size, size/2, size/2), path);

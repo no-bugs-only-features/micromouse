@@ -2,10 +2,12 @@
  * @file search.h
  * @brief Umbrella header for algorithms and functions related to searching through a maze.
  *
- * Available search algorithms included by this module:
- * - @see a_star.h
- * - @see djikstra.h
+ * Available search sub-modules included by this module:
+ * - @ref a_star.h
+ * - @ref djikstra.h
  *
+ * @see a_star.h
+ * @see djikstra.h
  * @author Dylan Wright (no-bugs-only-features)
  * @version 0.1
  * @date 2026-11-09
@@ -20,8 +22,12 @@
 
 /** @brief Reconstructs the shortest path from the start to the target.
  *
- * The start of the maze is always the top-left cell (CellID 0). If the path length is 0, either
- * the target is unreachable or the target is the start.
+ * The start cell is determined by the function that populated the prev array.
+ * If the path length is 0, either the target is unreachable or the target is the start.
+ *
+ * Available search algorithms that generate a prev array:
+ * - @ref aStar
+ * - @ref djikstra
  *
  * @param prev The array of previous cells.
  * @param target The target CellID.
