@@ -110,6 +110,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac5553b337a9bcc453412d92f81c0792c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ac5553b337a9bcc453412d92f81c0792c">getNeighbors</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> u, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *neighbors)</td></tr>
 <tr class="memdesc:ac5553b337a9bcc453412d92f81c0792c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the available neighbor cells of a given CellID.  <br /></td></tr>
 <tr class="separator:ac5553b337a9bcc453412d92f81c0792c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac043d747f3572e8669a40757812d312f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="maze_8h.html#af2846eae42eb56daadc424ab51f77e20">Cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ac043d747f3572e8669a40757812d312f">orient</a> (<a class="el" href="maze_8h.html#af2846eae42eb56daadc424ab51f77e20">Cell</a> walls, int size, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
+<tr class="memdesc:ac043d747f3572e8669a40757812d312f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orient the walls to the absolute direction of the maze based on the current direction of the mouse.  <br /></td></tr>
+<tr class="separator:ac043d747f3572e8669a40757812d312f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implements functions for manipulating a maze. </p>
@@ -223,6 +226,51 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of neighbor cells. </dd></dl>
+
+</div>
+</div>
+<a id="ac043d747f3572e8669a40757812d312f" name="ac043d747f3572e8669a40757812d312f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac043d747f3572e8669a40757812d312f">&#9670;&#160;</a></span>orient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="maze_8h.html#af2846eae42eb56daadc424ab51f77e20">Cell</a> orient </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#af2846eae42eb56daadc424ab51f77e20">Cell</a>&#160;</td>
+          <td class="paramname"><em>walls</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Orient the walls to the absolute direction of the maze based on the current direction of the mouse. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">walls</td><td>The wall data. This has different encoding from <a class="el" href="maze_8h.html#af2846eae42eb56daadc424ab51f77e20">Cell</a>. The bit layout (from most significant to least significant) of the lower nibble is Forward, Right, Back, Left. 1=true, 0=false. </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
+    <tr><td class="paramname">dir</td><td>The direction the mouse is currently facing. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Cell Correctly oriented cell wall data (NESW, see <a class="el" href="maze_8h.html#af2846eae42eb56daadc424ab51f77e20">Cell</a>). </dd></dl>
 
 </div>
 </div>

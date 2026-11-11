@@ -1,5 +1,8 @@
 var annotated_dup =
 [
+    [ "app", "namespaceapp.html", [
+      [ "Api", "classapp_1_1Api.html", "classapp_1_1Api" ]
+    ] ],
     [ "mazeviz", "namespacemazeviz.html", [
       [ "Api", "classmazeviz_1_1Api.html", null ],
       [ "CMaze", "classmazeviz_1_1CMaze.html", null ],

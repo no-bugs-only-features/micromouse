@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "app.Api", "classapp_1_1Api.html", null ],
     [ "mazeviz.Api", "classmazeviz_1_1Api.html", null ],
     [ "mazeviz.Engine", "classmazeviz_1_1Engine.html", null ],
     [ "Exception", null, [

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mazeviz_0',['mazeviz',['../namespacemazeviz.html',1,'']]]
+  ['app_0',['app',['../namespaceapp.html',1,'']]]
 ];
