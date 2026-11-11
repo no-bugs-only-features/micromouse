@@ -146,7 +146,6 @@ static inline void setExplored(Cell *cell, Direction dir) { *cell |= (dir << 4);
  * This type is used to uniquely identify each cell within the maze.
  * It is the index of the cell within the maze grid.
  *
- * @see cellID
  */
 typedef uint16_t CellID;
 
@@ -254,5 +253,19 @@ void clearWallBoth(Maze maze, int size, int y, int x, Direction dir);
  * @return The number of neighbor cells.
  */
 int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors);
+
+
+/**
+ * @brief Orient the walls to the absolute direction of the maze based on the
+ *        current direction of the mouse.
+ * 
+ * @param walls The wall data. This has different encoding from @ref Cell.
+ *              The bit layout (from most significant to least significant)
+ *              of the lower nibble is Forward, Right, Back, Left. 1=true, 0=false.
+ * @param size The size of the maze.
+ * @param dir The direction the mouse is currently facing.
+ * @return Cell Correctly oriented cell wall data (NESW, see @ref Cell).
+ */
+Cell orient(Cell walls, int size, Direction dir);
 
 #endif /* MAZE_H */

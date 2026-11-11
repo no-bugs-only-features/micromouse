@@ -9,10 +9,10 @@
 
 
 void setWallBoth(Maze maze, int size, int y, int x, Direction dir) {
-    setWall(&maze[y][x], dir);
+    if (inBounds(size, y, x)) setWall(&maze[y][x], dir);
     int nx = x + dx(dir);
     int ny = y + dy(dir);
-    setWall(&maze[ny][nx], opposite(dir));
+    if (inBounds(size, ny, nx)) setWall(&maze[ny][nx], opposite(dir));
 }
 
 
@@ -42,4 +42,24 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors) {
         }
     }
     return count;
+}
+
+
+Cell orient(Cell walls, int size, Direction dir) {
+    Cell result = 0;
+    switch(dir) {
+        case North:
+            result = walls;
+            break;
+        case East:
+            result = (walls >> 1) | (walls << 3);
+            break;
+        case South:
+            result = (walls >> 2) | (walls << 2);
+            break;
+        case West:
+            result = (walls >> 3) | (walls << 1);
+            break;
+    }
+    return result & 0x0F;
 }
