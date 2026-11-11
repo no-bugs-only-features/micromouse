@@ -145,6 +145,19 @@
   #scrubBar{
     flex:1;
   }
+  #playback{
+    flex:0 0 auto; display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+    padding:10px 24px; border-bottom:1px solid var(--grid); background:var(--panel);
+  }
+  #playback .transport{display:flex; gap:8px;}
+  button.icon{width:38px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;}
+  button.icon svg{width:16px; height:16px; fill:currentColor;}
+  button.icon svg.line{fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
+  #playback .speed{
+    display:flex; align-items:center; gap:10px; margin-left:20px; justify-self:start;
+    font-family:var(--mono); font-size:11px; color:var(--ink-dim);
+  }
+  #playback .speed input{width:150px;}
   #canvasWrap{
     flex:1;
     display:flex;
@@ -239,19 +252,6 @@
   </div>
 
   <div class="block">
-    <div class="block-label">PLAYBACK</div>
-    <div class="btn-row">
-      <button id="playBtn" class="primary">Play</button>
-      <button id="stepBtn">Step</button>
-      <button id="resetBtn">Reset</button>
-    </div>
-    <div class="row" style="margin-top:12px;">
-      <span style="font-size:11px;color:var(--ink-dim);">Speed</span>
-    </div>
-    <input type="range" id="speed" min="0.25" max="8" step="0.25" value="2">
-  </div>
-
-  <div class="block">
     <div class="block-label">TELEMETRY</div>
     <div id="stats"></div>
   </div>
@@ -259,9 +259,19 @@
 
 <div id="main">
   <div id="scrub">
-    <span id="scrubT">0.00s</span>
+    <span id="scrubT">#0</span>
     <input type="range" id="scrubBar" min="0" max="100" value="0">
   </div>
+  <div id="playback">
+    <span></span>
+    <div class="transport">
+      <button id="resetBtn" class="icon" title="Reset" aria-label="Reset"><svg class="line" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.1 8a5 5 0 1 0 1.6-3.7"/><path d="M3 2.6v3.2h3.2"/></svg></button>
+      <button id="playBtn" class="primary icon" title="Play" aria-label="Play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z"/></svg></button>
+      <button id="stepBtn" class="icon" title="Step" aria-label="Step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 2.5v11l8-5.5z"/><rect x="11.5" y="2.5" width="2" height="11" rx=".5"/></svg></button>
+    </div>
+    <label class="speed">Speed <input type="range" id="speed" min="0.25" max="8" step="0.25" value="2"></label>
+  </div>
+
   <div id="canvasWrap">
     <canvas id="cv"></canvas>
   </div>
@@ -423,7 +433,7 @@ function setMaze(m, source){
   m.source = source;
   maze = m; simTime = 0; playing = false; live = null; logBuildFile();
   const has = m.run_log.length > 0;
-  document.getElementById('playBtn').textContent = 'Play';
+  setPlayIcon(false);
   ['playBtn','stepBtn','resetBtn','scrubBar'].forEach(id => document.getElementById(id).disabled = !has);
   const bar = document.getElementById('scrubBar');
   bar.max = has ? m.run_log[m.run_log.length-1].t*1000 : 0;
@@ -695,7 +705,7 @@ function logSync(){                                    // follow the scrub posit
 logBody.addEventListener('click', e => {               // click a row to jump there
   const r = e.target.closest('.lrow'); if(!r || !maze) return;
   const i = +r.dataset.i;
-  playing = false; document.getElementById('playBtn').textContent = 'Play';
+  playing = false; setPlayIcon(false);
   if(live){ live.idx = i; syncLive(); }
   else if(maze.run_log.length){
     simTime = maze.run_log[i].t; document.getElementById('scrubBar').value = simTime*1000; render(); updateStats();
@@ -748,7 +758,7 @@ function syncLive(){
   const bar = document.getElementById('scrubBar');
   bar.max = live.hist.length-1; bar.value = live.idx;
   if(live.over && live.idx === live.hist.length-1) playing = false;
-  document.getElementById('playBtn').textContent = playing ? 'Pause' : 'Play';
+  setPlayIcon(playing);
   render(); updateStats();
 }
 
@@ -787,7 +797,7 @@ function tick(ts){
     const maxT = maze.run_log[maze.run_log.length-1].t;
     simTime = Math.min(maxT, simTime + dt*speed);
     document.getElementById('scrubBar').value = simTime*1000;
-    if(simTime>=maxT) playing=false, document.getElementById('playBtn').textContent='Play';
+    if(simTime>=maxT) playing=false, setPlayIcon(false);
     render();
     updateStats();
   }
@@ -846,9 +856,16 @@ function updateStats(){
 }
 
 // ---------- controls ----------
-document.getElementById('playBtn').onclick = (e)=>{
+const ICON_PLAY  = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z"/></svg>';
+const ICON_PAUSE = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="2.5" width="3.2" height="11" rx=".6"/><rect x="9.3" y="2.5" width="3.2" height="11" rx=".6"/></svg>';
+function setPlayIcon(isPlaying){
+  const b = document.getElementById('playBtn');
+  b.innerHTML = isPlaying ? ICON_PAUSE : ICON_PLAY;
+  b.title = b.ariaLabel = isPlaying ? 'Pause' : 'Play';
+}
+document.getElementById('playBtn').onclick = ()=>{
   playing = !playing;
-  e.target.textContent = playing ? 'Pause' : 'Play';
+  setPlayIcon(playing);
 };
 document.getElementById('stepBtn').onclick = ()=>{
   if(!maze) return;
@@ -859,7 +876,7 @@ document.getElementById('stepBtn').onclick = ()=>{
 document.getElementById('resetBtn').onclick = ()=>{
   if(live){ playing=false; maybeLive(true); return; }        // restart the same maze with the same start corner
   simTime=0; playing=false;
-  document.getElementById('playBtn').textContent='Play';
+  setPlayIcon(false);
   document.getElementById('scrubBar').value=0;
   render(); updateStats();
 };
@@ -868,7 +885,7 @@ document.getElementById('scrubBar').oninput = (e)=>{
   if(live){ live.idx = +e.target.value; playing=false; syncLive(); return; }
   simTime = e.target.value/1000;
   playing=false;
-  document.getElementById('playBtn').textContent='Play';
+  setPlayIcon(false);
   render(); updateStats();
 };
 ['lyHeat','lyPath'].forEach(id=>{
