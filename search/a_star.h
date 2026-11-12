@@ -8,8 +8,6 @@
 #ifndef A_STAR_H
 #define A_STAR_H
 
-#include <stdlib.h>
-
 #include "maze.h"
 
 
@@ -24,7 +22,7 @@
  * @param b The second cell.
  * @return int The heuristic value between the cells.
  */
-static inline int heuristic(int size, CellID a, CellID b) { return abs(row(size, a) - row(size, b)) + abs(col(size, a) - col(size, b)); }
+static inline int heuristic(int size, CellID a, CellID b) { manhattan(size, a, b); }
 
 
 /**
