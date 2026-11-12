@@ -276,6 +276,6 @@ Cell orient(Cell walls, int size, Direction dir);
  * @param b The second cell id.
  * @return int The manhattan distance.
  */
-static inline int manhattan(size, CellID a, CellID b) { return abs(row(size, a) - row(size, b)) + abs(col(size, a) - col(size, b)); }
+static inline int manhattan(int size, CellID a, CellID b) { return abs(row(size, a) - row(size, b)) + abs(col(size, a) - col(size, b)); }
 
 #endif /* MAZE_H */

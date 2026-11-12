@@ -38,7 +38,7 @@ void fullFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist) {
 
 void modifiedFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist) {
     CellID stack[256];
-    stack_c = 0;
+    int stack_c = 0;
     stack[stack_c++] = start;
 
     while(stack_c > 0) {
@@ -48,7 +48,7 @@ void modifiedFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dis
 
         CellID neighbors[4];
         int neighbors_c = getNeighbors(maze, size, u, neighbors);
-        min_neighbor = neighbors[0];
+        CellID min_neighbor = neighbors[0];
         for (int i = 1; i < neighbors_c; i++) {
             CellID n = neighbors[i];
             if (dist[min_neighbor] < dist[n])

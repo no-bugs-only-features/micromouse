@@ -17,3 +17,5 @@ void fullFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist);
 
 
 void modifiedFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist);
+
+#endif /* FLOOD_FILL_H */
