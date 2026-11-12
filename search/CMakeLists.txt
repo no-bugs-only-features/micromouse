@@ -14,6 +14,7 @@ target_link_libraries(search
     PRIVATE
         a_star
         djikstra
+        flood_fill
         maze
 )
 
@@ -48,6 +49,24 @@ target_sources(djikstra
 )
 
 target_link_libraries(djikstra
+    PRIVATE
+        maze
+        utils
+)
+
+add_library(flood_fill)
+
+target_sources(flood_fill
+    PRIVATE
+        flood_fill.c
+    
+    PUBLIC
+        FILE_SET HEADERS
+        FILES
+            flood_fill.h
+)
+
+target_link_libraries(flood_fill
     PRIVATE
         maze
         utils
