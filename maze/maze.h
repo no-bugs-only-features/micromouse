@@ -9,7 +9,7 @@
 #define MAZE_H
 
 #include <stdint.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * @brief Mask for cell's wall data.
@@ -267,5 +267,15 @@ int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors);
  * @return Cell Correctly oriented cell wall data (NESW, see @ref Cell).
  */
 Cell orient(Cell walls, int size, Direction dir);
+
+
+/**
+ * @brief Compute the manhattan distance between two cells.
+ * 
+ * @param a The first cell id.
+ * @param b The second cell id.
+ * @return int The manhattan distance.
+ */
+static inline int manhattan(size, CellID a, CellID b) { return abs(row(size, a) - row(size, b)) + abs(col(size, a) - col(size, b)); }
 
 #endif /* MAZE_H */
