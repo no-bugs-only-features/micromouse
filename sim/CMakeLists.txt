@@ -30,6 +30,6 @@ target_sources(mazegen
 
 target_link_libraries(mazegen
     PRIVATE
+        gen
         maze
-        maze_gens
 )

@@ -7,8 +7,8 @@
  */
 #include <stdlib.h>
 
+#include "gen.h"
 #include "maze.h"
-#include "maze_gens.h"
 #include "mazegen.h"
 
 

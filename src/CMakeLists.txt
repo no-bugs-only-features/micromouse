@@ -21,7 +21,7 @@ target_sources(maze_gen
 
 target_link_libraries(maze_gen
     PRIVATE
+        gen
         maze
-        maze_gens
         maze_io
 )
