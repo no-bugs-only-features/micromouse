@@ -107,6 +107,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae30ba9e374fcd2d1533fe37383c2df76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ae30ba9e374fcd2d1533fe37383c2df76">clearWallBoth</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, int y, int x, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
 <tr class="memdesc:ae30ba9e374fcd2d1533fe37383c2df76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the wall in both directions for a given cell.  <br /></td></tr>
 <tr class="separator:ae30ba9e374fcd2d1533fe37383c2df76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc67f66c0ae87ef191467f293afd5eef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#acc67f66c0ae87ef191467f293afd5eef">getNeighbor</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> u, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
+<tr class="memdesc:acc67f66c0ae87ef191467f293afd5eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the neighbor cell in the specified direction.  <br /></td></tr>
+<tr class="separator:acc67f66c0ae87ef191467f293afd5eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5553b337a9bcc453412d92f81c0792c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ac5553b337a9bcc453412d92f81c0792c">getNeighbors</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> u, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *neighbors)</td></tr>
 <tr class="memdesc:ac5553b337a9bcc453412d92f81c0792c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the available neighbor cells of a given CellID.  <br /></td></tr>
 <tr class="separator:ac5553b337a9bcc453412d92f81c0792c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +178,58 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="acc67f66c0ae87ef191467f293afd5eef" name="acc67f66c0ae87ef191467f293afd5eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc67f66c0ae87ef191467f293afd5eef">&#9670;&#160;</a></span>getNeighbor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> getNeighbor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a>&#160;</td>
+          <td class="paramname"><em>maze</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the neighbor cell in the specified direction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maze</td><td>The maze containing the cell. </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
+    <tr><td class="paramname">u</td><td>The CellID of the current cell. </td></tr>
+    <tr><td class="paramname">dir</td><td>The direction to look for a neighbor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CellID The CellID of the neighbor cell, or UINT16_MAX if no neighbor exists. </dd></dl>
 
 </div>
 </div>

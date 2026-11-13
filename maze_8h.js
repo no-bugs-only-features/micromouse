@@ -10,6 +10,7 @@ var maze_8h =
       [ "West", "maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aaaedd15c5b13ad5525c46d5c9650ddde5f", null ]
     ] ],
     [ "clearWallBoth", "maze_8h.html#ae30ba9e374fcd2d1533fe37383c2df76", null ],
+    [ "getNeighbor", "maze_8h.html#acc67f66c0ae87ef191467f293afd5eef", null ],
     [ "getNeighbors", "maze_8h.html#ac5553b337a9bcc453412d92f81c0792c", null ],
     [ "inGoal", "maze_8h.html#ab1d0c6c001704e130f2de3b7b57439e0", null ],
     [ "orient", "maze_8h.html#ac043d747f3572e8669a40757812d312f", null ],
