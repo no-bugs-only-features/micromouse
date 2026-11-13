@@ -397,7 +397,7 @@ def main():
     here = Path(__file__).parent
     # api = Api(Engine(find_lib(here, "mazeviz")))
     api = Api(None)
-    window = webview.create_window("Mazeviz", str(here / "ui" / "index.html"),
+    window = webview.create_window("Mazeviz", str(here / "ui" / "viz.html"),
                                    js_api=api, width=1280, height=800)
     api._bind(window)
     webview.start()

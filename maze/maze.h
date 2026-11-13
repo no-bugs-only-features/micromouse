@@ -9,7 +9,7 @@
 #define MAZE_H
 
 #include <stdint.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * @brief Mask for cell's wall data.
@@ -146,7 +146,6 @@ static inline void setExplored(Cell *cell, Direction dir) { *cell |= (dir << 4);
  * This type is used to uniquely identify each cell within the maze.
  * It is the index of the cell within the maze grid.
  *
- * @see cellID
  */
 typedef uint16_t CellID;
 
@@ -159,6 +158,26 @@ typedef uint16_t CellID;
  * @return CellID The unique identifier for the cell.
  */
 static inline CellID cellID(int size, int row, int col) { return row * size + col; }
+
+
+/**
+ * @brief Get the row of a given CellID.
+ * 
+ * @param size The size of the maze.
+ * @param c The CellID.
+ * @return int The row the cell resides in.
+ */
+static inline int row(int size, CellID c) { return c / size; }
+
+
+/**
+ * @brief Get the column of a given CellID.
+ * 
+ * @param size The size of the maze.
+ * @param c The CellID.
+ * @return int The column the cell resides in.
+ */
+static inline int col(int size, CellID c) { return c % size; }
 
 
 /**
@@ -223,5 +242,40 @@ void setWallBoth(Maze maze, int size, int y, int x, Direction dir);
  * @param dir The direction of the wall to clear.
  */
 void clearWallBoth(Maze maze, int size, int y, int x, Direction dir);
+
+
+/**
+ * @brief Finds the available neighbor cells of a given CellID.
+ *
+ * @param maze The maze.
+ * @param u Cell of the maze to check for neighbors.
+ * @param neighbors Array of neighbor cells.
+ * @return The number of neighbor cells.
+ */
+int getNeighbors(Maze maze, int size, CellID u, CellID* neighbors);
+
+
+/**
+ * @brief Orient the walls to the absolute direction of the maze based on the
+ *        current direction of the mouse.
+ * 
+ * @param walls The wall data. This has different encoding from @ref Cell.
+ *              The bit layout (from most significant to least significant)
+ *              of the lower nibble is Forward, Right, Back, Left. 1=true, 0=false.
+ * @param size The size of the maze.
+ * @param dir The direction the mouse is currently facing.
+ * @return Cell Correctly oriented cell wall data (NESW, see @ref Cell).
+ */
+Cell orient(Cell walls, int size, Direction dir);
+
+
+/**
+ * @brief Compute the manhattan distance between two cells.
+ * 
+ * @param a The first cell id.
+ * @param b The second cell id.
+ * @return int The manhattan distance.
+ */
+static inline int manhattan(int size, CellID a, CellID b) { return abs(row(size, a) - row(size, b)) + abs(col(size, a) - col(size, b)); }
 
 #endif /* MAZE_H */
