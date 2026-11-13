@@ -245,6 +245,18 @@ void clearWallBoth(Maze maze, int size, int y, int x, Direction dir);
 
 
 /**
+ * @brief Gets the neighbor cell in the specified direction.
+ * 
+ * @param maze The maze containing the cell.
+ * @param size The size of the maze.
+ * @param u The CellID of the current cell.
+ * @param dir The direction to look for a neighbor.
+ * @return CellID The CellID of the neighbor cell, or UINT16_MAX if no neighbor exists.
+ */
+CellID getNeighbor(Maze maze, int size, CellID u, Direction dir);
+
+
+/**
  * @brief Finds the available neighbor cells of a given CellID.
  *
  * @param maze The maze.
