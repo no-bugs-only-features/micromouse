@@ -12,46 +12,46 @@
 #include "mouse.h"
 #include "search.h"
 
-action_t mouse_step(Cell walls, Maze maze, int size, CellID *pos, Direction *dir, CellID *path, Cell *pending, uint16_t *pending_len) {
+action_t mouse_step(Cell walls, State cur_state) {
     /* If direction is unknown. */
-    if (!(*dir)) {
+    if (!*cur_state.dir) {
         /* Check for an opening to the left or right to determine direction. */
         if (~walls & (1 | 4)) {
-            *dir = ~walls & 1 ? South : East;
+            *cur_state.dir = ~walls & 1 ? South : East;
 
             /* Initialize some stuff. */
-            *pos = cellID(size, *pending_len * dy(*dir), *pending_len * dx(*dir));
+            *cur_state.pos = cellID(cur_state.size, *cur_state.pending_len * dy(*cur_state.dir), *cur_state.pending_len * dx(*cur_state.dir));
 
             /* Rotate all pending cells and put them into the maze. */
-            for (int i = 0; i < *pending_len; i++) {
-                int y = i * dy(*dir);
-                int x = i * dx(*dir);
-                Cell o = orient(pending[i], size, *dir);
+            for (int i = 0; i < *cur_state.pending_len; i++) {
+                int y = i * dy(*cur_state.dir);
+                int x = i * dx(*cur_state.dir);
+                Cell o = orient(cur_state.pending[i], cur_state.size, *cur_state.dir);
                 /* Set both walls in the maze. */
                 for (Direction d = North; d; d >>= 1) {
-                    if (hasWall(o, d)) setWallBoth(maze, size, y, x, d);
+                    if (hasWall(o, d)) setWallBoth(cur_state.maze, cur_state.size, y, x, d);
                 }
             }
 
         } else {
-            pending[(*pending_len)++] = walls;
+            cur_state.pending[(*cur_state.pending_len)++] = walls;
             return FORWARD;
         }
     }
 
     /* Add oriented wall data to maze. */
-    Cell o = orient(walls, size, *dir);
+    Cell o = orient(walls, cur_state.size, *cur_state.dir);
     /* Set both walls in the maze. */
     for (Direction d = North; d; d >>= 1) {
         if (hasWall(o, d))
-            setWallBoth(maze, size, row(size, *pos), col(size, *pos), d);
+            setWallBoth(cur_state.maze, cur_state.size, row(cur_state.size, *cur_state.pos), col(cur_state.size, *cur_state.pos), d);
     }
 
     /* Use A* to find the path to the goal. */
-    CellID* prev = malloc(size * size * sizeof(CellID));
-    CellID goal = cellID(size, size / 2, size / 2);
-    aStar(maze, size, *pos, goal, prev);
-    int path_len = reconstructPath(prev, goal, path);
+    CellID* prev = malloc(cur_state.size * cur_state.size * sizeof(CellID));
+    CellID goal = cellID(cur_state.size, cur_state.size / 2, cur_state.size / 2);
+    aStar(cur_state.maze, cur_state.size, *cur_state.pos, goal, prev);
+    int path_len = reconstructPath(prev, goal, cur_state.path);
 
     action_t action;
     
@@ -60,32 +60,32 @@ action_t mouse_step(Cell walls, Maze maze, int size, CellID *pos, Direction *dir
         action = DONE;
     } else {
         /* Translate the next move in the path to an action. */
-        CellID next = path[1];
+        CellID next = cur_state.path[1];
 
         /* This logic should be improved in the actual mouse. We are limited by the fact
         that we can only send one action per step back to the simulator. This means we have to 
         run A* once in order to turn and once more in order to move. */
 
         /* Is the next cell in the same direction? */
-        int dr = row(size, next) - row(size, *pos);
-        int dc = col(size, next) - col(size, *pos);
-        Direction r_dir = (*dir >> 1 | *dir << 3) & 0x0F;
+        int dr = row(cur_state.size, next) - row(cur_state.size, *cur_state.pos);
+        int dc = col(cur_state.size, next) - col(cur_state.size, *cur_state.pos);
+        Direction r_dir = (*cur_state.dir >> 1 | *cur_state.dir << 3) & 0x0F;
         Direction l_dir = opposite(r_dir);
-        if (dr == dy(*dir) && dc == dx(*dir)) {
-            *pos = next;
-            return FORWARD;
+        if (dr == dy(*cur_state.dir) && dc == dx(*cur_state.dir)) {
+            *cur_state.pos = next;
+            action = FORWARD;
         /* Is the next cell in the opposite direction? */
-        } else if (dr == dy(opposite(*dir)) && dc == dx(opposite(*dir))) {
-            *dir = opposite(*dir);
-            return TURN_180;
+        } else if (dr == dy(opposite(*cur_state.dir)) && dc == dx(opposite(*cur_state.dir))) {
+            *cur_state.dir = opposite(*cur_state.dir);
+            action = TURN_180;
         /* Is the next cell in the right direction? */
         } else if (dr == dy(r_dir) && dc == dx(r_dir)) {
-            *dir = r_dir;
-            return TURN_R;
+            *cur_state.dir = r_dir;
+            action = TURN_R;
         /* Otherwise, the next cell must be to the left. */
         } else {
-            *dir = l_dir;
-            return TURN_L;
+            *cur_state.dir = l_dir;
+            action = TURN_L;
         }
     }
 

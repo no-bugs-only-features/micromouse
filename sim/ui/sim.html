@@ -517,11 +517,12 @@ function render(){
   // walls: the true maze dimmed; what the mouse remembers drawn solid over it
   // (red where its memory has a wall the maze doesn't)
   {
-    const mem = fr && fr.known;
+    const mem = fr && fr.known;                        // the mouse's map: mask to the wall nibble before comparing
+    const memWalls = (x,y) => mem[y][x] & WALL_MASK;
     drawWallBits((x,y)=>walls[y][x], getVar(mem ? '--wall-dim' : '--wall'), originX, originY, cell, size);
     if(mem){
-      drawWallBits((x,y)=>(mem[y][x] & 15) & walls[y][x], getVar('--wall'), originX, originY, cell, size);
-      drawWallBits((x,y)=>(mem[y][x] & 15) & ~walls[y][x], '#e06b5a', originX, originY, cell, size);
+      drawWallBits((x,y)=>memWalls(x,y) & walls[y][x], getVar('--wall'), originX, originY, cell, size);
+      drawWallBits((x,y)=>memWalls(x,y) & ~walls[y][x], '#e06b5a', originX, originY, cell, size);
     }
   }
 
@@ -559,10 +560,11 @@ function render(){
 const HVEC = {N:[0,-1], E:[1,0], S:[0,1], W:[-1,0]};
 function curFrame(){ return live ? live.hist[live.idx] : null; }
 
+const WALL_MASK = 0x0F;      // map cells: low nibble = walls (N8 E4 S2 W1), high nibble = the mouse's per-direction explored flags
 function drawWallBits(get, color, ox, oy, cell, size){
   ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.lineCap = 'round';
   for(let y=0;y<size;y++) for(let x=0;x<size;x++){
-    const wx=ox+x*cell, wy=oy+y*cell, w=get(x,y);
+    const wx=ox+x*cell, wy=oy+y*cell, w=get(x,y) & WALL_MASK;   // never let the explored-flag nibble leak in
     ctx.beginPath();
     if(w & N){ ctx.moveTo(wx,wy); ctx.lineTo(wx+cell,wy); }
     if(w & S){ ctx.moveTo(wx,wy+cell); ctx.lineTo(wx+cell,wy+cell); }
