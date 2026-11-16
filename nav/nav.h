@@ -1,5 +1,8 @@
 /** @file nav.h
  * @brief Header file for navigation functions.
+ * @see a_star.h
+ * @see djikstra.h
+ * @see flood_fill.h
  * @author Dylan Wright (no-bugs-only-features)
  * @version 0.1
  * @date 2026-11-09
@@ -24,6 +27,6 @@
  * @param path An array to store the shortest path.
  * @return The number of cells in the shortest path.
  */
-int reconstructPath(CellID* prev, CellID target, CellID* path);
+int reconstructPath(CellID *prev, CellID target, CellID *path);
 
 #endif /* NAV_H */
