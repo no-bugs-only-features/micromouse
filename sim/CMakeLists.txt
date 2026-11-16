@@ -13,6 +13,7 @@ target_sources(mouse
 target_link_libraries(mouse
     PRIVATE
         maze
+        nav
         search
 )
 

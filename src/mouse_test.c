@@ -12,6 +12,7 @@
 
 #include "maze.h"
 #include "maze_io.h"
+#include "nav.h"
 #include "search.h"
 
 

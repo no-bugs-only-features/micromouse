@@ -10,6 +10,7 @@
 
 #include "maze.h"
 #include "mouse.h"
+#include "nav.h"
 #include "search.h"
 
 action_t mouse_step(Cell walls, State cur_state) {
