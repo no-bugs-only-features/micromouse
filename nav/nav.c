@@ -32,6 +32,7 @@ int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction st
     int path_length = 0;
     CellID current = start;
     Direction cur_dir = start_dir;
+    uint16_t distance = dist[current];
 
     while (distance > 0) {
         path[path_length++] = current;
