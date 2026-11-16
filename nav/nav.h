@@ -10,6 +10,8 @@
 #ifndef NAV_H
 #define NAV_H
 
+#include <stdint.h>
+
 #include "maze.h"
 
 
@@ -28,5 +30,24 @@
  * @return The number of cells in the shortest path.
  */
 int reconstructPath(CellID *prev, CellID target, CellID *path);
+
+
+/** @brief Generates a path from the start cell a cell with a distance of 0.
+ *
+ * The path has bias towards cells in the current direction of travel.
+ *
+ * Available algorithms that generate a dist array:
+ * - @ref fullFlood
+ * - @ref modifiedFlood
+ *
+ * @param Maze The maze to navigate.
+ * @param size The size of the maze.
+ * @param dist The array of distances from the target.
+ * @param start The starting CellID.
+ * @param start_dir The current direction of travel.
+ * @param path An array to store the path.
+ * @return The number of cells in the path.
+ */
+int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction start_dir, CellID *path);
 
 #endif /* NAV_H */
