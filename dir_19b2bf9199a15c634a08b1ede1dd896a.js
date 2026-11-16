@@ -6,6 +6,5 @@ var dir_19b2bf9199a15c634a08b1ede1dd896a =
     [ "djikstra.h", "djikstra_8h.html", "djikstra_8h" ],
     [ "flood_fill.c", "flood__fill_8c.html", null ],
     [ "flood_fill.h", "flood__fill_8h.html", null ],
-    [ "search.c", "search_8c.html", "search_8c" ],
-    [ "search.h", "search_8h.html", "search_8h" ]
+    [ "search.h", "search_8h.html", null ]
 ];

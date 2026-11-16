@@ -89,8 +89,6 @@ $(document).ready(function(){initNavTree('search_8h.html',''); initResizable(); 
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">search.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -100,16 +98,8 @@ $(document).ready(function(){initNavTree('search_8h.html',''); initResizable(); 
 <div class="textblock"><code>#include &quot;<a class="el" href="a__star_8h_source.html">a_star.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="djikstra_8h_source.html">djikstra.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="flood__fill_8h_source.html">flood_fill.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="maze_8h_source.html">maze.h</a>&quot;</code><br />
 </div>
 <p><a href="search_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a97e428931f309af8afb173a5bf23e5a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="search_8h.html#a97e428931f309af8afb173a5bf23e5a5">reconstructPath</a> (<a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *prev, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> target, <a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *path)</td></tr>
-<tr class="memdesc:a97e428931f309af8afb173a5bf23e5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconstructs the shortest path from the start to the target.  <br /></td></tr>
-<tr class="separator:a97e428931f309af8afb173a5bf23e5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Umbrella header for algorithms and functions related to searching through a maze. </p>
 <p>Available search sub-modules included by this module:</p><ul>
@@ -125,58 +115,7 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Dylan Wright (no-bugs-only-features) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-11-09 </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a97e428931f309af8afb173a5bf23e5a5" name="a97e428931f309af8afb173a5bf23e5a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97e428931f309af8afb173a5bf23e5a5">&#9670;&#160;</a></span>reconstructPath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int reconstructPath </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *&#160;</td>
-          <td class="paramname"><em>prev</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a>&#160;</td>
-          <td class="paramname"><em>target</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="maze_8h.html#afa369492e1133ed75e3b102b62e387df">CellID</a> *&#160;</td>
-          <td class="paramname"><em>path</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Reconstructs the shortest path from the start to the target. </p>
-<p>The start cell is determined by the function that populated the prev array. If the path length is 0, either the target is unreachable or the target is the start.</p>
-<p>Available search algorithms that generate a prev array:</p><ul>
-<li><a class="el" href="a__star_8c.html#aae891b6ed03b9dbabd902bd90a42d99c">aStar</a></li>
-<li><a class="el" href="djikstra_8c.html#ad3d211dc7e62f8deab114c1454b16d07">djikstra</a></li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">prev</td><td>The array of previous cells. </td></tr>
-    <tr><td class="paramname">target</td><td>The target CellID. </td></tr>
-    <tr><td class="paramname">path</td><td>An array to store the shortest path. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The number of cells in the shortest path. </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
