@@ -14,6 +14,7 @@ var maze_8h =
     [ "getNeighbors", "maze_8h.html#ac5553b337a9bcc453412d92f81c0792c", null ],
     [ "inGoal", "maze_8h.html#ab1d0c6c001704e130f2de3b7b57439e0", null ],
     [ "orient", "maze_8h.html#ac043d747f3572e8669a40757812d312f", null ],
+    [ "setExploredBoth", "maze_8h.html#abc821a2dbe65506cd5329ca6c1223c85", null ],
     [ "setWallBoth", "maze_8h.html#a39184589996ad6618c6f90840dafc9ee", null ],
     [ "MASK", "maze_8h.html#a34e230d32e3d5372adb458cd5f7fd8cf", null ]
 ];

@@ -104,6 +104,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a39184589996ad6618c6f90840dafc9ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#a39184589996ad6618c6f90840dafc9ee">setWallBoth</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, int y, int x, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
 <tr class="memdesc:a39184589996ad6618c6f90840dafc9ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the wall in both directions for a given cell.  <br /></td></tr>
 <tr class="separator:a39184589996ad6618c6f90840dafc9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc821a2dbe65506cd5329ca6c1223c85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#abc821a2dbe65506cd5329ca6c1223c85">setExploredBoth</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, int y, int x, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
+<tr class="memdesc:abc821a2dbe65506cd5329ca6c1223c85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the explored flag in both directions for a given cell.  <br /></td></tr>
+<tr class="separator:abc821a2dbe65506cd5329ca6c1223c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae30ba9e374fcd2d1533fe37383c2df76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8c.html#ae30ba9e374fcd2d1533fe37383c2df76">clearWallBoth</a> (<a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a> maze, int size, int y, int x, <a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a> dir)</td></tr>
 <tr class="memdesc:ae30ba9e374fcd2d1533fe37383c2df76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the wall in both directions for a given cell.  <br /></td></tr>
 <tr class="separator:ae30ba9e374fcd2d1533fe37383c2df76"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -326,6 +329,64 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Cell Correctly oriented cell wall data (NESW, see <a class="el" href="maze_8h.html#af2846eae42eb56daadc424ab51f77e20">Cell</a>). </dd></dl>
+
+</div>
+</div>
+<a id="abc821a2dbe65506cd5329ca6c1223c85" name="abc821a2dbe65506cd5329ca6c1223c85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc821a2dbe65506cd5329ca6c1223c85">&#9670;&#160;</a></span>setExploredBoth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setExploredBoth </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#a604e92d978d76b789611cc901c616d1a">Maze</a>&#160;</td>
+          <td class="paramname"><em>maze</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="maze_8h.html#a224b9163917ac32fc95a60d8c1eec3aa">Direction</a>&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the explored flag in both directions for a given cell. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maze</td><td>The maze containing the cell. </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the maze. </td></tr>
+    <tr><td class="paramname">y</td><td>The y-coordinate of the cell. </td></tr>
+    <tr><td class="paramname">x</td><td>The x-coordinate of the cell. </td></tr>
+    <tr><td class="paramname">dir</td><td>The direction of the explored flag to set. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

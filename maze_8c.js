@@ -4,5 +4,6 @@ var maze_8c =
     [ "getNeighbor", "maze_8c.html#acc67f66c0ae87ef191467f293afd5eef", null ],
     [ "getNeighbors", "maze_8c.html#ac5553b337a9bcc453412d92f81c0792c", null ],
     [ "orient", "maze_8c.html#ac043d747f3572e8669a40757812d312f", null ],
+    [ "setExploredBoth", "maze_8c.html#abc821a2dbe65506cd5329ca6c1223c85", null ],
     [ "setWallBoth", "maze_8c.html#a39184589996ad6618c6f90840dafc9ee", null ]
 ];
