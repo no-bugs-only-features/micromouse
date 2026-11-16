@@ -233,6 +233,18 @@ void setWallBoth(Maze maze, int size, int y, int x, Direction dir);
 
 
 /**
+ * @brief Sets the explored flag in both directions for a given cell.
+ * 
+ * @param maze The maze containing the cell.
+ * @param size The size of the maze.
+ * @param y The y-coordinate of the cell.
+ * @param x The x-coordinate of the cell.
+ * @param dir The direction of the explored flag to set.
+ */
+void setExploredBoth(Maze maze, int size, int y, int x, Direction dir);
+
+
+/**
  * @brief Clears the wall in both directions for a given cell.
  * 
  * @param maze The maze containing the cell.
