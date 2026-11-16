@@ -16,6 +16,14 @@ void setWallBoth(Maze maze, int size, int y, int x, Direction dir) {
 }
 
 
+void setExploredBoth(Maze maze, int size, int y, int x, Direction dir) {
+    if (inBounds(size, y, x)) setExplored(&maze[y][x], dir);
+    int nx = x + dx(dir);
+    int ny = y + dy(dir);
+    if (inBounds(size, ny, nx)) setExplored(&maze[ny][nx], opposite(dir));
+}
+
+
 void clearWallBoth(Maze maze, int size, int y, int x, Direction dir) {
     maze[y][x] &= ~dir;
     int nx = x + dx(dir);
