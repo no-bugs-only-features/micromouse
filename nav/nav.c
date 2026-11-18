@@ -37,8 +37,9 @@ int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction st
     while (distance > 0) {
         path[path_length++] = current;
 
+        /* Prioritize neighbors in the same direction. */
         CellID next = getNeighbor(maze, size, current, cur_dir);
-        uint16_t min_distance = hasWall(current, cur_dir) ? UINT16_MAX : dist[next];
+        uint16_t min_distance = next != UINT16_MAX ? dist[next] : UINT16_MAX;
 
         CellID neighbors[4];
         int neighbor_count = getNeighbors(maze, size, current, neighbors);
@@ -61,6 +62,7 @@ int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction st
             cur_dir = (row(size, next) > row(size, current)) ? South : North;
         }
         current = next;
+        distance = dist[current];
     }
 
     return path_length;
