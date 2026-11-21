@@ -5,6 +5,7 @@
  * @version 0.1
  * @date 2026-11-11
  */
+#include <stdlib.h>
 #include <stdint.h>
 
 #include "flood_fill.h"
@@ -35,11 +36,13 @@ void fullFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist) {
             }
         }
     }
+
+    destroyPriorityQueue(pq);
 }
 
 
 void modifiedFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist) {
-    CellID stack[256];
+    CellID *stack = malloc(size * size * sizeof(CellID));
     int stack_c = 0;
     stack[stack_c++] = start;
 
@@ -63,5 +66,7 @@ void modifiedFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dis
                 stack[stack_c++] = neighbors[i];
             }
         }
-    } 
+    }
+
+    free(stack);
 }
