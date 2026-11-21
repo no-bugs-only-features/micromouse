@@ -233,6 +233,18 @@ void setWallBoth(Maze maze, int size, int y, int x, Direction dir);
 
 
 /**
+ * @brief Sets the explored flag in both directions for a given cell.
+ * 
+ * @param maze The maze containing the cell.
+ * @param size The size of the maze.
+ * @param y The y-coordinate of the cell.
+ * @param x The x-coordinate of the cell.
+ * @param dir The direction of the explored flag to set.
+ */
+void setExploredBoth(Maze maze, int size, int y, int x, Direction dir);
+
+
+/**
  * @brief Clears the wall in both directions for a given cell.
  * 
  * @param maze The maze containing the cell.
@@ -242,6 +254,18 @@ void setWallBoth(Maze maze, int size, int y, int x, Direction dir);
  * @param dir The direction of the wall to clear.
  */
 void clearWallBoth(Maze maze, int size, int y, int x, Direction dir);
+
+
+/**
+ * @brief Gets the neighbor cell in the specified direction.
+ * 
+ * @param maze The maze containing the cell.
+ * @param size The size of the maze.
+ * @param u The CellID of the current cell.
+ * @param dir The direction to look for a neighbor.
+ * @return CellID The CellID of the neighbor cell, or UINT16_MAX if no neighbor exists.
+ */
+CellID getNeighbor(Maze maze, int size, CellID u, Direction dir);
 
 
 /**
@@ -276,6 +300,6 @@ Cell orient(Cell walls, int size, Direction dir);
  * @param b The second cell id.
  * @return int The manhattan distance.
  */
-static inline int manhattan(int size, CellID a, CellID b) { return abs(row(size, a) - row(size, b)) + abs(col(size, a) - col(size, b)); }
+static inline int manhattanDistance(int size, CellID a, CellID b) { return abs(row(size, a) - row(size, b)) + abs(col(size, a) - col(size, b)); }
 
 #endif /* MAZE_H */

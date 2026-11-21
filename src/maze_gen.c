@@ -12,8 +12,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "gen.h"
 #include "maze.h"
-#include "maze_gens.h"
 #include "maze_io.h"
 
 

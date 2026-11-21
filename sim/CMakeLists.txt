@@ -13,6 +13,7 @@ target_sources(mouse
 target_link_libraries(mouse
     PRIVATE
         maze
+        nav
         search
 )
 
@@ -30,6 +31,6 @@ target_sources(mazegen
 
 target_link_libraries(mazegen
     PRIVATE
+        gen
         maze
-        maze_gens
 )

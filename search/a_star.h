@@ -22,7 +22,7 @@
  * @param b The second cell.
  * @return int The heuristic value between the cells.
  */
-static inline int heuristic(int size, CellID a, CellID b) { manhattan(size, a, b); }
+static inline int heuristic(int size, CellID a, CellID b) { return manhattanDistance(size, a, b); }
 
 
 /**

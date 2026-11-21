@@ -1,11 +1,11 @@
-add_library(maze_gens)
+add_library(gen)
 
-target_link_libraries(maze_gens
+target_link_libraries(gen
     PRIVATE
         maze
 )
 
-target_sources(maze_gens
+target_sources(gen
     PRIVATE
         backtracking_gen.c
         backtracking_gen.h
@@ -13,5 +13,5 @@ target_sources(maze_gens
     PUBLIC
         FILE_SET HEADERS
         FILES
-            maze_gens.h
+            gen.h
 )

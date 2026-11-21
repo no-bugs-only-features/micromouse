@@ -4,6 +4,7 @@ project(micromouse)
 
 add_subdirectory(gen)
 add_subdirectory(maze)
+add_subdirectory(nav)
 add_subdirectory(search)
 add_subdirectory(sim)
 add_subdirectory(src)
