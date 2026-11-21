@@ -14,6 +14,8 @@
 #include "search.h"
 
 action_t mouse_step(Cell walls, State cur_state) {
+    CellID goal = cellID(cur_state.size, cur_state.size / 2, cur_state.size / 2);
+
     /* If direction is unknown. */
     if (!*cur_state.dir) {
         /* Check for an opening to the left or right to determine direction. */
@@ -34,6 +36,9 @@ action_t mouse_step(Cell walls, State cur_state) {
                 }
             }
 
+            /* Run a full flood of the maze to initialize distances. */
+            fullFlood(cur_state.maze, cur_state.size, 0, goal, cur_state.dist);
+
         } else {
             cur_state.pending[(*cur_state.pending_len)++] = walls;
             return FORWARD;
@@ -48,15 +53,15 @@ action_t mouse_step(Cell walls, State cur_state) {
             setWallBoth(cur_state.maze, cur_state.size, row(cur_state.size, *cur_state.pos), col(cur_state.size, *cur_state.pos), d);
     }
 
-    /* Use A* to find the path to the goal. */
-    CellID* prev = malloc(cur_state.size * cur_state.size * sizeof(CellID));
-    CellID goal = cellID(cur_state.size, cur_state.size / 2, cur_state.size / 2);
-    aStar(cur_state.maze, cur_state.size, *cur_state.pos, goal, prev);
-    int path_len = reconstructPath(prev, goal, cur_state.path);
+    /* Update distances using flood fill. */
+    modifiedFlood(cur_state.maze, cur_state.size, *cur_state.pos, goal, cur_state.dist);
+
+    /* Get downhill path to goal. */
+    int path_len = downhillPath(cur_state.maze, cur_state.size, cur_state.dist, *cur_state.pos, *cur_state.dir, cur_state.path);
 
     action_t action;
     
-    /* Path length of 0 indicates we are at the goal, or we cannot reach it. */
+    /* Path length of 1 indicates we are at the goal, or we cannot reach it. */
     if (path_len <= 1) {
         action = DONE;
     } else {
@@ -89,7 +94,5 @@ action_t mouse_step(Cell walls, State cur_state) {
             action = TURN_L;
         }
     }
-
-    free(prev);
     return action;
 }
