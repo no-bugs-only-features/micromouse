@@ -13,6 +13,18 @@
 #include "maze.h"
 
 
+typedef struct {
+    Maze maze;
+    int size;
+    CellID *pos;
+    Direction *dir;
+    CellID *path;
+    Cell *pending;
+    uint16_t *pending_len;
+    uint16_t *dist;
+} State;
+
+
 typedef enum {
     FORWARD = 0,
     TURN_L,
@@ -21,6 +33,6 @@ typedef enum {
     DONE
 } action_t;
 
-action_t mouse_step(Cell walls, Maze maze, int size, CellID *pos, Direction *dir, CellID *path, Cell *pending, uint16_t *pending_len);
+action_t mouse_step(Cell walls, State cur_state);
 
 #endif /* MOUSE_H */

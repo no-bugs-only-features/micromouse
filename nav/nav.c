@@ -53,9 +53,10 @@ int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction st
         }
 
         if (min_distance == UINT16_MAX) {
-            break; // No valid next cell found, exit the loop.
+            break; /* No valid next cell found, exit the loop. */
         }
 
+        /* Update the current direction based on the next cell's position. */
         if (row(size, next) == row(size, current)) {
             cur_dir = (col(size, next) > col(size, current)) ? East : West;
         } else {
