@@ -18,7 +18,7 @@
  */
 typedef struct {
     CellID cell_id; /** ID of the cell. */
-    uint8_t priority; /** Priority of the cell. */
+    uint16_t priority; /** Priority of the cell. */
 } PQEntry;
 
 
