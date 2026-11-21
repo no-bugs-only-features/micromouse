@@ -17,7 +17,7 @@ void fullFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist) {
         dist[i] = UINT16_MAX;
     }
 
-    int priority = 0;
+    uint16_t priority = 0;
 
     PriorityQueue *pq = createPriorityQueue(size);
     dist[goal] = 0;
