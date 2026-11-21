@@ -37,23 +37,33 @@ int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction st
     while (distance > 0) {
         path[path_length++] = current;
 
-        /* Prioritize neighbors in the same direction. */
-        CellID next = getNeighbor(maze, size, current, cur_dir);
-        uint16_t min_distance = next != UINT16_MAX ? dist[next] : UINT16_MAX;
+        CellID next = UINT16_MAX;
+        uint16_t min_distance = UINT16_MAX;
 
+        /* First consider the neighbor in the current direction. */
+        CellID forward = getNeighbor(maze, size, current, cur_dir);
+
+        if (forward != UINT16_MAX && dist[forward] < distance) {
+            next = forward;
+            min_distance = dist[forward];
+        }
+
+        /* Check all other neighbors for a shorter distance. */
         CellID neighbors[4];
         int neighbor_count = getNeighbors(maze, size, current, neighbors);
 
         for (int i = 0; i < neighbor_count; i++) {
             CellID neighbor = neighbors[i];
-            if (dist[neighbor] < min_distance) {
+
+            if (dist[neighbor] < distance && dist[neighbor] < min_distance) {
                 min_distance = dist[neighbor];
                 next = neighbor;
             }
         }
 
-        if (min_distance == UINT16_MAX) {
-            break; // No valid next cell found, exit the loop.
+        /* No downhill neighbor found. */
+        if (next == UINT16_MAX) {
+            break;
         }
 
         if (row(size, next) == row(size, current)) {
@@ -64,6 +74,9 @@ int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction st
         current = next;
         distance = dist[current];
     }
+
+    /* Add the final cell to the path. */
+    path[path_length++] = current;
 
     return path_length;
 }
