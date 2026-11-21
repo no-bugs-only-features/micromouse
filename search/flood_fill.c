@@ -17,9 +17,11 @@ void fullFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist) {
         dist[i] = UINT16_MAX;
     }
 
+    int priority = 0;
+
     PriorityQueue *pq = createPriorityQueue(size);
     dist[goal] = 0;
-    enqueue(pq, goal, 0);
+    enqueue(pq, goal, priority++);
 
     while(!isEmpty(pq)) {
         CellID u = dequeue(pq);
@@ -29,7 +31,7 @@ void fullFlood(Maze maze, int size, CellID start, CellID goal, uint16_t* dist) {
             CellID n = neighbors[i];
             if (dist[n] == UINT16_MAX) {
                 dist[n] = dist[u] + 1;
-                enqueue(pq, n, 0);
+                enqueue(pq, n, priority++);
             }
         }
     }
