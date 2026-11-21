@@ -66,6 +66,7 @@ int downhillPath(Maze maze, int size, uint16_t *dist, CellID start, Direction st
             break;
         }
 
+        /* Update the current direction based on the next cell's position. */
         if (row(size, next) == row(size, current)) {
             cur_dir = (col(size, next) > col(size, current)) ? East : West;
         } else {

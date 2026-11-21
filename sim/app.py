@@ -62,12 +62,27 @@ class Api:
         self._verbose = verbose
         self._sim = None
         self._prev = None                       # previous frame, for run-log notes
+        self._dist_logged = False               # -v: dump State.dist the first time the firmware writes it
         self._gen_json, self._gen_seed = None, None   # last generated maze and its seed
         self._lock = threading.Lock()
 
     def _log(self, msg):
         if self._verbose:
             print(msg, flush=True)
+
+    def _log_dist(self, frame):
+        """-v: print the raw State.dist the first time the firmware writes anything into it (mouse frame)."""
+        if self._dist_logged:
+            return
+        d = self._mouse.dist()                      # mouse frame, -1 = 0xFFFF (no value)
+        if d is None:
+            return
+        self._dist_logged = True
+        vals = [v for row in d for v in row if v >= 0]
+        self._log(f"[dist] State.dist first written at step {frame['step']} (mouse frame, row = y, '.' = 0xFFFF): "
+                  f"{len(vals)} cells set, min {min(vals)}, max {max(vals)}, zeros {vals.count(0)}")
+        for y, row in enumerate(d):
+            self._log(f"[dist] y={y:2d} " + " ".join("  ." if v < 0 else f"{v:3d}" for v in row))
 
     def _guard(self, fn):
         try:
@@ -98,7 +113,7 @@ class Api:
             sim = Sim(self._mouse, (opts or {}).get("max_steps"))
             rot_seed = (opts or {}).get("rotation_seed")   # Reset passes the previous one back for an identical start
             frame = sim.start(base, rotate, None if rot_seed is None else int(rot_seed))
-            self._sim, self._prev = sim, None
+            self._sim, self._prev, self._dist_logged = sim, None, False
             if self._verbose:
                 maze_seed = f"maze seed={self._gen_seed}" if maze == self._gen_json else "maze seed=n/a (loaded maze)"
                 rot = f"rotation seed={sim.seed}" if rotate else "no rotation"
@@ -120,6 +135,7 @@ class Api:
             frame = self._sim.step()
             if self._verbose and was_running:             # don't repeat the final row if polled again
                 self._log(_row(self._prev, frame))
+                self._log_dist(frame)
                 if frame["status"] != "running":
                     self._log(f"[end] status={frame['status']} steps={frame['step']} "
                               f"goal_reached={frame['goal_reached']} goal_step={frame['goal_step']}")
